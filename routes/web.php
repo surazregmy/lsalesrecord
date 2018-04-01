@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard','Dashboard\DashboardController@index');  /*controller to dashboard */
+Route::resource('items','Items\ItemsController');  /* sab lai route gardinxa sahi ho :D */
