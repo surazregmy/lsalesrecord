@@ -281,6 +281,7 @@
 <!-- DataTables -->
 <script src="{{asset('js/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/datatables/dataTables.bootstrap.min.js')}}"></script>
+
 <script>
     $(function () {
       $("#example1").DataTable();

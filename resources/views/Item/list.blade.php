@@ -33,13 +33,17 @@
                           <td>{{$item->i_cur_sp}}</td>
                           <td>{{$item->i_cur_dp}}</td>
                           <td class="text-left">
-                            {!! Form::open(['action'=>['Items\ItemsController@destroy',$item->item_id],'method'=>'POST']) !!}
-                            {!! Form::hidden('_method','DELETE') !!}
-                            {!! Form::submit('DELETE',['class'=>'btn btn-danger btn-xs cdelete']) !!}
-                            {!! Form::close() !!}
-                            <a href="/items/{{$item->item_id}}" class="btn btn-primary btn-xs"><i class="fa fa-check"></i> View</a>
-                            <a href="/items/{{$item->item_id}}/edit" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                           </td>                           
+                              <div id='delete' style="display:inline;">
+                                  {!! Form::open(['action'=>['Items\ItemsController@destroy',$item->item_id],'style'=>'display:inline;','method'=>'POST']) !!}
+                                  {!! Form::hidden('_method','DELETE') !!}
+                                  {!!Form::submit('Delete',['class'=>'btn btn-danger btn-xs cdelete','onClick' => 'return ConfirmDelete()'])!!}
+                                  {!! Form::close() !!}  
+                              </div>
+                              <div style="display:inline;float: right clear">
+                                <a href="/items/{{$item->item_id}}" class="btn btn-primary btn-xs"><i class="fa fa-check"></i> View</a>
+                                <a href="/items/{{$item->item_id}}/edit" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                              </div>
+                           </td>                      
                         </tr>
                        @php ($i++)
                       @endforeach
@@ -53,4 +57,14 @@
         </div>
         <!-- /.row -->
       </section>
+      
 @endsection
+<script>
+ function ConfirmDelete()
+    {
+     var x = confirm("Delete?");
+     if(x) return true; 
+     else return false;
+      
+  }
+</script>
