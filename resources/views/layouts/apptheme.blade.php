@@ -19,6 +19,9 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/apptheme/_all-skins.min.css')}}">
     <!-- DataTables -->
   <link rel="stylesheet" type="text/css" href="{{asset('css/datatables/dataTables.bootstrap.css')}}">
+  {{-- AlertyfyJS  --}}
+  <link rel="stylesheet" type="text/css" href="{{asset('css/alertifyjs/alertify.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('css/alertifyjs/themes/default.min.css')}}">
 
 
 </head>
@@ -281,6 +284,9 @@
 <!-- DataTables -->
 <script src="{{asset('js/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/datatables/dataTables.bootstrap.min.js')}}"></script>
+{{-- Alertyfyjs --}}
+<script src="{{asset('js/alertifyjs/alertify.min.js')}}"></script>
+
 
 <script>
     $(function () {

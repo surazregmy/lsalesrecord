@@ -2,7 +2,7 @@
 @section('content')
 <section class="content">
         <div class="row" style="margin-left:0px; margin-right:0px">
-  
+          
             <div class="box">
                     <div class="box-header with-border">
                             <h4 class="text-center">{{$subheading}}</h4>
@@ -59,12 +59,3 @@
       </section>
       
 @endsection
-<script>
- function ConfirmDelete()
-    {
-     var x = confirm("Delete?");
-     if(x) return true; 
-     else return false;
-      
-  }
-</script>
