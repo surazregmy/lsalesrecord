@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 class DashboardController extends Controller
 {
     public function index(){
-        return view('dashboard.dashboard');
+        $data = array(
+            'heading' => 'Dashboard',
+        ); 
+        return view('dashboard.dashboard')->with($data);;
     }
 }

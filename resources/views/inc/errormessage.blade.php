@@ -1,19 +1,30 @@
 @if(count($errors)>0)
     @foreach($errors -> all() as $error)
-        <div class="alert alert-danger">
-            {{$error}}
-        </div>
+        <script>
+                function alertfun(){
+                    alertify.error('<?php echo $error ?>');
+                }
+         alertfun();
+         </script>
      @endforeach
 @endif
 
 @if(session('success'))
-        <div class="alert alert-success">
-            {{session('success')}}
-        </div>
+        $succ = {{session('success')}};
+         <script>
+                function alertfun(){
+                    alertify.success('<?php echo e(session('success')) ?>');
+                }
+         alertfun();
+         </script>
+        
 @endif
 
 @if(session('error'))
-        <div class="alert alert-danger">
-            {{session('error')}}
-        </div>
+        <script>
+                function alertfun(){
+                    alertify.error('<?php echo e(session('error')) ?>');
+                }
+         alertfun();
+         </script>
 @endif

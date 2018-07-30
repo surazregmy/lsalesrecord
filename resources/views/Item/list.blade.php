@@ -33,10 +33,10 @@
                           <td>{{$item->i_cur_sp}}</td>
                           <td>{{$item->i_cur_dp}}</td>
                           <td class="text-left">
-                              <div id='delete' style="display:inline;">
-                                  {!! Form::open(['action'=>['Items\ItemsController@destroy',$item->item_id],'style'=>'display:inline;','method'=>'POST']) !!}
+                              <div class='delete' style="display:inline;">
+                                  {!! Form::open(['class'=>'del','action'=>['Items\ItemsController@destroy',$item->item_id],'style'=>'display:inline;','method'=>'POST']) !!}
                                   {!! Form::hidden('_method','DELETE') !!}
-                                  {!!Form::submit('Delete',['class'=>'btn btn-danger btn-xs cdelete','onClick' => 'return ConfirmDelete()'])!!}
+                                  {!!Form::button('Delete',['class'=>'btnk btn btn-danger btn-xs cdelete'])!!}
                                   {!! Form::close() !!}  
                               </div>
                               <div style="display:inline;float: right clear">

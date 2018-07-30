@@ -22,6 +22,8 @@
   {{-- AlertyfyJS  --}}
   <link rel="stylesheet" type="text/css" href="{{asset('css/alertifyjs/alertify.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/alertifyjs/themes/default.min.css')}}">
+  {{-- SELECT2 --}}
+  <link rel="stylesheet" type="text/css" href="{{asset('css/select2/select2.min.css')}}">
 
 
 </head>
@@ -166,8 +168,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="adddebtors" ><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Debtors</a></li>
-            <li id="viewdebtors" ><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Debtors</a></li>
+            <li id="adddebtors" ><a href="{{ action('debtors\DebtorsController@create') }}"><i class="fa fa-circle-o"></i>Add Debtors</a></li>
+            <li id="viewdebtors" ><a href="{{ action('debtors\DebtorsController@index') }}"><i class="fa fa-circle-o"></i>View Debtors</a></li>
           </ul>
         </li>
          <li id="pbills"  class="treeview">
@@ -253,7 +255,7 @@
       </ol>
     </section>
     @yield('content')
-    @include('inc.errormessage')
+   
 
     
     <!-- /.content -->
@@ -286,8 +288,8 @@
 <script src="{{asset('js/datatables/dataTables.bootstrap.min.js')}}"></script>
 {{-- Alertyfyjs --}}
 <script src="{{asset('js/alertifyjs/alertify.min.js')}}"></script>
-
-
+{{-- select2 --}}
+<script src="{{asset('js/select2/select2.full.min.js')}}"></script>
 <script>
     $(function () {
       $("#example1").DataTable();
@@ -336,5 +338,17 @@
     };
      
    </script>
+   <script>
+     $(".select2").select2(); // this is for select 2
+      $(".btnk").click(
+      function (){
+        alertify.confirm('Confirm Title', 'Confirm Message', 
+        function(){ 
+          $('#del').submit();
+          alertify.success('Deleted') }, 
+        function(){ alertify.error('Canceled')}); 
+      });
+    </script>
+    @include('inc.errormessage')
 </body>
 </html>
