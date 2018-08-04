@@ -35,9 +35,9 @@
     <!-- Logo -->
     <a href="../../index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>S</b>R</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Sales</b>RECORD</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -180,8 +180,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="addpbills"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Purchase Bills</a></li>
-            <li id="viewpbills"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Purchase Bills</a></li>
+            <li id="addpbills"><a href="{{ action('pbills\PbillsController@create') }}"><i class="fa fa-circle-o"></i>Add Purchase Bills</a></li>
+            <li id="viewpbills"><a href="{{ action('pbills\PbillsController@index') }}"><i class="fa fa-circle-o"></i>View Purchase Bills</a></li>
           </ul>
         </li>
          <li id="preceipts" class="treeview">
@@ -342,13 +342,14 @@
      $(".select2").select2(); // this is for select 2
       $(".btnk").click(
       function (){
-        alertify.confirm('Confirm Title', 'Confirm Message', 
+        alertify.confirm('Item Deletion', 'Do you want to delete?', 
         function(){ 
           $('#del').submit();
           alertify.success('Deleted') }, 
         function(){ alertify.error('Canceled')}); 
       });
     </script>
+    @yield('pagespecificscripts')
     @include('inc.errormessage')
 </body>
 </html>

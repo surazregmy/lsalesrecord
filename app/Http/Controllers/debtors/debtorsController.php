@@ -14,12 +14,10 @@ class DebtorsController extends Controller
      */
     public function index()
     {
-        echo "HI";
         $data = array(
             'heading' => 'Debtors',
             'subheading' => 'Debtors List',
         );
-        echo "HI";
         return view('debtor.add')->with($data);
         
     }
@@ -47,7 +45,6 @@ class DebtorsController extends Controller
     public function store(Request $request)
     {
         //
-        echo "HI";
     }
 
     /**

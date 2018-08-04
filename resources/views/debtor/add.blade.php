@@ -29,7 +29,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+            <div class="form-group">
                   <div class="row">
                     <div class="col-sm-2 text-center">
                       {{form:: label('d_prim_phone','Primary Phone* : ','',['class'=>'form-control required'])}}
@@ -38,17 +38,28 @@
                       {{form:: text('d_prim_phone','',['class'=>'form-control','placeholder'=>'Primary Phone number'])}}
                     </div>
                   </div>
-                </div>
+             </div>
                 <div class="form-group">
                     <div class="row">
                       <div class="col-sm-2 text-center">
                         {{form:: label('d_sec_phone','Phone Number : ','',['class'=>'form-control'])}}
                       </div>
                       <div class="col-sm-4">
-                        {{form:: text('d_sec_phone','',['class'=>'form-control','placeholder'=>'Secondary Phone'])}}
+                        {{form:: text('d_sec_phone','',['class'=>'form-control','placeholder'=>'Secondary'])}}
                       </div>
                     </div>
                 </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-2 text-center">
+                      {{form:: label('d_sec_phone','Phone Number : ','',['class'=>'form-control'])}}
+                    </div>
+                    <div class="col-sm-4">
+                      {{form:: text('d_sec_phone','',['class'=>'form-control','placeholder'=>'Secondary'])}}
+                    </div>
+                  </div>
+              </div>
+  
         {!! Form::close() !!}
       </div>
       <!-- /.box-body -->
