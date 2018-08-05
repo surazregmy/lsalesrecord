@@ -19,4 +19,6 @@ Route::get('/dashboard','Dashboard\DashboardController@index');  /*controller to
 Route::resource('items','Items\ItemsController');  /* sab lai route gardinxa sahi ho :D */
 Route::resource('pbills','pbills\PbillsController');
 Route::resource('debtors','debtors\DebtorsController');
+Route::resource('sbills','Sbills\SbillsController');
+Route::resource('creditors','Creditors\CreditorsController');
 

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\debtors;
+namespace App\Http\Controllers\Sbills;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Item\Item;
 
-class DebtorsController extends Controller
+class SbillsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +15,7 @@ class DebtorsController extends Controller
      */
     public function index()
     {
-        $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors List',
-        );
-        return view('debtor.add')->with($data);
-        
+        //
     }
 
     /**
@@ -29,11 +25,13 @@ class DebtorsController extends Controller
      */
     public function create()
     {
+        $items = Item :: all();  // fetches all the data        
         $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors Add',
+            'heading' => 'Sbills',
+            'subheading' => 'Sbills List',
+            'items'=>$items
         );
-        return view('debtor.add')->with($data);
+        return view('sbill.add')->with($data);
     }
 
     /**
@@ -55,11 +53,7 @@ class DebtorsController extends Controller
      */
     public function show($id)
     {
-        $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors Show',
-        );
-        return view('debtor.show')->with($data);
+        //
     }
 
     /**

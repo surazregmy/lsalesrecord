@@ -59,12 +59,21 @@
                     </div>
                   </div>
               </div>
+              <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-2 text-center">
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        {{form:: submit('Save',['class'=>'form-control btn btn-primary'])}}
+                    </div>
+                  </div>
+              </div>
   
         {!! Form::close() !!}
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        Footer
+        
       </div>
       <!-- /.box-footer-->
     </div>

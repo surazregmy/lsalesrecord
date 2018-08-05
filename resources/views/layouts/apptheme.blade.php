@@ -82,7 +82,7 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="images/shiva.jpg" class="img-circle" alt="User Image">
+                <img src="{{ url('images/shiva.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -129,7 +129,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="images/shiva.jpg" class="img-circle" alt="User Image">
+          <img src="{{ url('images/shiva.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Welcome Suraj!</p>
@@ -139,7 +139,7 @@
       <ul class="sidebar-menu">
         <li class="header"></li>
          <li id="dashboard">
-          <a href="../widgets.html">
+          <a href="{{ action('Dashboard\DashboardController@index') }}">
             <i class="fa fa-th"></i> <span>Home</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">Hot</small>
@@ -184,6 +184,18 @@
             <li id="viewpbills"><a href="{{ action('pbills\PbillsController@index') }}"><i class="fa fa-circle-o"></i>View Purchase Bills</a></li>
           </ul>
         </li>
+        <li id="prbills"  class="treeview">
+            <a href="#">
+              <i class="fa fa-newspaper-o"></i> <span>Purchase Return Bills</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li id="addprbills"><a href=""><i class="fa fa-circle-o"></i>Add Purchase Return Bills</a></li>
+              <li id="viewprbills"><a href=""><i class="fa fa-circle-o"></i>View Purchase Return Bills</a></li>
+            </ul>
+          </li>
          <li id="preceipts" class="treeview">
           <a href="#">
             <i class="fa  fa-file-text-o"></i> <span>Purchase Receipts</span>
@@ -221,6 +233,18 @@
             <li id="viewsbills"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Sales Bills</a></li>
           </ul>
         </li>
+        <li id="srbills" class="treeview">
+            <a href="#">
+              <i class="fa fa-newspaper-o"></i> <span>Sales Return Bills</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li id="addsrbills"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Sales Return Bills</a></li>
+              <li id="viewsrbills"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Sales Return Bills</a></li>
+            </ul>
+          </li>
          <li id="sreceipts" class="treeview">
           <a href="#">
             <i class="fa  fa-file-text-o"></i> <span>Sales Receipts</span>
@@ -230,9 +254,22 @@
           </a>
           <ul class="treeview-menu">
             <li id="addsreceipts"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Sales Receipts</a></li>
-            <liid="viewsreceipts"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Sales Receipts</a></li>
+            <li id="viewsreceipts"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Sales Receipts</a></li>
           </ul>
         </li>
+        <li class="header text-center" ><b>Service And Expense Section</b></li>
+        <li id="ser_and_exp" class="treeview">
+            <a href="#">
+              <i class="fa  fa-file-text-o"></i> <span>Services And Expenses</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li id="ser_sec"><a href="../../index.html"><i class="fa fa-circle-o"></i> Services</a></li>
+              <li id="expense_sec"><a href="../../index2.html"><i class="fa fa-circle-o"></i> Expenses</a></li>
+            </ul>
+          </li>
         
       </ul>
     </section>
@@ -242,7 +279,7 @@
   <!-- =============================================== -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper   " id="contWrap" >
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
@@ -292,6 +329,7 @@
 <script src="{{asset('js/select2/select2.full.min.js')}}"></script>
 <script>
     $(function () {
+      document.getElementById("contWrap").style.minHeight = "777px"; // Somewhere theme autocalculates minheight, need to set it at first though  :-/  I am overriding it. 
       $("#example1").DataTable();
       $('#example2').DataTable({
         "paging": true,
@@ -340,14 +378,17 @@
    </script>
    <script>
      $(".select2").select2(); // this is for select 2
-      $(".btnk").click(
-      function (){
+      
+      function deleteItem(x){
         alertify.confirm('Item Deletion', 'Do you want to delete?', 
         function(){ 
-          $('#del').submit();
-          alertify.success('Deleted') }, 
+          var delbut = document.getElementById(x);
+          alert(delbut.innerText);
+          alert(typeof delbut);
+          delbut.submit();
+          alertify.success('Item Deleted') }, 
         function(){ alertify.error('Canceled')}); 
-      });
+      }
     </script>
     @yield('pagespecificscripts')
     @include('inc.errormessage')

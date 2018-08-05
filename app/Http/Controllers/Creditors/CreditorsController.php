@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\debtors;
+namespace App\Http\Controllers\Creditors;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DebtorsController extends Controller
+class CreditorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,7 @@ class DebtorsController extends Controller
      */
     public function index()
     {
-        $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors List',
-        );
-        return view('debtor.add')->with($data);
-        
+        //
     }
 
     /**
@@ -29,11 +24,7 @@ class DebtorsController extends Controller
      */
     public function create()
     {
-        $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors Add',
-        );
-        return view('debtor.add')->with($data);
+        //
     }
 
     /**
@@ -55,11 +46,7 @@ class DebtorsController extends Controller
      */
     public function show($id)
     {
-        $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors Show',
-        );
-        return view('debtor.show')->with($data);
+        //
     }
 
     /**
