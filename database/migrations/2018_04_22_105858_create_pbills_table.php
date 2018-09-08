@@ -14,7 +14,13 @@ class CreatePbillsTable extends Migration
     public function up()
     {
         Schema::create('pbills', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('pbill_id');
+            $table->integer('debtor_id');
+            $table->string('pbill_original_id')->unique();
+            $table->date('p_date_of_purchase');
+            $table->string('p_date_of_purchase_n');
+            $table->string('p_entered_by');
+            $table->float('p_total_amount');
             $table->timestamps();
         });
     }

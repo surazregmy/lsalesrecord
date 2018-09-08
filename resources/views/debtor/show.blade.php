@@ -53,7 +53,7 @@
             <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-file-text-o margin-r-5"></i> Notes</h3>
              </div>
-            {!! Form::open(['action'=>'debtors\DebtorsController@store','method'=>'POST']) !!}
+            {!! Form::open(['action'=>'Debtors\DebtorsController@store','method'=>'POST']) !!}
             <div class="form-group">
               <div>
                 <div>

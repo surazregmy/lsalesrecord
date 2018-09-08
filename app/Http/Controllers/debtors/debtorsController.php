@@ -4,6 +4,7 @@ namespace App\Http\Controllers\debtors;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Debtor\Debtor;
 
 class DebtorsController extends Controller
 {
@@ -12,13 +13,19 @@ class DebtorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
+        $debtors = Debtor :: all();
         $data = array(
             'heading' => 'Debtors',
             'subheading' => 'Debtors List',
+            'debtors'=>$debtors
         );
-        return view('debtor.add')->with($data);
+        return view('debtor.list')->with($data);
         
     }
 
@@ -44,7 +51,21 @@ class DebtorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $this->validate($request,[
+            'd_name'=>'required',
+            'd_address'=>'required',
+            'd_prim_phone'=>'required'
+        ]);
+
+        $debtor = new Debtor;
+        $debtor->debtor_name = $request->input('d_name');
+        $debtor->d_address = $request->input('d_address');
+        $debtor->d_prim_phone = $request->input('d_prim_phone');
+        $debtor->d_sec_phone = $request->input('d_sec_phone');
+
+        $debtor->save();
+        return redirect('/debtors')->with('success','Debtor created Succesfully');  
     }
 
     /**
@@ -70,7 +91,13 @@ class DebtorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $debtor =  Debtor:: find($id);
+        $data = array(
+            'heading' => 'Debtor',
+            'subheading' => 'Debtor Edit',
+            'debtor'=>$debtor
+        );
+        return view('Debtor.edit')->with($data); 
     }
 
     /**
@@ -82,7 +109,20 @@ class DebtorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'd_name'=>'required',
+            'd_address'=>'required',
+            'd_prim_phone'=>'required'
+        ]);
+
+        $debtor =  Debtor:: find($id);
+        $debtor->debtor_name = $request->input('d_name');
+        $debtor->d_address = $request->input('d_address');
+        $debtor->d_prim_phone = $request->input('d_prim_phone');
+        $debtor->d_sec_phone = $request->input('d_sec_phone');
+
+        $debtor->save();
+        return redirect('/debtors')->with('success','Debtor Updated Succesfully');  
     }
 
     /**
@@ -93,6 +133,8 @@ class DebtorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $debtor = Debtor:: find($id);
+        $debtor-> delete();
+        return redirect('/debtors')->with('success','Debtor Deleted');
     }
 }

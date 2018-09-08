@@ -84,8 +84,11 @@
                       <div class="col-sm-2 text-center">
                       </div>
                       <div class="col-sm-2 text-center">
-                          {{form:: submit('Submit',['class'=>'form-control btn btn-primary'])}}
+                          {{form:: submit('Submit',['class'=>'form-control btn btn-primary'])}} 
                       </div>
+                      <a href="" data-toggle="modal" data-target="#myModal">| Or Load from Excel</a>
+                      
+                    </div>
                     </div>
                 </div>
         {!! Form::close() !!}
@@ -97,5 +100,25 @@
       <!-- /.box-footer-->
     </div>
   </div>
+   <!-- Modal -->
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Load Items From Excel</h4>
+        </div>
+        <div class="modal-body">
+          <p>Select Excel file </p>
+          {!! Form::open(['action'=>'Items\ItemsController@loadFromExcel','method'=>'POST','enctype'=>'multipart/form-data']) !!}
+              {{ Form::file('xls_file')}} 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success">Load</button>
+          {{ Form::close() }}
+        </div>
+      </div>
+    </div>
 </section>
 @endsection

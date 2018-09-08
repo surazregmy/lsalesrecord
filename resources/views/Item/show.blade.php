@@ -11,8 +11,8 @@
         <div class="col-md-8">
           <table class="table table-bordered table-striped table-hover ">
               <tr>
-                <th>Item Name</th>
-                <th>{{$item->item_name}}</th>
+                <td>Item Name</td>
+                <td>{{$item->item_name}}</td>
               </tr>
               <tr>
                 <td>Item Category</td>

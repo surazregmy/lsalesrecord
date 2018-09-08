@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>{{config('app.name')}}</title>
+<title class="no-print">{{config('app.name')}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -24,7 +24,8 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/alertifyjs/themes/default.min.css')}}">
   {{-- SELECT2 --}}
   <link rel="stylesheet" type="text/css" href="{{asset('css/select2/select2.min.css')}}">
-
+  
+  <link rel="stylesheet" href="https://unpkg.com/nepali-date-picker@2.0.0/dist/nepaliDatePicker.min.css" integrity="sha384-Fligaq3qH5qXDi+gnnhQctSqfMKJvH4U8DTA+XGemB/vv9AUHCwmlVR/B3Z4nE+q" crossorigin="anonymous">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -146,6 +147,21 @@
             </span>
           </a>
         </li>
+        <li id = "reports" class="treeview">
+            <a href="#">
+              <i class="fa fa-list-alt"></i> <span>Reports Generator</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li id ="incomereports"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Income Reports</a></li>
+              <li id ="expensereports"><a href="{{ action('Items\ItemsController@index') }}"><i class="fa fa-circle-o"></i>Expense Reports</a></li>
+              <li id ="incomevsexpense"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Income Vs Expense</a></li>
+              <li id ="stockgen"><a href="{{ action('Items\ItemsController@index') }}"><i class="fa fa-circle-o"></i>Stock Generator</a></li>
+              <li id ="duegen"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Due Amount Generator</a></li>
+            </ul>
+          </li>
         <li class="header text-center" ><b>Stock</b></li>
         <li id = "items" class="treeview">
           <a href="#">
@@ -168,8 +184,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="adddebtors" ><a href="{{ action('debtors\DebtorsController@create') }}"><i class="fa fa-circle-o"></i>Add Debtors</a></li>
-            <li id="viewdebtors" ><a href="{{ action('debtors\DebtorsController@index') }}"><i class="fa fa-circle-o"></i>View Debtors</a></li>
+            <li id="adddebtors" ><a href="{{ action('Debtors\DebtorsController@create') }}"><i class="fa fa-circle-o"></i>Add Debtors</a></li>
+            <li id="viewdebtors" ><a href="{{ action('Debtors\DebtorsController@index') }}"><i class="fa fa-circle-o"></i>View Debtors</a></li>
           </ul>
         </li>
          <li id="pbills"  class="treeview">
@@ -180,8 +196,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="addpbills"><a href="{{ action('pbills\PbillsController@create') }}"><i class="fa fa-circle-o"></i>Add Purchase Bills</a></li>
-            <li id="viewpbills"><a href="{{ action('pbills\PbillsController@index') }}"><i class="fa fa-circle-o"></i>View Purchase Bills</a></li>
+            <li id="addpbills"><a href="{{ action('Pbills\PbillsController@create') }}"><i class="fa fa-circle-o"></i>Add Purchase Bills</a></li>
+            <li id="viewpbills"><a href="{{ action('Pbills\PbillsController@index') }}"><i class="fa fa-circle-o"></i>View Purchase Bills</a></li>
           </ul>
         </li>
         <li id="prbills"  class="treeview">
@@ -270,6 +286,20 @@
               <li id="expense_sec"><a href="../../index2.html"><i class="fa fa-circle-o"></i> Expenses</a></li>
             </ul>
           </li>
+          <li class="header text-center" ><b>Utilities</b></li>
+          <li id = "reports" class="treeview">
+            <a href="#">
+              <i class="fa fa-list-alt"></i> <span>Logs</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li id ="incomereports"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Activity Log</a></li>
+              <li id ="expensereports"><a href="{{ action('Items\ItemsController@index') }}"><i class="fa fa-circle-o"></i>Cron Log</a></li>
+            </ul>
+          </li>
+       
         
       </ul>
     </section>
@@ -299,7 +329,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
+  <footer class="main-footer no-print">
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
@@ -327,9 +357,12 @@
 <script src="{{asset('js/alertifyjs/alertify.min.js')}}"></script>
 {{-- select2 --}}
 <script src="{{asset('js/select2/select2.full.min.js')}}"></script>
+
+<script type="text/javascript" src="https://unpkg.com/nepali-date-picker@2.0.0/dist/jquery.nepaliDatePicker.min.js" integrity="sha384-bBN6UZ/L0DswJczUYcUXb9lwIfAnJSGWjU3S0W5+IlyrjK0geKO+7chJ7RlOtrrF" crossorigin="anonymous"></script>
+
 <script>
     $(function () {
-      document.getElementById("contWrap").style.minHeight = "777px"; // Somewhere theme autocalculates minheight, need to set it at first though  :-/  I am overriding it. 
+      document.getElementById("contWrap").style.minHeight = "992px"; // Somewhere theme autocalculates minheight, need to set it at first though  :-/  I am overriding it. 
       $("#example1").DataTable();
       $('#example2').DataTable({
         "paging": true,
@@ -383,12 +416,19 @@
         alertify.confirm('Item Deletion', 'Do you want to delete?', 
         function(){ 
           var delbut = document.getElementById(x);
-          alert(delbut.innerText);
-          alert(typeof delbut);
+          // alert(delbut.innerText);
+          // alert(typeof delbut);
           delbut.submit();
-          alertify.success('Item Deleted') }, 
+          // alertify.success('Item Deleted') // no need, will be rendered from controller
+          }, 
         function(){ alertify.error('Canceled')}); 
       }
+    </script>
+    <script>
+      $(".bod-picker").nepaliDatePicker({
+      dateFormat: "%D, %M %d, %y",
+      closeOnDateSelect: true
+      });
     </script>
     @yield('pagespecificscripts')
     @include('inc.errormessage')

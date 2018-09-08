@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Items;
-
+use Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Item\Item;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+
 
 
 
@@ -15,6 +20,14 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $load_status = 1;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $items = Item :: all();  // fetches all the data        
@@ -145,6 +158,82 @@ class ItemsController extends Controller
     {
         $item = Item:: find($id);
         $item->delete();
-        return redirect('/items')->with('succcess','Item Deleted');
+        return redirect('/items')->with('success','Item Deleted');
+    }
+
+    public function loadFromExcel(Request $request)
+    {
+        
+        $this->validate($request,[
+            'xls_file' => 'required|mimes:xls,xlsx'
+        ],
+        [
+            'xls_file.required' => 'File can not be empty'
+        ]
+    );
+
+        if($request -> hasFile('xls_file')){
+            
+            
+            $filenameWithExt = $request->file('xls_file')->getClientOriginalName();
+            $pathl = $request->file('xls_file')->getRealPath();
+
+            
+            Storage::disk('uploads')->put($filenameWithExt, file_get_contents($pathl));
+            $path2 = storage_path('app\uploads'.'\\'.$filenameWithExt);
+            
+           
+            try{
+                DB::beginTransaction();
+                Excel:: load($request->file('xls_file')->getRealPath(), function($reader){
+                    foreach ($reader->toArray() as $key => $row) {
+                    $data['item_name'] = $row['item_name'] ;
+                    $data['i_category'] = $row['i_category'];
+                    $data['i_quantity'] = $row['i_quantity'];
+                    $data['i_pre_cp'] = $row['i_pre_cp'];
+                    $data['i_pre_sp'] = $row['i_pre_sp'];
+                    $data['i_cur_cp'] = $row['i_cur_cp'];
+                    $data['i_cur_sp'] = $row['i_cur_sp'];
+                    $data['i_pre_dp'] = $row['i_pre_dp'];
+                    $data['i_cur_dp'] = $row['i_cur_dp'];
+                    $data['i_low_flag'] = $row['i_low_flag'];
+                    $data['i_date_of_change_of_price'] = $row['i_date_of_change_of_price'];
+                    $data['created_at'] = $row['created_at'];
+                    $data['updated_at'] = $row['updated_at'];
+                    
+                    if(!empty($data)) {
+                        try{
+                             DB::table('items')->insert($data);
+                        }
+                        catch (\Illuminate\Database\QueryException $e){
+                            $this->load_status = 0;
+                            DB:: rollback();
+                            break;
+                            
+                         }
+                        
+                    }
+
+                }
+                    
+            });
+                DB::commit();
+            }
+            catch(\Exception $e){
+                DB:: rollback();
+               $load_status = 0;
+                
+            }
+            
+        }
+        if($this->load_status == 1){
+            // echo "succcess";
+            return redirect('/items')->with('success','Items Loaded from Excel Successful');
+        }
+        elseif($this->load_status == 0){
+            // echo 'failed';
+            return redirect('/items')->with('error','Item name Repeated');
+        }
+
     }
 }

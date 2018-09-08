@@ -11,6 +11,7 @@
                 <h3 class="box-title" ><b>Items Detail</b></h3>
               </div>
               <!-- /.box-header -->
+              {!! Form::open(['action'=>'Pbills\PbillsController@store','method'=>'POST']) !!}
               <div class="box-body">
                 <div class="table-responsive">
                   <table class="table no-margin" id="input_item">
@@ -23,122 +24,120 @@
                       <th>Total</th>
                     </tr>
                     </thead>
-                    {!! Form::open(['action'=>'Items\ItemsController@store','method'=>'POST']) !!}
                     <tbody class="detail">
                     <tr>
                       <td>1</td>
                       <td>
                             <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                                <option value=""  selected="selected" >Select Item</option>
                                 <?php foreach($items as $item): ?>
-                                           <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                           <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                  <?php endforeach ?>
                              </select>
                         </td>
-                      <td> {{form:: text('i_cur_dp','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                      <td> {{form:: text('i_cur_dp','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                      <td> {{form:: text('i_cur_dp','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
+                      <td> {{form:: text('quantity1','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                      <td> {{form:: text('rate1','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                      <td> {{form:: text('total1','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     <tr>
                       <td>2</td>
                       <td>
-                            <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                            <select name = "item2" class="select2 form-control" style="width: 100%";>
+                                <option value=""  selected="selected" >Select Item</option>
                                 <?php foreach($items as $item): ?>
-                                           <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                           <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                  <?php endforeach ?>
                              </select>
                         </td>
-                      <td> {{form:: text('i_cur_dp','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                      <td> {{form:: text('i_cur_dp','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                      <td> {{form:: text('i_cur_dp','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
+                      <td> {{form:: text('quantity2','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                      <td> {{form:: text('rate2','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                      <td> {{form:: text('total2','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>
-                                <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                    <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                                <select name = "item3" class="select2 form-control" style="width: 100%";>
+                                    <option value=""  selected="selected" >Select Item</option>
                                     <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                     <?php endforeach ?>
                                 </select>
                             </td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Total'])}}</td>
+                        <td> {{form:: text('quantity3','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                        <td> {{form:: text('rate3','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                        <td> {{form:: text('total3','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td>
-                                <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                        <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                                <select name = "item4" class="select2 form-control" style="width: 100%";>
+                                        <option value=""  selected="selected" >Select Item</option>
                                     <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                     <?php endforeach ?>
                                 </select>
                             </td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Total'])}}</td>
+                        <td> {{form:: text('quantity4','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                        <td> {{form:: text('rate4','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                        <td> {{form:: text('total4','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     <tr>
                         <td>5</td>
                         <td>
-                                <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                    <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                                <select name = "item5" class="select2 form-control" style="width: 100%";>
+                                    <option value=""  selected="selected" >Select Item</option>
                                     <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                     <?php endforeach ?>
                                 </select>
                             </td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Total'])}}</td>
+                        <td> {{form:: text('quantity5','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                        <td> {{form:: text('rate5','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                        <td> {{form:: text('total5','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     <tr>
                         <td>6</td>
                         <td>
-                                <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                    <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                                <select name = "item6" class="select2 form-control" style="width: 100%";>
+                                    <option value=""  selected="selected" >Select Item</option>
                                     <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                     <?php endforeach ?>
                                 </select>
                             </td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Total'])}}</td>
+                        <td> {{form:: text('quantity6','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                        <td> {{form:: text('rate6','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                        <td> {{form:: text('total6','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     <tr>
                         <td>7</td>
                         <td>
-                                <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                    <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                                <select name = "item7" class="select2 form-control" style="width: 100%";>
+                                    <option value=""  selected="selected" >Select Item</option>
                                     <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                     <?php endforeach ?>
                                 </select>
                             </td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Total'])}}</td>
+                        <td> {{form:: text('quantity7','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                        <td> {{form:: text('rate7','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                        <td> {{form:: text('total7','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     <tr>
                         <td>8</td>
                         <td>
-                                <select name = "item1" class="select2 form-control" style="width: 100%";>
-                                    <option value="aa" disabled="disabled" selected="selected" >Select Item</option>
+                                <select name = "item8" class="select2 form-control" style="width: 100%";>
+                                    <option value=""  selected="selected" >Select Item</option>
                                     <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['items_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
                                     <?php endforeach ?>
                                 </select>
                             </td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Total'])}}</td>
+                        <td> {{form:: text('quantity8','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                        <td> {{form:: text('rate8','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                        <td> {{form:: text('total8','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
                     </tbody>
-                    {!! Form::close() !!}
                   </table>
                 </div>
                 <!-- /.table-responsive -->
@@ -166,10 +165,10 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-4 text-center">
-                            {{form:: label('item_name','Total Amount: ','',['class'=>'form-control '])}}
+                            {{form:: label('total_amount','Total Amount: ','',['class'=>'form-control '])}}
                             </div>
                             <div class="col-sm-8">
-                            {{form:: text('item_name','',['class'=>'form-control grandtotal','placeholder'=>'Item name'])}}
+                            {{form:: text('total_amount','',['class'=>'form-control grandtotal','placeholder'=>'Item name'])}}
                             </div>
                         </div>
                     </div>
@@ -185,52 +184,60 @@
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('item_name','Debtor Name: ','',['class'=>'form-control'])}}
+                                  {{form:: label('d_id','Debtor Name: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('item_name','',['class'=>'form-control','placeholder'=>'Item name'])}}
+                                        <select name = "d_id" class="select2 form-control" style="width: 100%";>
+                                                <option value=""  selected="selected" >Select Debtor</option>
+                                                <?php foreach($debtors as $debtor): ?>
+                                                           <option value="<?php echo $debtor['debtor_id'] ?>"><?php echo $debtor['debtor_name'];?></option>          
+                                                 <?php endforeach ?>
+                                             </select>
                                   </div>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('item_name','Bill No: ','',['class'=>'form-control'])}}
+                                  {{form:: label('bill_no','Bill No: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('item_name','',['class'=>'form-control','placeholder'=>'Item name'])}}
+                                  {{form:: text('bill_no','',['class'=>'form-control','placeholder'=>'Bill No'])}}
                                   </div>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('item_name','Date : ','',['class'=>'form-control'])}}
+                                  {{form:: label('Date of Purchase','Date of Purchase : ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('item_name','',['class'=>'form-control','placeholder'=>'Item name'])}}
+                                  {{form:: text('date_of_purchase','',['class'=>'form-control bod-picker','placeholder'=>'date'])}}
                                   </div>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('item_name','Entered By : ','',['class'=>'form-control'])}}
+                                  {{form:: label('entered_by','Entered By : ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('item_name','',['class'=>'form-control','placeholder'=>'Item name'])}}
+                                  {{form:: text('entered_by',$log_user->name,['class'=>'form-control','readonly'])}}
                                   </div>
                               </div>
                           </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                            <a href="javascript:void(0)" class="btn btn-md btn-info btn-flat pull-left" onclick="changeC()">Save</a>
-                            <a href="javascript:void(0)" class="btn btn-md btn-default btn-flat pull-right">Save and Exit</a>
+                            {{form:: submit('save',['class'=>'btn btn-md btn-info btn-flat pull-left','onclick'=>"changeC()",'name'=>'save'])}} 
+                            {{-- <a href="javascript:void(0)" class="btn btn-md btn-info btn-flat pull-left" onclick="changeC()">Save</a> --}}
+                            {{form:: submit('Save and Exit',['class'=>'btn btn-md btn-default btn-flat pull-right','onclick'=>"changeC()",'name'=>'save_and_exit'])}}                             
+                            {{-- <a href="javascript:void(0)" class="btn btn-md btn-default btn-flat pull-right">Save and Exit</a> --}}
                     </div>
                     <!-- /.box-footer -->
                   </div>
                   <!-- /.box -->
+                  {!! Form::close() !!}                  
           </div>
           <!-- /.col -->
         </div>
@@ -250,7 +257,7 @@
       var n =($('.detail tr').length)+1; 
       var count = Object.keys(o).length;
 
-      var string ="<option value=\"aa\" disabled=\"disabled\" selected=\"selected\" >Select Item</option>";
+      var string ="<option value=\"\" selected=\"selected\" >Select Item</option>";
       var form_string = " class=\"form-control select2 \" style=\"width: 100%;\"";
 
       for(var i=0; i<count; i++){
