@@ -31,7 +31,9 @@
                             <select name = "item1" class="select2 form-control" style="width: 100%";>
                                 <option value=""  selected="selected" >Select Item</option>
                                 <?php foreach($items as $item): ?>
-                                           <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                           <option value="<?php echo $item['item_id'] ?>"
+                                                @if (old('item1') == $item['item_id']) selected="selected" @endif>
+                                            <?php echo $item['item_name'];?></option>          
                                  <?php endforeach ?>
                              </select>
                         </td>
@@ -43,10 +45,12 @@
                       <td>2</td>
                       <td>
                             <select name = "item2" class="select2 form-control" style="width: 100%";>
-                                <option value=""  selected="selected" >Select Item</option>
-                                <?php foreach($items as $item): ?>
-                                           <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                 <?php endforeach ?>
+                                    <option value=""  selected="selected" >Select Item</option>
+                                    <?php foreach($items as $item): ?>
+                                               <option value="<?php echo $item['item_id'] ?>"
+                                                    @if (old('item2') == $item['item_id']) selected="selected" @endif>
+                                                <?php echo $item['item_name'];?></option>          
+                                     <?php endforeach ?>
                              </select>
                         </td>
                       <td> {{form:: text('quantity2','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
@@ -57,10 +61,12 @@
                         <td>3</td>
                         <td>
                                 <select name = "item3" class="select2 form-control" style="width: 100%";>
-                                    <option value=""  selected="selected" >Select Item</option>
-                                    <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                    <?php endforeach ?>
+                                        <option value=""  selected="selected" >Select Item</option>
+                                        <?php foreach($items as $item): ?>
+                                                   <option value="<?php echo $item['item_id'] ?>"
+                                                        @if (old('item3') == $item['item_id']) selected="selected" @endif>
+                                                    <?php echo $item['item_name'];?></option>          
+                                         <?php endforeach ?>
                                 </select>
                             </td>
                         <td> {{form:: text('quantity3','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
@@ -72,10 +78,12 @@
                         <td>
                                 <select name = "item4" class="select2 form-control" style="width: 100%";>
                                         <option value=""  selected="selected" >Select Item</option>
-                                    <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                    <?php endforeach ?>
-                                </select>
+                                        <?php foreach($items as $item): ?>
+                                                   <option value="<?php echo $item['item_id'] ?>"
+                                                        @if (old('item4') == $item['item_id']) selected="selected" @endif>
+                                                    <?php echo $item['item_name'];?></option>          
+                                         <?php endforeach ?>
+                                 </select>
                             </td>
                         <td> {{form:: text('quantity4','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
                         <td> {{form:: text('rate4','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
@@ -85,11 +93,13 @@
                         <td>5</td>
                         <td>
                                 <select name = "item5" class="select2 form-control" style="width: 100%";>
-                                    <option value=""  selected="selected" >Select Item</option>
-                                    <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                    <?php endforeach ?>
-                                </select>
+                                        <option value=""  selected="selected" >Select Item</option>
+                                        <?php foreach($items as $item): ?>
+                                                   <option value="<?php echo $item['item_id'] ?>"
+                                                        @if (old('item5') == $item['item_id']) selected="selected" @endif>
+                                                    <?php echo $item['item_name'];?></option>          
+                                         <?php endforeach ?>
+                                 </select>
                             </td>
                         <td> {{form:: text('quantity5','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
                         <td> {{form:: text('rate5','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
@@ -99,11 +109,13 @@
                         <td>6</td>
                         <td>
                                 <select name = "item6" class="select2 form-control" style="width: 100%";>
-                                    <option value=""  selected="selected" >Select Item</option>
-                                    <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                    <?php endforeach ?>
-                                </select>
+                                        <option value=""  selected="selected" >Select Item</option>
+                                        <?php foreach($items as $item): ?>
+                                                   <option value="<?php echo $item['item_id'] ?>"
+                                                        @if (old('item6') == $item['item_id']) selected="selected" @endif>
+                                                    <?php echo $item['item_name'];?></option>          
+                                         <?php endforeach ?>
+                                 </select>
                             </td>
                         <td> {{form:: text('quantity6','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
                         <td> {{form:: text('rate6','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
@@ -113,11 +125,13 @@
                         <td>7</td>
                         <td>
                                 <select name = "item7" class="select2 form-control" style="width: 100%";>
-                                    <option value=""  selected="selected" >Select Item</option>
-                                    <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                    <?php endforeach ?>
-                                </select>
+                                        <option value=""  selected="selected" >Select Item</option>
+                                        <?php foreach($items as $item): ?>
+                                                   <option value="<?php echo $item['item_id'] ?>"
+                                                        @if (old('item7') == $item['item_id']) selected="selected" @endif>
+                                                    <?php echo $item['item_name'];?></option>          
+                                         <?php endforeach ?>
+                                 </select>
                             </td>
                         <td> {{form:: text('quantity7','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
                         <td> {{form:: text('rate7','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
@@ -127,11 +141,13 @@
                         <td>8</td>
                         <td>
                                 <select name = "item8" class="select2 form-control" style="width: 100%";>
-                                    <option value=""  selected="selected" >Select Item</option>
-                                    <?php foreach($items as $item): ?>
-                                                <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                    <?php endforeach ?>
-                                </select>
+                                        <option value=""  selected="selected" >Select Item</option>
+                                        <?php foreach($items as $item): ?>
+                                                   <option value="<?php echo $item['item_id'] ?>"
+                                                        @if (old('item8') == $item['item_id']) selected="selected" @endif>
+                                                    <?php echo $item['item_name'];?></option>          
+                                         <?php endforeach ?>
+                                 </select>
                             </td>
                         <td> {{form:: text('quantity8','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
                         <td> {{form:: text('rate8','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
@@ -190,19 +206,21 @@
                                         <select name = "d_id" class="select2 form-control" style="width: 100%";>
                                                 <option value=""  selected="selected" >Select Debtor</option>
                                                 <?php foreach($debtors as $debtor): ?>
-                                                           <option value="<?php echo $debtor['debtor_id'] ?>"><?php echo $debtor['debtor_name'];?></option>          
+                                                           <option value="<?php echo $debtor['debtor_id'] ?>"
+                                                                @if (old('d_id') == $debtor['debtor_id']) selected="selected" @endif>
+                                                            <?php echo $debtor['debtor_name'];?></option>          
                                                  <?php endforeach ?>
-                                             </select>
+                                         </select>
                                   </div>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('bill_no','Bill No: ','',['class'=>'form-control'])}}
+                                  {{form:: label('pbill_original_id','Bill No: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('bill_no','',['class'=>'form-control','placeholder'=>'Bill No'])}}
+                                  {{form:: text('pbill_original_id','',['class'=>'form-control','placeholder'=>'Bill No'])}}
                                   </div>
                               </div>
                           </div>

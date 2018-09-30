@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Items;
 use Storage;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Item\Item;
@@ -22,6 +23,7 @@ class ItemsController extends Controller
      */
 
     private $load_status = 1;
+    
 
     public function __construct()
     {
@@ -64,11 +66,24 @@ class ItemsController extends Controller
         $this->validate($request,[
             'item_name'=>'required',
             'i_category'=>'required',
-            'i_quantity'=>'required|integer',
+            'i_quantity'=>'required|numeric',
             'i_cur_cp'=>'required|numeric',
             'i_cur_sp'=>'required|numeric',
             'i_cur_dp'=>'required|numeric',
             'i_low_flag'=>'required|integer'
+        ],[
+            'item_name.required'=>'Item name is required',
+            'i_category.required'=>"Item Category is required",
+            'i_quantity.required'=>"Item Quantity is required",
+            'i_cur_cp.required'=>"Current Cost Price is required",
+            'i_cur_sp.required'=>"Current Selling Price is required",
+            'i_cur_dp.required'=>"Current Discount Price is required",
+            'i_low_flag.required'=>"Low Flag is required",
+            'i_quantity.numeric' =>'Item Quantity should be a number',
+            'i_cur_cp.numeric' =>'Current Cost Price should be a number',
+            'i_cur_sp.numeric' =>'Current Selling Price should be a number',
+            'i_cur_dp.numeric' =>'Current Discount Price should be a number',
+            'i_low_flag.integer' =>'Low Flag should be a number',
         ]);
         
         $item = new Item;
@@ -79,8 +94,28 @@ class ItemsController extends Controller
         $item->i_cur_sp = $request->input('i_cur_sp');
         $item->i_cur_dp = $request->input('i_cur_dp');
         $item->i_low_flag = $request->input('i_low_flag');
-        $item->save();
-        return redirect('/items')->with('success','Item created Succesfully');  
+        $log_user = Auth:: user();
+        // DB::transaction(function () use($item) {
+        //     $item->save();
+        //     $log_user = Auth:: user();
+        //     $values = ['Items Insertion','Item','NULL','NULL','NULL','ADD',$log_user->name];
+        //     DB::select('call insert_into_log(?,?,?,?,?,?,?)',$values);
+           
+        // });
+        DB::beginTransaction();        
+        try {
+            $item->save();
+            $log_user = Auth:: user();
+            $values = ['Items Insertion','Item','NULL',$item->item_name,'NULL','NULL','ADD',$log_user->name];
+            DB::select('call insert_into_log(?,?,?,?,?,?,?,?)',$values);
+            DB::table('log_table')->where('user1',NULL)->orwhere('user1','')->update(['user1'=>$log_user->name]);
+            DB:: commit();
+        }
+        catch (\Exception $e){
+            DB:: rollback();
+            return redirect('/items')->with('error','Item name repeated');  
+         }
+         return redirect('/items')->with('success','Item created Succesfully');  
     }
 
     /**
@@ -129,11 +164,24 @@ class ItemsController extends Controller
         $this->validate($request,[
             'item_name'=>'required',
             'i_category'=>'required',
-            'i_quantity'=>'required|integer',
+            'i_quantity'=>'required|numeric',
             'i_cur_cp'=>'required|numeric',
             'i_cur_sp'=>'required|numeric',
             'i_cur_dp'=>'required|numeric',
             'i_low_flag'=>'required|integer'
+        ],[
+            'item_name.required'=>'Item name is required',
+            'i_category.required'=>"Item Category is required",
+            'i_quantity.required'=>"Item Quantity is required",
+            'i_cur_cp.required'=>"Current Cost Price is required",
+            'i_cur_sp.required'=>"Current Selling Price is required",
+            'i_cur_dp.required'=>"Current Discount Price is required",
+            'i_low_flag.required'=>"Low Flag is required",
+            'i_quantity.numeric' =>'Item Quantity should be a number',
+            'i_cur_cp.numeric' =>'Current Cost Price should be a number',
+            'i_cur_sp.numeric' =>'Current Selling Price should be a number',
+            'i_cur_dp.numeric' =>'Current Discount Price should be a number',
+            'i_low_flag.integer' =>'Low Flag should be a number',
         ]);
         
         $item =Item :: find($id);
@@ -144,7 +192,17 @@ class ItemsController extends Controller
         $item->i_cur_sp = $request->input('i_cur_sp');
         $item->i_cur_dp = $request->input('i_cur_dp');
         $item->i_low_flag = $request->input('i_low_flag');
-        $item->save();
+        $log_user = Auth:: user();
+        DB::beginTransaction();        
+        try {
+            $item->save();
+            DB::table('log_table')->where('user1',NULL)->orwhere('user1','')->update(['user1'=>$log_user->name]);
+            DB:: commit();
+        }
+        catch (\Exception $e){
+            DB:: rollback();
+            return redirect('/items')->with('error','Item name repeated');  
+        }
         return redirect('/items')->with('success','Item Updated Succesfully');
     }
 
@@ -157,7 +215,19 @@ class ItemsController extends Controller
     public function destroy($id)
     {
         $item = Item:: find($id);
-        $item->delete();
+        $log_user = Auth:: user();
+        DB::beginTransaction();
+        try {
+            $item->delete();
+            $values = ['Items Deletion','Item','NULL',$item->item_name,'NULL','NULL','DELETE',$log_user->name];
+            DB::select('call insert_into_log(?,?,?,?,?,?,?,?)',$values);
+            DB::table('log_table')->where('user1',NULL)->orwhere('user1','')->update(['user1'=>$log_user->name]);
+            DB:: commit();
+        }
+        catch (\Exception $e){
+            DB:: rollback();
+            return redirect('/items')->with('error','Item Can not be deleted');  
+        }  
         return redirect('/items')->with('success','Item Deleted');
     }
 
@@ -227,7 +297,9 @@ class ItemsController extends Controller
             
         }
         if($this->load_status == 1){
-            // echo "succcess";
+            $log_user = Auth:: user();
+            $values = ['Items Insertion from Excel','Item','NULL','NULL','NULL','NULL','Add',$log_user->name];
+            DB::select('call insert_into_log(?,?,?,?,?,?,?,?)',$values);
             return redirect('/items')->with('success','Items Loaded from Excel Successful');
         }
         elseif($this->load_status == 0){

@@ -19,6 +19,7 @@ class CreateDebtorsTable extends Migration
             $table->string('d_address');
             $table->string('d_prim_phone');
             $table->string('d_sec_phone');
+            $table->longtext('d_note')->nullable();
             $table->timestamps();
         });
     }

@@ -9,9 +9,11 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" type="text/css" href="{{asset('css/apptheme/bootstrap.min.css')}}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"> --}}
+  <link rel="stylesheet" type="text/css" href="{{asset('css/downloads/font-awesome.min.css')}}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> --}}
+  <link rel="stylesheet" href="{{asset('css/downloads/ionicons.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" type="text/css" href="{{asset('css/apptheme/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -25,7 +27,8 @@
   {{-- SELECT2 --}}
   <link rel="stylesheet" type="text/css" href="{{asset('css/select2/select2.min.css')}}">
   
-  <link rel="stylesheet" href="https://unpkg.com/nepali-date-picker@2.0.0/dist/nepaliDatePicker.min.css" integrity="sha384-Fligaq3qH5qXDi+gnnhQctSqfMKJvH4U8DTA+XGemB/vv9AUHCwmlVR/B3Z4nE+q" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{asset('css/downloads/nepali-datepicker.min.css')}}">
+  {{-- <link rel="stylesheet" href="https://unpkg.com/nepali-date-picker@2.0.0/dist/nepaliDatePicker.min.css" integrity="sha384-Fligaq3qH5qXDi+gnnhQctSqfMKJvH4U8DTA+XGemB/vv9AUHCwmlVR/B3Z4nE+q" crossorigin="anonymous"> --}}
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -78,40 +81,21 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ url('images/shiva.jpg') }}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Suraj</span>
+              {{ Auth::user()->name }} <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="{{ url('images/shiva.jpg') }}" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
+            <ul class="dropdown-menu">   
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="#" class="btn btn-info"><i class="fa  fa-gear"></i>&nbspSettings</a>
+                  <a class="btn btn-info" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                        <i class="fa fa-check"></i>
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
                 </div>
               </li>
             </ul>
@@ -208,8 +192,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id="addprbills"><a href=""><i class="fa fa-circle-o"></i>Add Purchase Return Bills</a></li>
-              <li id="viewprbills"><a href=""><i class="fa fa-circle-o"></i>View Purchase Return Bills</a></li>
+              <li id="addprbills"><a href="{{ action('Prbills\PrbillsController@create') }}"><i class="fa fa-circle-o"></i>Add Purchase Return Bills</a></li>
+              <li id="viewprbills"><a href="{{ action('Prbills\PrbillsController@index') }}"><i class="fa fa-circle-o"></i>View Purchase Return Bills</a></li>
             </ul>
           </li>
          <li id="preceipts" class="treeview">
@@ -220,8 +204,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="addpreceipts"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Purchase Receipts</a></li>
-            <li id="viewpreceipts"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Purchase Receipts</a></li>
+            <li id="addpreceipts"><a href="{{ action('Preceipts\PreceiptsController@create') }}"><i class="fa fa-circle-o"></i>Add Purchase Receipts</a></li>
+            <li id="viewpreceipts"><a href="{{ action('Preceipts\PreceiptsController@index') }}"><i class="fa fa-circle-o"></i>View Purchase Receipts</a></li>
           </ul>
         </li>
         <li class="header text-center" ><b>Sales Section</b></li>
@@ -295,12 +279,24 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id ="incomereports"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Activity Log</a></li>
-              <li id ="expensereports"><a href="{{ action('Items\ItemsController@index') }}"><i class="fa fa-circle-o"></i>Cron Log</a></li>
+              <li id ="activity_log"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Activity Log</a></li>
+              <li id ="cron_log"><a href="{{ action('Items\ItemsController@index') }}"><i class="fa fa-circle-o"></i>Cron Log</a></li>
             </ul>
-          </li>
-       
-        
+          </li>  
+          @can('isAdmin')
+          <li id = "usermanage" class="treeview">
+              <a href="#">
+                <i class="fa fa-user-plus"></i> <span>Usermanagement</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li id ="adduser"><a href="{{ action('Auth\UserController@createUser') }}"><i class="fa fa-circle-o"></i>Add User</a></li>
+                <li id ="listuser"><a href="{{ action('Auth\UserController@listUser') }}"><i class="fa fa-circle-o"></i>View User</a></li>
+              </ul>
+            </li>
+          @endcan
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -358,7 +354,8 @@
 {{-- select2 --}}
 <script src="{{asset('js/select2/select2.full.min.js')}}"></script>
 
-<script type="text/javascript" src="https://unpkg.com/nepali-date-picker@2.0.0/dist/jquery.nepaliDatePicker.min.js" integrity="sha384-bBN6UZ/L0DswJczUYcUXb9lwIfAnJSGWjU3S0W5+IlyrjK0geKO+7chJ7RlOtrrF" crossorigin="anonymous"></script>
+<script src="{{asset('js/downloads/nepaliDatePicker.min.js')}}"></script>
+{{-- <script type="text/javascript" src="https://unpkg.com/nepali-date-picker@2.0.0/dist/jquery.nepaliDatePicker.min.js" integrity="sha384-bBN6UZ/L0DswJczUYcUXb9lwIfAnJSGWjU3S0W5+IlyrjK0geKO+7chJ7RlOtrrF" crossorigin="anonymous"></script> --}}
 
 <script>
     $(function () {
@@ -430,7 +427,8 @@
       closeOnDateSelect: true
       });
     </script>
-    @yield('pagespecificscripts')
     @include('inc.errormessage')
+    @yield('pagespecificscripts')
+    
 </body>
 </html>

@@ -14,7 +14,6 @@ class CreatePbillItemsTable extends Migration
     public function up()
     {
         Schema::create('pbill_items', function (Blueprint $table) {
-            $table->increments('pbillitem_id');
             $table->integer('pbill_id');
             $table->integer('item_id');
             $table->float('quantity');

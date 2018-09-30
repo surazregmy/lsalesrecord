@@ -16,13 +16,17 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('role')->default('user');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
 
         });
+
+        DB::unprepared('INSERT INTO users VALUES(1,"admin@salesrecord.com","Admin","admin",
+        "$2y$10$QikDtrqFNNQ.aqSu31xIae3qyzKi9Pof1oP06yjyzzPKzkbApRRkC",NULL,curdate(),curdate())');
+
     }
 
     /**

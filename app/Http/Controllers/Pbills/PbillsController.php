@@ -15,6 +15,8 @@ use Carbon\carbon;
 use App\Pbill\Pbill;
 use App\PbillItem\PbillItem;
 use Illuminate\Support\Facades\DB;
+use Validator;
+use Illuminate\Validation\Rule;
 
 
 class PbillsController extends Controller
@@ -69,10 +71,6 @@ class PbillsController extends Controller
     public function store(Request $request)
     {
         
-        // echo '<pre>';
-        // print_r($_POST);
-        // die;
-
         $this->validate($request,[
             'item1'=>'required|numeric',
             'quantity1'=>'required|numeric',
@@ -80,20 +78,47 @@ class PbillsController extends Controller
             'total1'=>'required|numeric',
             'total_amount'=>'required|numeric',
             'd_id'=>'required',
-            'bill_no'=> 'required',
+            'pbill_original_id'=> 'required',
             'date_of_purchase'=>'required',
-            'entered_by'=>'required'
+            'entered_by'=>'required',
+            'pbill_generated_id'=>'unique'
         ]); 
+
+        $date_of_purchase_n= $request->input('date_of_purchase');
+        $finanacialyear =  NepaliDateFormat :: returnFinacialYear($date_of_purchase_n);
+        $gen_pbill_id = str_pad($request->input('pbill_original_id'),5,'0',STR_PAD_LEFT);
+        $request['pbill_generated_id'] = $finanacialyear.'-'.$gen_pbill_id;
+
+        $messages = [
+            'pbill_generated_id.unique' => 'Bill No repeated',
+        ];
+        $d_id = $request->input('d_id');
+        $pbill_original_id = $request->input('pbill_original_id');
+        $validator =  Validator::make($request->all(), [
+                'pbill_generated_id' =>  // Look at the query/ Don;t know it requires the field from request
+                 Rule::unique('pbills')->where(function($query) use ($d_id, $pbill_original_id){
+                        return $query->where('debtor_id',$d_id);
+                 }),
+            ],
+            $messages
+            );
+        if ($validator->fails()) {
+            return redirect('pbills/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+
         $addPbillsave = Pbill::addPbill($request);
         // return $addPbillsave;
         if(!is_null($request->input('save'))){
             if($addPbillsave['pbill_add_status']== 0)
-                return redirect('/pbills/create')->with('error','Error in Creating PBill');  
+                return redirect('/pbills/create')->with('error','Error in Creating PBill')->withInput();  
             elseif($addPbillsave['pbill_add_status'] == 1)
                 return redirect('/pbills/'.$addPbillsave["inserted_id"].'/edit')->with('success','Pbill created successfully');  
         }elseif(!is_null($request->input('save_and_exit'))){
             if($addPbillsave['pbill_add_status']== 0)
-                return redirect('/pbills/create')->with('error','Error in Creating PBill');  
+                return redirect('/pbills/create')->withErrors('Error in Creating PBill')->withInput();  
             elseif($addPbillsave['pbill_add_status'] == 1)
                 return redirect('/pbills')->with('success','Pbill created successfully');  
         }
@@ -150,6 +175,9 @@ class PbillsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // echo '<pre>';
+        // print_r($_POST);
+        // die;
         $this->validate($request,[
             'item1'=>'required|numeric',
             'quantity1'=>'required|numeric',
@@ -157,11 +185,37 @@ class PbillsController extends Controller
             'total1'=>'required|numeric',
             'total_amount'=>'required|numeric',
             'd_id'=>'required',
-            'bill_no'=> 'required',
+            'pbill_original_id'=> 'required',
             'date_of_purchase'=>'required',
-            'entered_by'=>'required'
+            'entered_by'=>'required',
+            'pbill_generated_id'=>'required'
         ]); 
+        $date_of_purchase_n= $request->input('date_of_purchase');
+        $finanacialyear =  NepaliDateFormat :: returnFinacialYear($date_of_purchase_n);
+        $gen_pbill_id = str_pad($request->input('pbill_original_id'),5,'0',STR_PAD_LEFT);
+        $request['pbill_generated_id'] = $finanacialyear.'-'.$gen_pbill_id;
         
+        $messages = [
+            'pbill_generated_id.unique' => 'Bill No repeated',
+        ];
+        $d_id = $request->input('d_id');
+        $pbill_generated_id = $request->input('pbill_generated_id');
+        $pbill_old_id = $request->input('pbill_old_id');
+        $validator =  Validator::make($request->all(), [
+                'pbill_generated_id' =>  // Look at the query/ Don;t know it requires the field from request
+                 Rule::unique('pbills')->ignore($pbill_old_id,'pbill_generated_id')
+                 ->where(function($query) use ($d_id, $pbill_generated_id){
+                        return $query->where('debtor_id',$d_id);
+                 }),
+            ],
+            $messages
+            );
+        if ($validator->fails()) {
+            return redirect('pbills/'.$id.'/edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         if(!is_null($request->input('update'))){
             $pbill_update = Pbill::updatePbill($request, $id);
             if($pbill_update['pbill_update_status'] == 0)
@@ -204,5 +258,14 @@ class PbillsController extends Controller
             'pbill' => $pbill
         );
         return view('pbill.print')->with($data); 
+    }
+
+    public function getPbillsOfDebtor($debtor_id){
+        $debtor = Debtor::find($debtor_id);
+        $pbills = $debtor->pbill;
+        $data = array(
+                'pbills' => $pbills
+        );
+        return view('pbill.invoices')->with($data);
     }
 }

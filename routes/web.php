@@ -21,6 +21,22 @@ Route::resource('pbills','Pbills\PbillsController');
 Route::resource('debtors','Debtors\DebtorsController');
 Route::resource('sbills','Sbills\SbillsController');
 Route::resource('creditors','Creditors\CreditorsController');
+Route::resource('prbills','Prbills\PrbillsController');
+Route::resource('preceipts','Preceipts\PreceiptsController');
+Route::get('pbills/getPbillsOfDebtor/{id}','Pbills\PbillsController@getPbillsOfDebtor');
+Route::get('prbills/getPrbillsOfDebtor/{id}','Prbills\PrbillsController@getPrbillsOfDebtor');
+Route::get('preceipts/getPreceiptsOfDebtor/{id}','Preceipts\PreceiptsController@getPreceiptsOfDebtor');
+Route::get('pledgers/prepareLedgerforDebtor/{id}','Pledgers\PledgersController@prepareLedgerforDebtor');
+Route::POST('Debtors/saveNotes','Debtors\DebtorsController@saveNotes');
+Route::GET('/createUser','Auth\UserController@createUser');
+Route::POST('/saveUser','Auth\UserController@saveUser');
+Route::GET('/editUser/{id}','Auth\UserController@editUser');
+Route::POST('/updateUser','Auth\UserController@updateUser');
+Route::GET('/listUser','Auth\UserController@listUser');
+Route::DELETE('/deleteUser/{id}}','Auth\UserController@deleteUser');
+
+
+
 
 
 

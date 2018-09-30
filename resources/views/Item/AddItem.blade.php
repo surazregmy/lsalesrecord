@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <div class="row">
                       <div class="col-sm-2 text-center">
-                        {{form:: label('i_cur_dp','Discount Price : ','',['class'=>'form-control'])}}
+                        {{form:: label('i_cur_dp','Discount Rate(%) : ','',['class'=>'form-control'])}}
                       </div>
                       <div class="col-sm-4">
                         {{form:: text('i_cur_dp','',['class'=>'form-control','placeholder'=>'Discount Price'])}}
@@ -93,11 +93,6 @@
                 </div>
         {!! Form::close() !!}
       </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        
-      </div>
-      <!-- /.box-footer-->
     </div>
   </div>
    <!-- Modal -->

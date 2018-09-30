@@ -5,6 +5,8 @@ namespace App\Http\Controllers\debtors;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Debtor\Debtor;
+use Validator;
+use Illuminate\Validation\Rule;
 
 class DebtorsController extends Controller
 {
@@ -53,7 +55,7 @@ class DebtorsController extends Controller
     {
        
         $this->validate($request,[
-            'd_name'=>'required',
+            'd_name'=>'required|unique:debtors,debtor_name',
             'd_address'=>'required',
             'd_prim_phone'=>'required'
         ]);
@@ -76,9 +78,11 @@ class DebtorsController extends Controller
      */
     public function show($id)
     {
+        $debtor = Debtor::find($id);
         $data = array(
             'heading' => 'Debtors',
             'subheading' => 'Debtors Show',
+            'debtor' => $debtor
         );
         return view('debtor.show')->with($data);
     }
@@ -109,11 +113,29 @@ class DebtorsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $debtor =  Debtor:: find($id);
         $this->validate($request,[
             'd_name'=>'required',
             'd_address'=>'required',
             'd_prim_phone'=>'required'
         ]);
+
+        $messages = [
+            'd_name.unique' => 'Debtors repeated',
+        ];
+        $d_name = $debtor->debtor_name;
+        $validator =  Validator::make($request->all(), [
+                'd_name' =>  // Look at the query/ Don;t know it requires the field from request
+                    Rule::unique('debtors','debtor_name')->ignore($d_name,'debtor_name')
+            ],  
+            $messages
+            );
+        if ($validator->fails()) {
+            return redirect('debtors/'.$id.'/edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
 
         $debtor =  Debtor:: find($id);
         $debtor->debtor_name = $request->input('d_name');
@@ -123,6 +145,7 @@ class DebtorsController extends Controller
 
         $debtor->save();
         return redirect('/debtors')->with('success','Debtor Updated Succesfully');  
+
     }
 
     /**
@@ -136,5 +159,15 @@ class DebtorsController extends Controller
         $debtor = Debtor:: find($id);
         $debtor-> delete();
         return redirect('/debtors')->with('success','Debtor Deleted');
+    }
+
+    public function saveNotes(Request $request)
+    {
+       $id = $request->input('d_id');
+        $debtor = Debtor::find($id);
+        $debtor->d_note = $request->input('d_note');
+        $debtor->save();
+        return redirect('/debtors/'.$id);
+        
     }
 }

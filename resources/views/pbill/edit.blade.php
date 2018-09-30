@@ -106,10 +106,10 @@
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('bill_no','Bill No: ','',['class'=>'form-control'])}}
+                                  {{form:: label('pbill_original_id','Bill No: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('bill_no',$pbill->pbill_original_id,['class'=>'form-control','placeholder'=>'Bill No'])}}
+                                  {{form:: text('pbill_original_id',$pbill->pbill_original_id,['class'=>'form-control','placeholder'=>'Bill No'])}}
                                   </div>
                               </div>
                           </div>
@@ -136,6 +136,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
+                            {{Form::hidden('pbill_old_id', $pbill->pbill_generated_id) }}
                             {{form:: submit('update',['class'=>'btn btn-md btn-info btn-flat pull-left','onclick'=>"changeC()",'name'=>'update'])}} 
                             {{-- <a href="javascript:void(0)" class="btn btn-md btn-info btn-flat pull-left" onclick="changeC()">Save</a> --}}
                             {{form:: submit('Update and Exit',['class'=>'btn btn-md btn-default btn-flat pull-right','onclick'=>"changeC()",'name'=>'update_and_exit'])}}

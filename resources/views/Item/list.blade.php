@@ -4,9 +4,14 @@
         <div class="row" style="margin-left:0px; margin-right:0px">
           
             <div class="box">
-                    <div class="box-header with-border">
-                            <h4 class="text-center">{{$subheading}}</h4>
-                    </div>
+            <div class="box-header with-border">
+                  <section class="content-header">
+                      <h4 class="text-center" style="float:center">{{$subheading}}</h4>
+                      <a class = 'breadcrumb' href='{{ action('Items\ItemsController@create') }}' style="float:right">
+                          <img src="{{ url('images/add_icon.png') }}" class="img-circle" alt="User Image" style="height:30px; width:30px">
+                      </a>
+                  </section>         
+            </div>
               <!-- /.box-header -->
               <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">

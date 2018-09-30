@@ -10,7 +10,6 @@
 @endif
 
 @if(session('success'))
-        $succ = {{session('success')}};
          <script>
                 function alertfun(){
                     alertify.success('<?php echo e(session('success')) ?>');

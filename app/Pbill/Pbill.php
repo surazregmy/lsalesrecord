@@ -31,19 +31,21 @@ class Pbill extends Model
         $date_of_purchase_n= $request->input('date_of_purchase');
         $date_of_purchase_e = NepaliDateFormat :: returnCarbonDate($date_of_purchase_n);
         $pbill = new Pbill;
-        $pbill->pbill_original_id = $request->input('bill_no');
+        $pbill->pbill_original_id = $request->input('pbill_original_id');
         $pbill->debtor_id = $request->input('d_id');
         $pbill->p_date_of_purchase = $date_of_purchase_e;
         $pbill->p_date_of_purchase_n= $request->input('date_of_purchase');
         $pbill->p_entered_by = $request->input('entered_by');
         $pbill->p_total_amount = $request->input('total_amount');
+        $pbill->pbill_generated_id = $request->input('pbill_generated_id');
+       
 
         DB::beginTransaction();
         try{
             $pbill->save();
             $inserted_id = $pbill->pbill_id;  // get the id of the inserted pbill
             $total_amount = 0;
-            for ($i=1; $i < count($_POST)-6; $i+=4) { 
+            for ($i=1; $i < count($_POST)-7; $i+=4) { 
                 $one_row = array_slice($_POST,$i,4);
                 if (!(in_array(null, $one_row))) {
                        $k = array_keys($one_row);
@@ -86,12 +88,13 @@ class Pbill extends Model
         $date_of_purchase_n= $request->input('date_of_purchase');
         $date_of_purchase_e = NepaliDateFormat :: returnCarbonDate($date_of_purchase_n);
         $pbill = Pbill:: find($id);
-        $pbill->pbill_original_id = $request->input('bill_no');
+        $pbill->pbill_original_id = $request->input('pbill_original_id');
         $pbill->debtor_id = $request->input('d_id');
         $pbill->p_date_of_purchase = $date_of_purchase_e;
         $pbill->p_date_of_purchase_n= $request->input('date_of_purchase');
         $pbill->p_entered_by = $request->input('entered_by');
         $pbill->p_total_amount = $request->input('total_amount');
+        $pbill->pbill_generated_id = $request->input('pbill_generated_id');
 
         DB::beginTransaction();
         try{
@@ -100,7 +103,7 @@ class Pbill extends Model
             PbillItem :: where('pbill_id',$updated_id)->delete();
 
             $total_amount = 0;
-            for ($i=2; $i < count($_POST)-6; $i+=4) { 
+            for ($i=2; $i < count($_POST)-8; $i+=4) { 
                 $one_row = array_slice($_POST,$i,4);
                 if (!(in_array(null, $one_row))) {
                        $k = array_keys($one_row);
@@ -112,7 +115,9 @@ class Pbill extends Model
                              'rate' =>$one_row[$k[2]],
                              'total' =>$one_row[$k[3]]
                         );
-                        $total_amount = $total_amount + $one_row[$k[3]]; // total amount
+                
+                        
+                       $total_amount = $total_amount + $one_row[$k[3]]; // total amount
                         
 
                         // echo '<pre>';
