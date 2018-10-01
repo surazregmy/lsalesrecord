@@ -26,6 +26,7 @@ class HomeController extends Controller
         $data = array(
             'heading' => 'Salesrecord',
             'subheading' => 'Dashboard',
+            'brname' => 'home'
         );
         return view('home')->with($data);
     }

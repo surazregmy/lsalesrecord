@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Sbills;
-
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Item\Item;
+use App\Creditor\Creditor;
 
 class SbillsController extends Controller
 {
@@ -25,11 +26,16 @@ class SbillsController extends Controller
      */
     public function create()
     {
-        $items = Item :: all();  // fetches all the data        
+        $log_user = Auth::user();
+        $items = Item :: all();  // fetches all the data    
+        $creditors = Creditor::all();    
         $data = array(
             'heading' => 'Sbills',
             'subheading' => 'Sbills List',
-            'items'=>$items
+            'items'=>$items,
+            'creditors'=>$creditors,
+            'log_user'=>$log_user,
+            'brname'=>'addPbills'
         );
         return view('sbill.add')->with($data);
     }

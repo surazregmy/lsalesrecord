@@ -217,8 +217,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="addcreditors"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Creditors</a></li>
-            <li id="viewcreditors"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Creditors</a></li>
+            <li id="addcreditors"><a href="{{ action('Creditors\CreditorsController@create') }}"><i class="fa fa-circle-o"></i>Add Creditors</a></li>
+            <li id="viewcreditors"><a href="{{ action('Creditors\CreditorsController@index') }}"><i class="fa fa-circle-o"></i>View Creditors</a></li>
           </ul>
         </li>
          <li id="sbills" class="treeview">
@@ -229,8 +229,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="addsbills"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Sales Bills</a></li>
-            <li id="viewsbills"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Sales Bills</a></li>
+            <li id="addsbills"><a href="{{ action('Sbills\SbillsController@create') }}"><i class="fa fa-circle-o"></i>Add Sales Bills</a></li>
+          <li id="viewsbills"><a href="{{action('Sbills\SbillsController@index')}}"><i class="fa fa-circle-o"></i>View Sales Bills</a></li>
           </ul>
         </li>
         <li id="srbills" class="treeview">
@@ -311,11 +311,13 @@
       <h1 class="text-center">
         {{$heading}}
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      {{-- <ol class="breadcrumb"> --}}
+        {{-- <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol>
+        <li class="active">Blank page</li> --}}
+        {{ Breadcrumbs::render($brname) }}
+      <div class="clear"></div>
+      {{-- </ol> --}}
     </section>
     @yield('content')
    

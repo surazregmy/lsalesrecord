@@ -34,7 +34,8 @@ class PrbillsController extends Controller
         $data = array(
             'heading' => 'PRbills',
             'subheading' => 'Purchase Return bills List',
-            'prbills'=>$prbills   
+            'prbills'=>$prbills,
+            'brname'=>'listPrbills' 
         );
         return view('prbill.list')->with($data);
     }
@@ -54,7 +55,8 @@ class PrbillsController extends Controller
             'subheading' => 'Purchase Return bills List',
             'items'=>$items,
             'debtors' => $debtors,
-            'log_user' => $log_user
+            'log_user' => $log_user,
+            'brname'=>'addPrbills' 
         );
         return view('prbill.add')->with($data);
     }
@@ -134,7 +136,8 @@ class PrbillsController extends Controller
         $data = array(
             'heading'=>'PRbills',
             'subheading'=>'Purchase Returns bills Show',
-            'prbill' => $prbill
+            'prbill' => $prbill,
+            'brname'=>'showPrbills'             
         );
         return view('prbill.show')->with($data);
     }
@@ -157,7 +160,9 @@ class PrbillsController extends Controller
             'prbill' => $prbill,
             'items'=>$items,
             'debtors' => $debtors,
-            'log_user' => $log_user
+            'log_user' => $log_user,
+            'brname'=>'editPrbills' 
+            
         );
         return view('prbill.edit')->with($data);
     }

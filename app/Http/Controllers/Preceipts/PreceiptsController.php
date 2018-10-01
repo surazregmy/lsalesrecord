@@ -31,7 +31,8 @@ class PreceiptsController extends Controller
         $data = array(
             'heading' => 'Purchse Receipts',
             'subheading' => 'Purchase Receipts List',
-            'preceipts' => $preceipts
+            'preceipts' => $preceipts,
+            'brname' => 'listPreceipts'
         );
         return view('preceipt.list')->with($data);
     }
@@ -49,7 +50,8 @@ class PreceiptsController extends Controller
             'heading' => 'Purchse Receipts',
             'subheading' => 'Purchase Receipts Add',
             'debtors'=>$debtors,
-            'log_user' => $log_user 
+            'log_user' => $log_user ,
+            'brname' => 'addPreceipts'            
         );
         return view('preceipt.add')->with($data);
     }
@@ -125,7 +127,8 @@ class PreceiptsController extends Controller
         $data = array(
             'heading' => 'Purchse Receipt',
             'subheading' => 'Purchase Receipts Show',
-            'preceipt' => $preceipt
+            'preceipt' => $preceipt,
+            'brname' => 'showPreceipts'            
         );
         return view('preceipt.show')->with($data);
        
@@ -147,7 +150,8 @@ class PreceiptsController extends Controller
             'subheading' => 'Purchase Receipts Edit',
             'debtors'=>$debtors, 
             'log_user'=>$log_user,
-            'preceipt'=>$preceipt
+            'preceipt'=>$preceipt,
+            'brname' => 'editPreceipts'            
         );
         return view('preceipt.edit')->with($data);
 

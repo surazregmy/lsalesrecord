@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Creditors;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Creditor\Creditor;
+use Validator;
+use Illuminate\Validation\Rule;
 
 class CreditorsController extends Controller
 {
@@ -14,7 +17,14 @@ class CreditorsController extends Controller
      */
     public function index()
     {
-        //
+        $creditros = Creditor::all();
+        $data = array(
+            'heading'=>'creditors',
+            'subheading'=>'List Creditors',
+            'creditors'=>$creditros,
+            'brname'=>'listCreditors'
+        );
+        return view('creditor.list')->with($data);
     }
 
     /**
@@ -24,7 +34,12 @@ class CreditorsController extends Controller
      */
     public function create()
     {
-        //
+        $data = array(
+            'heading'=>'creditors',
+            'subheading'=>'List Creditors',
+            'brname'=>'addCreditors'
+        );
+        return view('creditor.add')->with($data);
     }
 
     /**
@@ -35,7 +50,19 @@ class CreditorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'c_name'=>'required|unique:creditors,creditor_name',
+            'c_address'=>'required',
+            'c_prim_phone'=>'required'
+        ]);
+
+        $creditor = new Creditor;
+        $creditor->creditor_name = $request->input('c_name');
+        $creditor->c_address = $request->input('c_address');
+        $creditor->c_prim_phone = $request->input('c_prim_phone');
+        $creditor->c_sec_phone = $request->input('c_sec_phone');
+        $creditor->save();
+        return redirect('/creditors')->with('success','Creditor created Succesfully');  
     }
 
     /**
@@ -57,7 +84,14 @@ class CreditorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $creditor = Creditor::find($id);
+        $data = array(
+            'heading'=>'creditors',
+            'subheading'=>'List Creditors',
+            'creditor'=>$creditor,
+            'brname'=>'editCreditors'
+        );
+        return view('creditor.edit')->with($data);
     }
 
     /**
@@ -69,7 +103,39 @@ class CreditorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $creditor =  Creditor:: find($id);
+        $this->validate($request,[
+            'c_name'=>'required',
+            'c_address'=>'required',
+            'c_prim_phone'=>'required'
+        ]);
+
+        $messages = [
+            'c_name.unique' => 'Creditors name repeated',
+        ];
+        $c_name = $creditor->creditor_name;
+        $validator =  Validator::make($request->all(), [
+                'c_name' =>  // Look at the query/ Don;t know it requires the field from request
+                    Rule::unique('creditors','creditor_name')->ignore($c_name,'creditor_name')
+            ],  
+            $messages
+            );
+        if ($validator->fails()) {
+            return redirect('creditors/'.$id.'/edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+
+
+        $creditor->creditor_name = $request->input('c_name');
+        $creditor->c_address = $request->input('c_address');
+        $creditor->c_prim_phone = $request->input('c_prim_phone');
+        $creditor->c_sec_phone = $request->input('c_sec_phone');
+
+        $creditor->save();
+        return redirect('/creditors')->with('success','Creditor Updated Succesfully');  
+
     }
 
     /**
@@ -80,6 +146,18 @@ class CreditorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $creditor = Creditor:: find($id);
+        $creditor-> delete();
+        return redirect('/creditors')->with('success','Creditor Deleted');
+    }
+
+    public function saveNotes(Request $request)
+    {
+       $id = $request->input('c_id');
+        $creditor = Creditor::find($id);
+        $creditor->c_note = $request->input('c_note');
+        $creditor->save();
+        return redirect('/creditors/'.$id);
+        
     }
 }

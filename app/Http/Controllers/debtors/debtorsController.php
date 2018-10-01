@@ -25,7 +25,8 @@ class DebtorsController extends Controller
         $data = array(
             'heading' => 'Debtors',
             'subheading' => 'Debtors List',
-            'debtors'=>$debtors
+            'debtors'=>$debtors,
+            'brname' => 'listDebtors'
         );
         return view('debtor.list')->with($data);
         
@@ -41,6 +42,7 @@ class DebtorsController extends Controller
         $data = array(
             'heading' => 'Debtors',
             'subheading' => 'Debtors Add',
+            'brname' => 'addDebtors'
         );
         return view('debtor.add')->with($data);
     }
@@ -82,7 +84,9 @@ class DebtorsController extends Controller
         $data = array(
             'heading' => 'Debtors',
             'subheading' => 'Debtors Show',
-            'debtor' => $debtor
+            'debtor' => $debtor,
+            'brname' => 'showDebtors'
+            
         );
         return view('debtor.show')->with($data);
     }
@@ -99,7 +103,9 @@ class DebtorsController extends Controller
         $data = array(
             'heading' => 'Debtor',
             'subheading' => 'Debtor Edit',
-            'debtor'=>$debtor
+            'debtor'=>$debtor,
+            'brname' => 'editDebtors'
+            
         );
         return view('Debtor.edit')->with($data); 
     }
@@ -156,9 +162,17 @@ class DebtorsController extends Controller
      */
     public function destroy($id)
     {
+
         $debtor = Debtor:: find($id);
-        $debtor-> delete();
-        return redirect('/debtors')->with('success','Debtor Deleted');
+        $pbill_count = count($debtor->pbill);
+        $prbill_count = count($debtor->prbill);
+        if($pbill_count == 0 && $prbill_count == 0){
+            $debtor-> delete();
+            return redirect('/debtors')->with('success','Debtor Deleted');
+        }
+        else{
+            return redirect('/debtors')->with('error','Debtor can not be deleted with existing bills');
+        }
     }
 
     public function saveNotes(Request $request)

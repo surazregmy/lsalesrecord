@@ -36,7 +36,8 @@ class ItemsController extends Controller
         $data = array(
             'heading' => 'Items',
             'subheading' => 'Items List',
-            'items'=>$items
+            'items'=>$items,
+            'brname'=>'listItems'
         );
         return view('Item.list')->with($data);
     }
@@ -51,6 +52,7 @@ class ItemsController extends Controller
         $data = array(
             'heading' => 'Items',
             'subheading' => 'Add Items',
+            'brname'=>'addItems'
         );
         return view('Item/AddItem')->with($data);
     }
@@ -130,7 +132,8 @@ class ItemsController extends Controller
         $data = array(
             'heading' => 'Items',
             'subheading' => 'Show Item',
-            'item'=>$item
+            'item'=>$item,
+            'brname'=>'showItems'
         );
         return view('Item.show')->with($data);
     }
@@ -147,7 +150,8 @@ class ItemsController extends Controller
         $data = array(
             'heading' => 'Items',
             'subheading' => 'Edit Item',
-            'item'=>$item
+            'item'=>$item,
+            'brname'=>'editItems'
         );
         return view('Item.edit')->with($data);    
     }

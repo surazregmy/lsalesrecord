@@ -28,6 +28,7 @@ Route::get('prbills/getPrbillsOfDebtor/{id}','Prbills\PrbillsController@getPrbil
 Route::get('preceipts/getPreceiptsOfDebtor/{id}','Preceipts\PreceiptsController@getPreceiptsOfDebtor');
 Route::get('pledgers/prepareLedgerforDebtor/{id}','Pledgers\PledgersController@prepareLedgerforDebtor');
 Route::POST('Debtors/saveNotes','Debtors\DebtorsController@saveNotes');
+Route::POST('Creditors/saveNotes','Creditors\CreditorsController@saveNotes');
 Route::GET('/createUser','Auth\UserController@createUser');
 Route::POST('/saveUser','Auth\UserController@saveUser');
 Route::GET('/editUser/{id}','Auth\UserController@editUser');

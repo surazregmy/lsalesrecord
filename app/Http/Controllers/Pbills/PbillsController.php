@@ -37,7 +37,8 @@ class PbillsController extends Controller
         $data = array(
             'heading' => 'Pbills',
             'subheading' => 'Pbills List',
-            'pbills'=>$pbills   
+            'pbills'=>$pbills ,
+            'brname'=>'listPbills' 
         );
         return view('pbill.list')->with($data);
     }
@@ -57,7 +58,8 @@ class PbillsController extends Controller
             'subheading' => 'Pbills List',
             'items'=>$items,
             'debtors' => $debtors,
-            'log_user' => $log_user
+            'log_user' => $log_user,
+            'brname'=>'addPbills' 
         );
         return view('pbill.add')->with($data);
     }
@@ -138,7 +140,8 @@ class PbillsController extends Controller
         $data = array(
             'heading'=>'Pbills',
             'subheading'=>'Pbills Show',
-            'pbill' => $pbill
+            'pbill' => $pbill,
+            'brname'=>'showPbills' 
         );
         return view('pbill.show')->with($data);
     }
@@ -161,7 +164,8 @@ class PbillsController extends Controller
             'pbill' => $pbill,
             'items'=>$items,
             'debtors' => $debtors,
-            'log_user' => $log_user
+            'log_user' => $log_user,
+            'brname'=>'editPbills' 
         );
         return view('pbill.edit')->with($data);
     }

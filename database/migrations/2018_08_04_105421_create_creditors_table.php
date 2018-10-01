@@ -14,7 +14,12 @@ class CreateCreditorsTable extends Migration
     public function up()
     {
         Schema::create('creditors', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('creditor_id');
+            $table->string('creditor_name')->unique();
+            $table->string('c_address');
+            $table->string('c_prim_phone');
+            $table->string('c_sec_phone');
+            $table->longtext('c_note')->nullable();
             $table->timestamps();
         });
     }
