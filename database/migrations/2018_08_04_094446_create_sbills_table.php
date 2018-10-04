@@ -14,8 +14,22 @@ class CreateSbillsTable extends Migration
     public function up()
     {
         Schema::create('sbills', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('sbill_id');
+            $table->integer('creditor_id');
+            $table->string('sbill_original_id');
+            $table->string('sbill_generated_id');
+            $table->string('sbill_type');
+            $table->date('s_date_of_sale');
+            $table->string('s_date_of_sale_n');
+            $table->string('s_entered_by');
+            $table->float('s_sub_total_amount');
+            $table->float('s_fin_discount_amount')->nullable();
+            $table->float('s_fin_total_amount');
+            $table->float('s_paid_amount')->nullable();
+            $table->float('s_rem_amount')->nullable();
+            $table->float('profit_amount');
             $table->timestamps();
+            $table->unique( array('creditor_id','sbill_generated_id') );
         });
     }
 

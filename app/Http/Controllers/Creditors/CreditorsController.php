@@ -146,9 +146,17 @@ class CreditorsController extends Controller
      */
     public function destroy($id)
     {
+        
         $creditor = Creditor:: find($id);
-        $creditor-> delete();
-        return redirect('/creditors')->with('success','Creditor Deleted');
+        $sbill_count = count($creditor->sbill);
+        $srbill_count = count($creditor->srbill);
+        if($sbill_count == 0 && $srbill_count == 0){
+            $creditor-> delete();
+            return redirect('/creditors')->with('success','Creditor Deleted');
+        }
+        else{
+            return redirect('/creditors')->with('error','Creditor can not be deleted with existing bills');
+        }
     }
 
     public function saveNotes(Request $request)

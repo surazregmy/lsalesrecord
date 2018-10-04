@@ -2,19 +2,17 @@
 @section('content')
 <section class="content">
         <!-- Main row -->
-        {!! Form::open(['action'=>'Sbills\SbillsController@store','method'=>'POST']) !!}
+        {!! Form::open(['action'=>['Sbills\SbillsController@update',$sbill->sbill_id],'method'=>'PUT']) !!}
         <div class="row">
           <!-- Left col -->
           <div class="col-md-8">
             <!-- TABLE: Purchase Bills -->
-       
             <div class="box box-info">
               <div class="box-header with-border  text-center">
                 <h3 class="box-title" ><b>Items Detail</b></h3>
               </div>
               <!-- /.box-header -->
              
-              
               <div class="box-body">
                 <div class="table-responsive">
                   <table class="table no-margin" id="input_item">
@@ -29,142 +27,25 @@
                     </tr>
                     </thead>
                     <tbody class="detail">
+                    @php($i = 1)
+                    @foreach ($sbill->sbillitem as $sbitem)  
                     <tr>
-                      <td>1</td>
+                      <td>{{$i}}</td>
                       <td>
-                            <select name = "item1" id="form-item1"  class="select2 form-control form-item1" style="width: 100%";>
-                                <option value=""  selected="selected" >Select Item</option>
+                      <select name = "{{'item'.$i}}" id="{{'form-item'.$i}}"  class="{{'select2 form-control form-item'.$i}}" style="width: 100%";>
+                            <option value="<?php echo $sbitem->item_id?>"  selected="selected" >{{$sbitem->item[0]['item_name']}}</option>
                                 <?php foreach($items as $item): ?>
-                                           <option value="<?php echo $item['item_id'] ?>"
-                                                @if (old('item1') == $item['item_id']) selected="selected" @endif>
-                                            <?php echo $item['item_name'];?></option>          
-                                 <?php endforeach ?>
+                                     <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                <?php endforeach ?>             
                              </select>
                         </td>
-                      <td> {{form:: text('quantity1','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                      <td> {{form:: text('rate1','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                      <td> {{form:: text('discount1','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                      <td> {{form:: text('total1','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
+                      <td> {{form:: text('quantity'.$i,$sbitem->quantity,['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                      <td> {{form:: text('rate'.$i,$sbitem->rate,['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                      <td> {{form:: text('discount'.$i,$sbitem->discount,['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
+                      <td> {{form:: text('total'.$i,$sbitem->total,['class'=>'form-control total','placeholder'=>'Total'])}}</td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>
-                            <select name = "item2" id="form-item2"  class="select2 form-control form-item2" style="width: 100%";>
-                                    <option value=""  selected="selected" >Select Item</option>
-                                    <?php foreach($items as $item): ?>
-                                               <option value="<?php echo $item['item_id'] ?>"
-                                                    @if (old('item2') == $item['item_id']) selected="selected" @endif>
-                                                <?php echo $item['item_name'];?></option>          
-                                     <?php endforeach ?>
-                             </select>
-                        </td>
-                      <td> {{form:: text('quantity2','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                      <td> {{form:: text('rate2','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                      <td> {{form:: text('discount2','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                      <td> {{form:: text('total2','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>
-                                <select name = "item3" id="form-item3" class="select2 form-control form-item3" style="width: 100%";>
-                                        <option value=""  selected="selected" >Select Item</option>
-                                        <?php foreach($items as $item): ?>
-                                                   <option value="<?php echo $item['item_id'] ?>"
-                                                        @if (old('item3') == $item['item_id']) selected="selected" @endif>
-                                                    <?php echo $item['item_name'];?></option>          
-                                         <?php endforeach ?>
-                                </select>
-                            </td>
-                        <td> {{form:: text('quantity3','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('rate3','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('discount3','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                        <td> {{form:: text('total3','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>
-                                <select name = "item4" id="form-item4" class="select2 form-control form-item4" style="width: 100%";>
-                                        <option value=""  selected="selected" >Select Item</option>
-                                        <?php foreach($items as $item): ?>
-                                                   <option value="<?php echo $item['item_id'] ?>"
-                                                        @if (old('item4') == $item['item_id']) selected="selected" @endif>
-                                                    <?php echo $item['item_name'];?></option>          
-                                         <?php endforeach ?>
-                                 </select>
-                            </td>
-                        <td> {{form:: text('quantity4','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('rate4','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('discount4','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                        <td> {{form:: text('total4','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>
-                                <select name = "item5" id="form-item5" class="select2 form-control form-item5" style="width: 100%";>
-                                        <option value=""  selected="selected" >Select Item</option>
-                                        <?php foreach($items as $item): ?>
-                                                   <option value="<?php echo $item['item_id'] ?>"
-                                                        @if (old('item5') == $item['item_id']) selected="selected" @endif>
-                                                    <?php echo $item['item_name'];?></option>          
-                                         <?php endforeach ?>
-                                 </select>
-                            </td>
-                        <td> {{form:: text('quantity5','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('rate5','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('discount5','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                        <td> {{form:: text('total5','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>
-                                <select name = "item6" id="form-item6" class="select2 form-control form-item6" style="width: 100%";>
-                                        <option value=""  selected="selected" >Select Item</option>
-                                        <?php foreach($items as $item): ?>
-                                                   <option value="<?php echo $item['item_id'] ?>"
-                                                        @if (old('item6') == $item['item_id']) selected="selected" @endif>
-                                                    <?php echo $item['item_name'];?></option>          
-                                         <?php endforeach ?>
-                                 </select>
-                            </td>
-                        <td> {{form:: text('quantity6','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('rate6','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('discount6','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                        <td> {{form:: text('total6','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>
-                                <select name = "item7" id="form-item7" class="select2 form-control form-item7" style="width: 100%";>
-                                        <option value=""  selected="selected" >Select Item</option>
-                                        <?php foreach($items as $item): ?>
-                                                   <option value="<?php echo $item['item_id'] ?>"
-                                                        @if (old('item7') == $item['item_id']) selected="selected" @endif>
-                                                    <?php echo $item['item_name'];?></option>          
-                                         <?php endforeach ?>
-                                 </select>
-                            </td>
-                        <td> {{form:: text('quantity7','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('rate7','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('discount7','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                        <td> {{form:: text('total7','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>
-                                <select name = "item8" id="form-item8" class="select2 form-control form-item8" style="width: 100%";>
-                                        <option value=""  selected="selected" >Select Item</option>
-                                        <?php foreach($items as $item): ?>
-                                                   <option value="<?php echo $item['item_id'] ?>"
-                                                        @if (old('item8') == $item['item_id']) selected="selected" @endif>
-                                                    <?php echo $item['item_name'];?></option>          
-                                         <?php endforeach ?>
-                                 </select>
-                            </td>
-                        <td> {{form:: text('quantity8','',['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                        <td> {{form:: text('rate8','',['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                        <td> {{form:: text('discount8','',['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                        <td> {{form:: text('total8','',['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
+                    @php ($i++)
+                    @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -197,12 +78,11 @@
                                   </div>
                                   <div class="col-sm-8">
                                         <select name = "c_id" class="select2 form-control" style="width: 100%";>
-                                                <option value=""  selected="selected" >Select Creditor</option>
+                                                <option value="{{$sbill->creditor->creditor_id}}"  selected="selected" >{{$sbill->creditor->creditor_name}}</option>
                                                 <?php foreach($creditors as $creditor): ?>
-                                                           <option value="<?php echo $creditor['creditor_id'] ?>"
-                                                                @if (old('c_id') == $creditor['creditor_id']) selected="selected" @endif>
-                                                            <?php echo $creditor['creditor_name'];?></option>          
+                                                           <option value="<?php echo $creditor['creditor_id'] ?>"><?php echo $creditor['creditor_name'];?></option>          
                                                  <?php endforeach ?>
+                                             </select>
                                          </select>
                                   </div>
                               </div>
@@ -213,7 +93,7 @@
                                   {{form:: label('sbill_original_id','Bill No: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('sbill_original_id','',['class'=>'form-control','placeholder'=>'Bill No'])}}
+                                  {{form:: text('sbill_original_id',$sbill->sbill_original_id,['class'=>'form-control','placeholder'=>'Bill No'])}}
                                   </div>
                               </div>
                           </div>
@@ -224,7 +104,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                     {{ Form::select('sbill_type', 
-                                    array('credit' => 'Credit', 'cash' => 'Cash','halfpaid'=>'Halfpaid',''=>'Select'), '',
+                                    array('credit' => 'Credit', 'cash' => 'Cash','halfpaid'=>'Halfpaid',''=>'Select'), $sbill->sbill_type,
                                     ['class' => 'form-control formtype','id'=>'form_type'])}}
                                     </div>
                                 </div>
@@ -235,7 +115,7 @@
                                   {{form:: label('Date of Sale','Date of Sale : ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('date_of_sale','',['class'=>'form-control bod-picker','placeholder'=>'date'])}}
+                                  {{form:: text('date_of_sale',$sbill->s_date_of_sale_n,['class'=>'form-control bod-picker','placeholder'=>'date'])}}
                                   </div>
                               </div>
                           </div>
@@ -245,7 +125,7 @@
                                   {{form:: label('entered_by','Entered By : ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('entered_by',$log_user->name,['class'=>'form-control','readonly'])}}
+                                  {{form:: text('entered_by',$sbill->s_entered_by,['class'=>'form-control','readonly'])}}
                                   </div>
                               </div>
                           </div>
@@ -264,7 +144,7 @@
                                     {{form:: label('sub_total','Sub Total: ','',['class'=>'form-control '])}}
                                     </div>
                                     <div class="col-sm-8">
-                                    {{form:: text('sub_total','',['class'=>'form-control grandtotal','placeholder'=>'Item name'])}}
+                                    {{form:: text('sub_total',$sbill->s_sub_total_amount,['class'=>'form-control grandtotal','placeholder'=>'Item name'])}}
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +154,7 @@
                                         {{form:: label('dis_amt','Discount Amount: ','',['class'=>'form-control '])}}
                                         </div>
                                         <div class="col-sm-8">
-                                        {{form:: text('dis_amt','',['class'=>'form-control final_discount','placeholder'=>'Item name'])}}
+                                        {{form:: text('dis_amt',$sbill->s_fin_discount_amount,['class'=>'form-control final_discount','placeholder'=>'Item name'])}}
                                         </div>
                                     </div>
                              </div>
@@ -284,10 +164,33 @@
                                         {{form:: label('tot_amt','Total Amount: ','',['class'=>'form-control '])}}
                                         </div>
                                         <div class="col-sm-8">
-                                        {{form:: text('tot_amt','',['class'=>'form-control final_total','placeholder'=>'Item name'])}}
+                                        {{form:: text('tot_amt',$sbill->s_fin_total_amount,['class'=>'form-control final_total','placeholder'=>'Item name'])}}
                                         </div>
                                     </div>
                              </div>
+                            @if($sbill->sbill_type == 'halfpaid')
+                            <div class="form-group" id ="paid_amt">
+                                    <div class="row">
+                                        <div class="col-sm-4 text-center">
+                                        {{form:: label('paid_amount','Paid Amount: ','',['class'=>'form-control '])}}
+                                        </div>
+                                        <div class="col-sm-8">
+                                        {{form:: text('paid_amount',$sbill->s_paid_amount,['class'=>'form-control paid_amt','placeholder'=>'Item name'])}}
+                                        </div>
+                                    </div>
+                             </div>
+                             <div class="form-group" id ="rem_amt">
+                                    <div class="row">
+                                        <div class="col-sm-4 text-center">
+                                        {{form:: label('rem_amount','Remaining Amount: ','',['class'=>'form-control '])}}
+                                        </div>
+                                        <div class="col-sm-8">
+                                        {{form:: text('rem_amount',$sbill->s_rem_amount,['class'=>'form-control rem_amt','placeholder'=>'Item name'])}}
+                                        </div>
+                                    </div>
+                             </div>
+                            @endif
+                             
                     </div>
                     <!-- /.box -->
                     <div class="box-footer clearfix">
@@ -345,9 +248,118 @@
             $(document).ready(function() {
                 $(".select2").select2();
 
-                 calculaterow();
-                 calculatefinaltotal();
-                 calculateremamt();
+                $('body').delegate('.quantity,.rate,.total','keyup',function(){  
+                    var tr=$(this).parent().parent();  
+                    var qty=tr.find('.quantity').val();  
+                    var discount = tr.find('.discount').val();  
+                    var price=tr.find('.rate').val();
+                    var dis_price = price - (discount/100 * price);
+                    var amt =(qty * dis_price);  
+                    tr.find('.total').val(amt);
+                });
+                $('.form-item1').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item1");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               }); 
+
+               $('.form-item2').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item2");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               }); 
+
+               $('.form-item3').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item3");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               }); 
+
+                $('.form-item4').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item4");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               }); 
+
+                $('.form-item5').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item5");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               }); 
+
+               $('.form-item6').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item6");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               });
+
+               $('.form-item7').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item7");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               });
+
+                $('.form-item8').change(function () {
+                    var tr=$(this).parent().parent();
+                    var item = document.getElementById("form-item8");
+                    var itemid = item.options[item.selectedIndex].value;
+                    $.each(o, function(i,v){
+                        if(itemid == v.item_id){                       
+                         tr.find('.rate').val(v.i_cur_sp);
+                         tr.find('.discount').val(v.i_cur_dp);
+                        }
+                    });
+                
+               });
 
                 $('.form-item9').change(function () {
                     var tr=$(this).parent().parent();
@@ -359,9 +371,6 @@
                          tr.find('.discount').val(v.i_cur_dp);
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
 
@@ -375,9 +384,6 @@
                          tr.find('.discount').val(v.i_cur_dp);
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
 
@@ -389,12 +395,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                       
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
                $('.form-item12').change(function () {
@@ -405,12 +407,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                      
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
                $('.form-item13').change(function () {
@@ -421,12 +419,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                      
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
                $('.form-item14').change(function () {
@@ -437,12 +431,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                     
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
                $('.form-item15').change(function () {
@@ -453,12 +443,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                     
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
             });
@@ -541,11 +527,7 @@
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
                         }
-                        
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                }); 
 
@@ -557,12 +539,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                        
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                }); 
 
@@ -574,12 +552,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                         
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                }); 
 
@@ -591,12 +565,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                        
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                }); 
 
@@ -608,12 +578,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                      
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                }); 
 
@@ -625,12 +591,8 @@
                         if(itemid == v.item_id){                       
                          tr.find('.rate').val(v.i_cur_sp);
                          tr.find('.discount').val(v.i_cur_dp);
-                      
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
 
@@ -644,9 +606,6 @@
                          tr.find('.discount').val(v.i_cur_dp);
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
 
@@ -660,13 +619,9 @@
                          tr.find('.discount').val(v.i_cur_dp);
                         }
                     });
-                    calculaterowselect(tr);
-                    calculatefinaltotalselect();
-                    calculateremamtselect();
                 
                });
                    
         });
 </script>
-
 @endsection
