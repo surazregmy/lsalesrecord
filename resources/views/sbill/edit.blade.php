@@ -10,6 +10,19 @@
             <div class="box box-info">
               <div class="box-header with-border  text-center">
                 <h3 class="box-title" ><b>Items Detail</b></h3>
+                <div class="custom-control custom-checkbox pull-right">
+                    <input type="hidden" name="status_date">
+                    <input type="hidden" name="status" value="due">
+                    @if($sbill->status == 'due')
+                    <input type="checkbox" name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
+                    <label class="custom-control-label" for="customCheck1">Clear</label>
+                    @else
+                    <input type="checkbox" checked name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
+                    <label class="custom-control-label" for="customCheck1">Clear</label>
+                    &nbsp{{$sbill->date_status}}
+                    @endif
+                    
+                </div>
               </div>
               <!-- /.box-header -->
              
@@ -129,6 +142,16 @@
                                   </div>
                               </div>
                           </div>
+                          <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                {{form:: label('comment','Comment : ','',['class'=>'form-control'])}}
+                                </div>
+                                <div class="col-sm-8">
+                                    {{form:: textarea('comment',$sbill->comment,['class'=>'form-control','placeholder'=>'notes','rows'=>'3'])}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                       <!-- PRODUCT LIST -->
@@ -207,8 +230,27 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
+
+         <!-- Modal -->
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Select Date of Clearance</h4>
+        </div>
+        <div class="modal-body">
+          <p>Select Date</p>
+          {{form:: text('status_date',$sbill->date_status,['class'=>'form-control bod-picker','id'=>'st_date','placeholder'=>'date','required'])}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
       </section>
-@endsection
+
+      @endsection
 
 @section('pagespecificscripts')
 <script src="{{asset('js/custom/sbill_js.js')}}"></script>
@@ -623,5 +665,20 @@
                });
                    
         });
+        
+</script>
+<script>
+function getStatusChangedDate(){
+   var checkbx = document.getElementById('statuscheck');
+   if(checkbx.checked == true){
+    $("#myModal").modal();
+   }
+   else{
+       var x= $('#st_date').val('');
+    //    alert(x);
+    //    document.getElementById('st_date').val('');
+   }
+
+}
 </script>
 @endsection

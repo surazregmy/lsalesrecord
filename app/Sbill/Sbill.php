@@ -43,6 +43,7 @@ class Sbill extends Model
         $sbill->s_paid_amount = $request->input('paid_amount');
         $sbill->s_rem_amount = $request->input('rem_amount');
         $sbill->profit_amount = $request->input('sub_total');
+        $sbill->comment = $request->input('comment');
         $sbill->sbill_generated_id = $request->input('sbill_generated_id');
        
         if($request->input('sbill_type') == 'halfpaid'){
@@ -87,7 +88,7 @@ class Sbill extends Model
             $sbill_add_status = 1;
             
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             $sbill_add_status = 0;
             DB:: rollback();
 
@@ -108,6 +109,8 @@ class Sbill extends Model
         $sbill = Sbill::find($id);
         $sbill->sbill_original_id = $request->input('sbill_original_id');
         $sbill->sbill_type = $request->input('sbill_type');
+        $sbill->status = $request->input('status');
+        $sbill->date_status = $request->input('status_date');
         $sbill->creditor_id = $request->input('c_id');
         $sbill->s_date_of_sale= $date_of_purchase_e;
         $sbill->s_date_of_sale_n= $request->input('date_of_sale');
@@ -118,6 +121,7 @@ class Sbill extends Model
         $sbill->s_paid_amount = $request->input('paid_amount');
         $sbill->s_rem_amount = $request->input('rem_amount');
         $sbill->profit_amount = $request->input('sub_total');
+        $sbill->comment = $request->input('comment');
         $sbill->sbill_generated_id = $request->input('sbill_generated_id');
        
         if($request->input('sbill_type') == 'halfpaid'){
@@ -134,7 +138,7 @@ class Sbill extends Model
             SbillItem :: where('sbill_id',$updated_id)->delete();
 
             $total_cost = 0;
-            for ($i=2; $i < count($_POST) -$no_of_params; $i+=5) { // 2 because method is put
+            for ($i=4; $i < count($_POST) -$no_of_params; $i+=5) { // 2 because method is put
                 $one_row = array_slice($_POST,$i,5);
                 // echo "<pre>";
                 // print_r($one_row);

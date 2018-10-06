@@ -96,9 +96,7 @@ class SbillsController extends Controller
         $sbill_original_id = $request->input('sbill_original_id');
         $validator =  Validator::make($request->all(), [
                 'sbill_generated_id' =>  // Look at the query/ Don;t know it requires the field from request
-                 Rule::unique('sbills')->where(function($query) use ($c_id, $sbill_original_id){
-                        return $query->where('creditor_id',$c_id);
-                 }),
+                 Rule::unique('sbills')
             ],
             $messages
             );
@@ -203,9 +201,6 @@ class SbillsController extends Controller
         $validator =  Validator::make($request->all(), [
                 'sbill_generated_id' =>  // Look at the query/ Don;t know it requires the field from request
                  Rule::unique('sbills')->ignore($sbill_old_id,'sbill_generated_id')
-                 ->where(function($query) use ($c_id, $sbill_original_id){
-                        return $query->where('creditor_id',$c_id);
-                 }),
             ],
             $messages
             );
@@ -213,6 +208,10 @@ class SbillsController extends Controller
             return redirect('sbills/'.$id.'/edit')
                         ->withErrors($validator)
                         ->withInput();
+        }
+
+        if($request->input('status')== 'clear' && $request->input('status_date') == ''){
+            return redirect('sbills/'.$id.'/edit')->with('error','Date is required for Clearing Bills')->withInput();
         }
         
         $sbill_update = Sbill::updateSbill($request, $id);

@@ -192,7 +192,7 @@ class PbillsController extends Controller
             'pbill_original_id'=> 'required',
             'date_of_purchase'=>'required',
             'entered_by'=>'required',
-            'pbill_generated_id'=>'required'
+            'pbill_generated_id'=>'unique'
         ]); 
         $date_of_purchase_n= $request->input('date_of_purchase');
         $finanacialyear =  NepaliDateFormat :: returnFinacialYear($date_of_purchase_n);

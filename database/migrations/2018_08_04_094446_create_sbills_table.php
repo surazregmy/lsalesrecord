@@ -19,6 +19,8 @@ class CreateSbillsTable extends Migration
             $table->string('sbill_original_id');
             $table->string('sbill_generated_id');
             $table->string('sbill_type');
+            $table->string('status')->nullable();
+            $table->string('date_status')->nullable();
             $table->date('s_date_of_sale');
             $table->string('s_date_of_sale_n');
             $table->string('s_entered_by');
@@ -28,8 +30,9 @@ class CreateSbillsTable extends Migration
             $table->float('s_paid_amount')->nullable();
             $table->float('s_rem_amount')->nullable();
             $table->float('profit_amount');
+            $table->longText('comment')->nullable();
             $table->timestamps();
-            $table->unique( array('creditor_id','sbill_generated_id') );
+            $table->unique('sbill_generated_id');
         });
     }
 

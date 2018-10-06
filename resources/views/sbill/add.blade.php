@@ -249,6 +249,16 @@
                                   </div>
                               </div>
                           </div>
+                          <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                {{form:: label('entered_by','Comment : ','',['class'=>'form-control'])}}
+                                </div>
+                                <div class="col-sm-8">
+                                    {{form:: textarea('comment','',['class'=>'form-control','placeholder'=>'notes','rows'=>'3'])}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                       <!-- PRODUCT LIST -->
