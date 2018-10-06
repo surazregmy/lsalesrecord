@@ -259,6 +259,7 @@ class PbillsController extends Controller
         $data = array(
             'heading'=>'Pbills',
             'subheading'=>'Pbills Show',
+            'brname'=>'home',
             'pbill' => $pbill
         );
         return view('pbill.print')->with($data); 

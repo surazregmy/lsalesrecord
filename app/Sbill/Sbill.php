@@ -9,6 +9,7 @@ use App\Services\NepaliDateFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\SbillItem\SbillItem;
+use App\Item\Item;
 
 class Sbill extends Model
 {
@@ -71,15 +72,16 @@ class Sbill extends Model
                              'total' =>$one_row[$k[4]]
                         );
                         DB::table('sbill_items')->insert($data);
-                        $total_amount = $total_amount + $one_row[$k[4]];
-                        $total_cost = 100;
+                        $tmp_item = Item::find($one_row[$k[0]]);
+                        $cost = $tmp_item->i_cur_cp;
+                        $total_cost =$total_cost + $cost * $one_row[$k[1]];
+                      
                  }
                  
 
             }
             $sbill = sbill::find($inserted_id);
-            $tot = $total_amount;
-            $sbill->profit_amount = $tot -  $total_cost;
+            $sbill->profit_amount = $sbill->s_fin_total_amount -  $total_cost;
             $sbill->save();
             DB::commit();
             $sbill_add_status = 1;
@@ -131,7 +133,6 @@ class Sbill extends Model
             $updated_id = $sbill->sbill_id;  // get the id of the update pbill
             SbillItem :: where('sbill_id',$updated_id)->delete();
 
-            $total_amount = 0;
             $total_cost = 0;
             for ($i=2; $i < count($_POST) -$no_of_params; $i+=5) { // 2 because method is put
                 $one_row = array_slice($_POST,$i,5);
@@ -149,16 +150,16 @@ class Sbill extends Model
                              'total' =>$one_row[$k[4]]
                         );
                         DB::table('sbill_items')->insert($data);
-                        $total_amount = $total_amount + $one_row[$k[4]];
-                        $total_cost = 100;
+                        $tmp_item = Item::find($one_row[$k[0]]);
+                        $cost = $tmp_item->i_cur_cp;
+                        $total_cost =$total_cost + $cost * $one_row[$k[1]];
                  }
                  
 
             }
             // die;
             $sbill = sbill::find($updated_id);
-            $tot = $total_amount;
-            $sbill->profit_amount =   $tot -  $total_cost;
+            $sbill->profit_amount = $sbill->s_fin_total_amount -  $total_cost;
             $sbill->save();
             DB::commit();
             $sbill_update_status = 1;

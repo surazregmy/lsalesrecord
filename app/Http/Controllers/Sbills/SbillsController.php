@@ -23,6 +23,11 @@ class SbillsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $sbills = Sbill :: orderBy('sbill_id','desc')->get();
@@ -125,7 +130,14 @@ class SbillsController extends Controller
      */
     public function show($id)
     {
-        //
+        $sbill = Sbill::find($id);
+        $data = array(
+            'heading'=>'Sbills',
+            'subheading'=>'Sbills Show',
+            'sbill' => $sbill,
+            'brname'=>'showPbills' 
+        );
+        return view('sbill.show')->with($data);
     }
 
     /**
