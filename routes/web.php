@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/printpbill/{id}', 'Pbills\PbillsController@printpbill');
+Route::get('/generatepdf/{id}', 'Pbills\PbillsController@generatePdf');
 
 Route::get('/dashboard','Dashboard\DashboardController@index');  /*controller to dashboard */
 Route::resource('items','Items\ItemsController');  /* sab lai route gardinxa sahi ho :D */

@@ -161,6 +161,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -213,7 +214,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,  // from and html are forms from laracollective
         'Excel' => Maatwebsite\Excel\Facades\Excel::class, // facede for spreadsheet
-        
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

@@ -17,6 +17,7 @@ use App\PbillItem\PbillItem;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Validation\Rule;
+use PDF;
 
 
 class PbillsController extends Controller
@@ -263,6 +264,22 @@ class PbillsController extends Controller
             'pbill' => $pbill
         );
         return view('pbill.print')->with($data); 
+    }
+    public function generatePdf($id)
+    {
+        $pbill = Pbill::find($id);
+        $data = array(
+            'heading'=>'Pbills',
+            'subheading'=>'Pbills Show',
+            'brname'=>'home',
+            'pbill' => $pbill
+        );
+        // return view('pbill.generate', $data);
+
+        $pdf = PDF::loadView('pbill.generate', $data);
+        set_time_limit(300);
+        return $pdf->download('invoice.pdf');
+
     }
 
     public function getPbillsOfDebtor($debtor_id){
