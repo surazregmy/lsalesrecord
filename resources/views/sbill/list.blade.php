@@ -48,16 +48,16 @@
                     <td>{{$sbill->s_rem_amount}}</td>
                     <td>Clear</td>
                     <td>{{$sbill->s_entered_by}}</td>
-                    <td class="text-left">
+                    <td class="text-left" style="padding:0px">
                         <div class='delete' style="display:inline;">
                             {!! Form::open(['class'=>'del','action'=>['Sbills\SbillsController@destroy',$sbill->sbill_id],'style'=>'display:inline;','method'=>'POST','id'=>$sbill->sbill_id]) !!}
                             {!! Form::hidden('_method','DELETE') !!}
-                            <button type="button" class="btnk btn btn-danger btn-xs cdelete" onclick="deleteItem({{$sbill->sbill_id}})"><i class="fa fa-trash margin-r-5"></i>Delete</button>
+                            <button type="button" class="btnk btn btn-danger btn-xs cdelete" onclick="deleteItem({{$sbill->sbill_id}})"><i class="fa fa-trash margin-r-5"></i></button>
                             {!! Form::close() !!}  
                         </div>
                         <div style="display:inline;float: right clear">
-                          <a href="/sbills/{{$sbill->sbill_id}}" class="btn btn-primary btn-xs"><i class="fa fa-check"></i> View</a>
-                          <a href="/sbills/{{$sbill->sbill_id}}/edit" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                          <a href="/sbills/{{$sbill->sbill_id}}" class="btn btn-primary btn-xs"><i class="fa fa-check"></i> </a>
+                          <a href="/sbills/{{$sbill->sbill_id}}/edit" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
                         </div>
                      </td>                      
                   </tr>

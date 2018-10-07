@@ -13,11 +13,11 @@
                 <div class="custom-control custom-checkbox pull-right">
                     <input type="hidden" name="status_date">
                     <input type="hidden" name="status" value="due">
-                    @if($sbill->status == 'due')
-                    <input type="checkbox" name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
+                    @if($sbill->status == 'clear')
+                    <input type="checkbox" checked name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
                     <label class="custom-control-label" for="customCheck1">Clear</label>
                     @else
-                    <input type="checkbox" checked name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
+                    <input type="checkbox"  name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
                     <label class="custom-control-label" for="customCheck1">Clear</label>
                     &nbsp{{$sbill->date_status}}
                     @endif

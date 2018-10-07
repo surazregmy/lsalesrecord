@@ -25,12 +25,12 @@
                     <div class='delete' style="display:inline;">
                         {!! Form::open(['class'=>'del','action'=>['Pbills\PbillsController@destroy',$pbill->pbill_id],'style'=>'display:inline;','method'=>'POST','id'=>$pbill->pbill_id]) !!}
                         {!! Form::hidden('_method','DELETE') !!}
-                        <button type="button" class="btnk btn btn-danger btn-xs cdelete" onclick="deleteItem({{$pbill->pbill_id}})"><i class="fa fa-trash margin-r-5"></i>Delete</button>
+                        <button type="button" class="btnk btn btn-danger btn-xs cdelete" onclick="deleteItem({{$pbill->pbill_id}})"><i class="fa fa-trash margin-r-5"></i></button>
                         {!! Form::close() !!}  
                     </div>
                     <div style="display:inline;float: right clear">
-                      <a href="/pbills/{{$pbill->pbill_id}}" class="btn btn-primary btn-xs"><i class="fa fa-check"></i> View</a>
-                      <a href="/pbills/{{$pbill->pbill_id}}/edit" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                      <a href="/pbills/{{$pbill->pbill_id}}" class="btn btn-primary btn-xs"><i class="fa fa-check"></i></a>
+                      <a href="/pbills/{{$pbill->pbill_id}}/edit" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
                     </div>
                  </td>                      
               </tr>
