@@ -2,65 +2,54 @@
 @section('content')
 <section class="content">
         <!-- Main row -->
-        {!! Form::open(['action'=>['Sbills\SbillsController@update',$sbill->sbill_id],'method'=>'PUT']) !!}
+        {!! Form::open(['action'=>['Srbills\SrbillsController@update',$srbill->srbill_id],'method'=>'PUT']) !!}
         <div class="row">
           <!-- Left col -->
           <div class="col-md-8">
             <!-- TABLE: Purchase Bills -->
+       
             <div class="box box-info">
               <div class="box-header with-border  text-center">
                 <h3 class="box-title" ><b>Items Detail</b></h3>
-                <div class="custom-control custom-checkbox pull-right">
-                    <input type="hidden" name="status_date">
-                    <input type="hidden" name="status" value="due">
-                    @if($sbill->status == 'clear')
-                    <input type="checkbox" checked name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
-                    <label class="custom-control-label" for="customCheck1">Clear</label>
-                    @else
-                    <input type="checkbox"  name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
-                    <label class="custom-control-label" for="customCheck1">Clear</label>
-                    &nbsp{{$sbill->date_status}}
-                    @endif
-                    
-                </div>
               </div>
               <!-- /.box-header -->
              
+              
               <div class="box-body">
                 <div class="table-responsive">
-                  <table class="table no-margin" id="input_item">
-                    <thead>
-                    <tr>
-                      <th>S.N.</th>
-                      <th style="width: 45%">Item Name</th>
-                      <th>Quantity(Unit)</th>
-                      <th>Rate(Rs.)</th>
-                      <th>Discount(%)</th>
-                      <th>Total(Rs.)</th>
-                    </tr>
-                    </thead>
-                    <tbody class="detail">
-                    @php($i = 1)
-                    @foreach ($sbill->sbillitem as $sbitem)  
-                    <tr>
-                      <td>{{$i}}</td>
-                      <td>
-                      <select name = "{{'item'.$i}}" id="{{'form-item'.$i}}"  class="{{'select2 form-control form-item'.$i}}" style="width: 100%";>
-                            <option value="<?php echo $sbitem->item_id?>"  selected="selected" >{{$sbitem->item[0]['item_name']}}</option>
-                                <?php foreach($items as $item): ?>
-                                     <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
-                                <?php endforeach ?>             
-                             </select>
-                        </td>
-                      <td> {{form:: text('quantity'.$i,$sbitem->quantity,['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
-                      <td> {{form:: text('rate'.$i,$sbitem->rate,['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
-                      <td> {{form:: text('discount'.$i,$sbitem->discount,['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
-                      <td> {{form:: text('total'.$i,$sbitem->total,['class'=>'form-control total','placeholder'=>'Total'])}}</td>
-                    </tr>
-                    @php ($i++)
-                    @endforeach
-                    </tbody>
-                  </table>
+                    <table class="table no-margin" id="input_item">
+                        <thead>
+                        <tr>
+                          <th>S.N.</th>
+                          <th style="width: 45%">Item Name</th>
+                          <th>Quantity(Unit)</th>
+                          <th>Rate(Rs.)</th>
+                          <th>Discount(%)</th>
+                          <th>Total(Rs.)</th>
+                        </tr>
+                        </thead>
+                        <tbody class="detail">
+                        @php($i = 1)
+                        @foreach ($srbill->srbillitem as $srbitem)  
+                        <tr>
+                          <td>{{$i}}</td>
+                          <td>
+                          <select name = "{{'item'.$i}}" id="{{'form-item'.$i}}"  class="{{'select2 form-control form-item'.$i}}" style="width: 100%";>
+                                <option value="<?php echo $srbitem->item_id?>"  selected="selected" >{{$srbitem->item[0]['item_name']}}</option>
+                                    <?php foreach($items as $item): ?>
+                                         <option value="<?php echo $item['item_id'] ?>"><?php echo $item['item_name'];?></option>          
+                                    <?php endforeach ?>             
+                                 </select>
+                            </td>
+                          <td> {{form:: text('quantity'.$i,$srbitem->quantity,['class'=>'form-control quantity','placeholder'=>'Quantity'])}}</td>
+                          <td> {{form:: text('rate'.$i,$srbitem->rate,['class'=>'form-control rate','placeholder'=>'Rate'])}}</td>
+                          <td> {{form:: text('discount'.$i,$srbitem->discount,['class'=>'form-control discount','placeholder'=>'discount'])}}</td>
+                          <td> {{form:: text('total'.$i,$srbitem->total,['class'=>'form-control total','placeholder'=>'Total'])}}</td>
+                        </tr>
+                        @php ($i++)
+                        @endforeach
+                        </tbody>
+                      </table>
                 </div>
                 <!-- /.table-responsive -->
               </div>
@@ -90,45 +79,33 @@
                                   {{form:: label('c_id','Creditor Name: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                        <select name = "c_id" class="select2 form-control" style="width: 100%";>
-                                                <option value="{{$sbill->creditor->creditor_id}}"  selected="selected" >{{$sbill->creditor->creditor_name}}</option>
-                                                <?php foreach($creditors as $creditor): ?>
-                                                           <option value="<?php echo $creditor['creditor_id'] ?>"><?php echo $creditor['creditor_name'];?></option>          
-                                                 <?php endforeach ?>
-                                             </select>
-                                         </select>
+                                    <select name = "c_id" class="select2 form-control" style="width: 100%";>
+                                        <option value="{{$srbill->creditor->creditor_id}}"  selected="selected" >{{$srbill->creditor->creditor_name}}</option>
+                                        <?php foreach($creditors as $creditor): ?>
+                                                   <option value="<?php echo $creditor['creditor_id'] ?>"><?php echo $creditor['creditor_name'];?></option>          
+                                         <?php endforeach ?>
+                                     </select>
+                                 </select>
                                   </div>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('sbill_original_id','Bill No: ','',['class'=>'form-control'])}}
+                                  {{form:: label('srbill_original_id','Bill No: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('sbill_original_id',$sbill->sbill_original_id,['class'=>'form-control','placeholder'=>'Bill No'])}}
+                                  {{form:: text('srbill_original_id',$srbill->srbill_original_id,['class'=>'form-control','placeholder'=>'Bill No'])}}
                                   </div>
                               </div>
                           </div>
                           <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-4 text-center">
-                                    {{form:: label('sbill_type','Type: ','',['class'=>'form-control'])}}
-                                    </div>
-                                    <div class="col-sm-8">
-                                    {{ Form::select('sbill_type', 
-                                    array('credit' => 'Credit', 'cash' => 'Cash','halfpaid'=>'Halfpaid',''=>'Select'), $sbill->sbill_type,
-                                    ['class' => 'form-control formtype','id'=>'form_type'])}}
-                                    </div>
-                                </div>
-                            </div>
-                          <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('Date of Sale','Date of Sale : ','',['class'=>'form-control'])}}
+                                  {{form:: label('Date of Sale','Date of Return : ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('date_of_sale',$sbill->s_date_of_sale_n,['class'=>'form-control bod-picker','placeholder'=>'date'])}}
+                                  {{form:: text('date_of_sale',$srbill->sr_date_of_ret_n,['class'=>'form-control bod-picker','placeholder'=>'date'])}}
                                   </div>
                               </div>
                           </div>
@@ -138,17 +115,17 @@
                                   {{form:: label('entered_by','Entered By : ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
-                                  {{form:: text('entered_by',$sbill->s_entered_by,['class'=>'form-control','readonly'])}}
+                                  {{form:: text('entered_by',$log_user->name,['class'=>'form-control','readonly'])}}
                                   </div>
                               </div>
                           </div>
                           <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-4 text-center">
-                                {{form:: label('comment','Comment : ','',['class'=>'form-control'])}}
+                                {{form:: label('entered_by','Comment : ','',['class'=>'form-control'])}}
                                 </div>
                                 <div class="col-sm-8">
-                                    {{form:: textarea('comment',$sbill->comment,['class'=>'form-control','placeholder'=>'notes','rows'=>'3'])}}
+                                    {{form:: textarea('comment',$srbill->comment,['class'=>'form-control','placeholder'=>'notes','rows'=>'3'])}}
                                 </div>
                             </div>
                         </div>
@@ -164,56 +141,13 @@
                             <div class="form-group" id ="sub_tot">
                                 <div class="row">
                                     <div class="col-sm-4 text-center">
-                                    {{form:: label('sub_total','Sub Total: ','',['class'=>'form-control '])}}
+                                    {{form:: label('tot_amt',' Total: ','',['class'=>'form-control '])}}
                                     </div>
                                     <div class="col-sm-8">
-                                    {{form:: text('sub_total',$sbill->s_sub_total_amount,['class'=>'form-control grandtotal','placeholder'=>'Item name'])}}
+                                    {{form:: text('tot_amt',$srbill->sr_total_amount,['class'=>'form-control grandtotal','placeholder'=>'Item name'])}}
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" id ="dis_amt">
-                                    <div class="row">
-                                        <div class="col-sm-4 text-center">
-                                        {{form:: label('dis_amt','Discount Amount: ','',['class'=>'form-control '])}}
-                                        </div>
-                                        <div class="col-sm-8">
-                                        {{form:: text('dis_amt',$sbill->s_fin_discount_amount,['class'=>'form-control final_discount','placeholder'=>'Item name'])}}
-                                        </div>
-                                    </div>
-                             </div>
-                             <div class="form-group" id ="tot_amt">
-                                    <div class="row">
-                                        <div class="col-sm-4 text-center">
-                                        {{form:: label('tot_amt','Total Amount: ','',['class'=>'form-control '])}}
-                                        </div>
-                                        <div class="col-sm-8">
-                                        {{form:: text('tot_amt',$sbill->s_fin_total_amount,['class'=>'form-control final_total','placeholder'=>'Item name'])}}
-                                        </div>
-                                    </div>
-                             </div>
-                            @if($sbill->sbill_type == 'halfpaid')
-                            <div class="form-group" id ="paid_amt">
-                                    <div class="row">
-                                        <div class="col-sm-4 text-center">
-                                        {{form:: label('paid_amount','Paid Amount: ','',['class'=>'form-control '])}}
-                                        </div>
-                                        <div class="col-sm-8">
-                                        {{form:: text('paid_amount',$sbill->s_paid_amount,['class'=>'form-control paid_amt','placeholder'=>'Item name'])}}
-                                        </div>
-                                    </div>
-                             </div>
-                             <div class="form-group" id ="rem_amt">
-                                    <div class="row">
-                                        <div class="col-sm-4 text-center">
-                                        {{form:: label('rem_amount','Remaining Amount: ','',['class'=>'form-control '])}}
-                                        </div>
-                                        <div class="col-sm-8">
-                                        {{form:: text('rem_amount',$sbill->s_rem_amount,['class'=>'form-control rem_amt','placeholder'=>'Item name'])}}
-                                        </div>
-                                    </div>
-                             </div>
-                            @endif
-                             
                     </div>
                     <!-- /.box -->
                     <div class="box-footer clearfix">
@@ -230,27 +164,8 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
-
-         <!-- Modal -->
-   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Select Date of Clearance</h4>
-        </div>
-        <div class="modal-body">
-          <p>Select Date</p>
-          {{form:: text('status_date',$sbill->date_status,['class'=>'form-control bod-picker','id'=>'st_date','placeholder'=>'date','required'])}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-        </div>
-      </div>
-    </div>
       </section>
-
-      @endsection
+@endsection
 
 @section('pagespecificscripts')
 <script src="{{asset('js/custom/sbill_js.js')}}"></script>
@@ -744,17 +659,5 @@ $(document).ready(function() {
         
 });
 </script>
-<script>
-function getStatusChangedDate(){
-   var checkbx = document.getElementById('statuscheck');
-   if(checkbx.checked == true){
-    $("#myModal").modal();
-   }
-   else{
-       var x= $('#st_date').val('');
-    //    alert(x);
-    //    document.getElementById('st_date').val('');
-   }
-}
-</script>
+
 @endsection

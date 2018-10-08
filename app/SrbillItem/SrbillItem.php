@@ -1,14 +1,13 @@
 <?php
 
-namespace App\SbillItem;
+namespace App\SrbillItem;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SbillItem extends Model
+class SrbillItem extends Model
 {
-
-    public function sbill(){
-        return $this->belongsToMany('App\Sbill\Sbill','sbill_id');
+    public function srbill(){
+        return $this->belongsToMany('App\Srbill\Srbill','srbill_id');
     }
 
     public function item(){

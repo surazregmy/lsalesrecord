@@ -241,8 +241,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id="addsrbills"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Sales Return Bills</a></li>
-              <li id="viewsrbills"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Sales Return Bills</a></li>
+            <li id="addsrbills"><a href="{{action('Srbills\SrbillsController@create')}}"><i class="fa fa-circle-o"></i>Add Sales Return Bills</a></li>
+              <li id="viewsrbills"><a href="{{action('Srbills\SrbillsController@index')}}"><i class="fa fa-circle-o"></i>View Sales Return Bills</a></li>
             </ul>
           </li>
          <li id="sreceipts" class="treeview">

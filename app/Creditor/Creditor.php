@@ -10,4 +10,7 @@ class Creditor extends Model
     public function sbill(){
         return $this->hasMany('App\Sbill\Sbill','creditor_id','creditor_id');
     }
+    public function srbill(){
+        return $this->hasMany('App\Srbill\Srbill','creditor_id','creditor_id');
+    }
 }

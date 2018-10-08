@@ -73,6 +73,7 @@ class SbillsController extends Controller
             'item1'=>'required|numeric',
             'quantity1'=>'required|numeric',
             'rate1'=>'required|numeric',
+            'discount1'=>'required|numeric',
             'total1'=>'required|numeric',
             'c_id'=>'required',
             'sbill_original_id'=> 'required',
@@ -90,13 +91,28 @@ class SbillsController extends Controller
         $request['sbill_generated_id'] = $finanacialyear.'-'.$gen_sbill_id;
 
         $messages = [
-            'sbill_generated_id.unique' => 'SBill No repeated',
+            'sbill_generated_id.unique' => 'SBill No repeated in Sales',
         ];
         $c_id = $request->input('c_id');
         $sbill_original_id = $request->input('sbill_original_id');
         $validator =  Validator::make($request->all(), [
                 'sbill_generated_id' =>  // Look at the query/ Don;t know it requires the field from request
-                 Rule::unique('sbills')
+                 Rule::unique('sbills'),
+            ],
+            $messages
+            );
+        if ($validator->fails()) {
+            return redirect('sbills/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        $messages = [
+            'sbill_generated_id.unique' => 'SBill No repeated in Sales Return',
+        ];
+        $c_id = $request->input('c_id');
+        $sbill_original_id = $request->input('sbill_original_id');
+        $validator =  Validator::make($request->all(), [
+                 'sbill_generated_id' => Rule::unique('srbills','srbill_generated_id')
             ],
             $messages
             );
@@ -192,7 +208,7 @@ class SbillsController extends Controller
         $request['sbill_generated_id'] = $finanacialyear.'-'.$gen_sbill_id;
 
         $messages = [
-            'sbill_generated_id.unique' => 'SBill No repeated',
+            'sbill_generated_id.unique' => 'SBill No repeated is sales',
         ];
         $c_id = $request->input('c_id');
         $sbill_original_id = $request->input('sbill_original_id');
@@ -200,7 +216,26 @@ class SbillsController extends Controller
 
         $validator =  Validator::make($request->all(), [
                 'sbill_generated_id' =>  // Look at the query/ Don;t know it requires the field from request
-                 Rule::unique('sbills')->ignore($sbill_old_id,'sbill_generated_id')
+                 Rule::unique('sbills')->ignore($sbill_old_id,'sbill_generated_id'),
+            ],
+            $messages
+            );
+        if ($validator->fails()) {
+            return redirect('sbills/'.$id.'/edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $messages = [
+            'sbill_generated_id.unique' => 'SBill No repeated in Sales Return',
+        ];
+        $c_id = $request->input('c_id');
+        $sbill_original_id = $request->input('sbill_original_id');
+        $sbill_old_id = $sbill->sbill_generated_id;
+
+        $validator =  Validator::make($request->all(), [
+                 'sbill_generated_id' =>  // Look at the query/ Don;t know it requires the field from request
+                 Rule::unique('srbills','srbill_generated_id')->ignore($sbill_old_id,'srbill_generated_id')
             ],
             $messages
             );

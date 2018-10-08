@@ -103,7 +103,7 @@ class Sbill extends Model
         // print_r($request->all());
         // die;
         $sbill_update_status = 0;
-        $inserted_id = 0;
+        $updated_id = 0;
         $date_of_sale_n= $request->input('date_of_sale');
         $date_of_purchase_e = NepaliDateFormat :: returnCarbonDate($date_of_sale_n);
         $sbill = Sbill::find($id);

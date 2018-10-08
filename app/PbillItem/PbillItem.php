@@ -8,7 +8,7 @@ class PbillItem extends Model
 {
     //
     // public $primaryKey ='pbillitem_id';
-    public function debtor(){
+    public function pbill(){
         return $this->belongsToMany('App\Pbill\Pbill','pbill_id');
     }
 
