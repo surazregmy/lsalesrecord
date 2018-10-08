@@ -73,7 +73,15 @@ class CreditorsController extends Controller
      */
     public function show($id)
     {
-        //
+        $creditor = Creditor::find($id);
+        $data = array(
+            'heading' => 'Creditor',
+            'subheading' => 'Creditor Show',
+            'creditor' => $creditor,
+            'brname' => 'showDebtors'
+            
+        );
+        return view('creditor.show')->with($data);
     }
 
     /**

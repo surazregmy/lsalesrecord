@@ -25,6 +25,7 @@ Route::resource('creditors','Creditors\CreditorsController');
 Route::resource('prbills','Prbills\PrbillsController');
 Route::resource('preceipts','Preceipts\PreceiptsController');
 Route::resource('srbills','Srbills\SrbillsController');
+Route::resource('sreceipts','Sreceipts\SreceiptsController');
 Route::get('pbills/getPbillsOfDebtor/{id}','Pbills\PbillsController@getPbillsOfDebtor');
 Route::get('prbills/getPrbillsOfDebtor/{id}','Prbills\PrbillsController@getPrbillsOfDebtor');
 Route::get('preceipts/getPreceiptsOfDebtor/{id}','Preceipts\PreceiptsController@getPreceiptsOfDebtor');

@@ -13,4 +13,7 @@ class Creditor extends Model
     public function srbill(){
         return $this->hasMany('App\Srbill\Srbill','creditor_id','creditor_id');
     }
+    public function sreceipt(){
+        return $this->hasMany('App\Sreceipt\Sreceipt','creditor_id','creditor_id');
+    }
 }

@@ -253,8 +253,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="addsreceipts"><a href="../../index.html"><i class="fa fa-circle-o"></i>Add Sales Receipts</a></li>
-            <li id="viewsreceipts"><a href="../../index2.html"><i class="fa fa-circle-o"></i>View Sales Receipts</a></li>
+          <li id="addsreceipts"><a href="{{action('Sreceipts\SreceiptsController@create')}}"><i class="fa fa-circle-o"></i>Add Sales Receipts</a></li>
+            <li id="viewsreceipts"><a href="{{action('Sreceipts\SreceiptsController@index')}}"><i class="fa fa-circle-o"></i>View Sales Receipts</a></li>
           </ul>
         </li>
         <li class="header text-center" ><b>Service And Expense Section</b></li>

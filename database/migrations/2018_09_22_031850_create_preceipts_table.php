@@ -23,6 +23,7 @@ class CreatePreceiptsTable extends Migration
             $table->float('p_rec_amount');
             $table->string('p_rec_entered_by');
             $table->timestamps();
+            $table->unique( array('debtor_id','p_rec_gen_no') );
         });
     }
 
