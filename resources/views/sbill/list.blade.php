@@ -46,7 +46,7 @@
                     <td>{{$sbill->s_fin_total_amount}}</td>
                     <td>{{$sbill->s_paid_amount}}</td>
                     <td>{{$sbill->s_rem_amount}}</td>
-                    <td>Clear</td>
+                    <td>{{$sbill->status}}</td>
                     <td>{{$sbill->s_entered_by}}</td>
                     <td class="text-left" style="padding:0px">
                         <div class='delete' style="display:inline;">

@@ -35,7 +35,7 @@
                       <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">
                           <li>
-                            <a href="#"><b>Cash Sales </b><span class=" badge bg-green">31</span><span class="pull-right"><b>Rs. 31</b></span>
+                          <a href="#"><b>Cash Sales </b><span class=" badge bg-green">{{$cash_bill_no}}</span><span class="pull-right"><b>Rs. {{$cash_total}}</b></span>
                             </a>
                           </li>
                           <li>

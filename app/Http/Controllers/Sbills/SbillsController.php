@@ -279,4 +279,13 @@ class SbillsController extends Controller
         });
         return redirect('/sbills')->with('success','Sbill Deleted');
     }
+
+    public function getSbillsOfCreditor($creditor_id){
+        $creditor = Creditor::find($creditor_id);
+        $sbills = $creditor->sbill;
+        $data = array(
+                'sbills' => $sbills
+        );
+        return view('sbill.invoices')->with($data);
+    }
 }

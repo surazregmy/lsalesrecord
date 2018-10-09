@@ -33,6 +33,9 @@ class Sbill extends Model
         $sbill = new Sbill;
         $sbill->sbill_original_id = $request->input('sbill_original_id');
         $sbill->sbill_type = $request->input('sbill_type');
+        if($request->input('sbill_type') != 'cash'){
+            $sbill->status = 'due';
+        }
         $sbill->creditor_id = $request->input('c_id');
         $sbill->s_date_of_sale= $date_of_purchase_e;
         $sbill->s_date_of_sale_n= $request->input('date_of_sale');

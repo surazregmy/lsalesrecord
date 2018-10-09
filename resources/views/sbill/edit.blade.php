@@ -16,10 +16,10 @@
                     @if($sbill->status == 'clear')
                     <input type="checkbox" checked name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
                     <label class="custom-control-label" for="customCheck1">Clear</label>
+                    &nbsp &nbsp &nbsp {{ $sbill->date_status }}
                     @else
                     <input type="checkbox"  name="status" class="custom-control-input" value="clear" id="statuscheck"  data-target="#myModal" onclick="getStatusChangedDate()">
                     <label class="custom-control-label" for="customCheck1">Clear</label>
-                    &nbsp{{$sbill->date_status}}
                     @endif
                     
                 </div>

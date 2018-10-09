@@ -265,4 +265,12 @@ class SrbillsController extends Controller
         });
         return redirect('/srbills')->with('success','Srbill Deleted');
     }
+    public function getSrbillsOfCreditor($creditor_id){
+        $creditor = Creditor::find($creditor_id);
+        $srbills = $creditor->srbill;
+        $data = array(
+                'srbills' => $srbills
+        );
+        return view('srbill.invoices')->with($data);
+    }
 }

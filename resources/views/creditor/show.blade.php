@@ -108,7 +108,7 @@
    var creditor_id = {{$creditor->creditor_id}};
    $.ajax({
                     type : "GET",
-                    url :  '/pbills/getPbillsOfDebtor/'+creditor_id,
+                    url :  '/sbills/getSbillsOfCreditor/'+creditor_id,
                     success : function(msg){
                       // alert(msg);
                       $('#result').html(msg);
@@ -125,7 +125,7 @@
    var creditor_id = {{$creditor->creditor_id}};
    $.ajax({
                     type : "GET",
-                    url :  '/prbills/getPrbillsOfDebtor/'+creditor_id,
+                    url :  '/srbills/getSrbillsOfCreditor/'+creditor_id,
                     success : function(msg){
                       // alert(msg);
                       $('#result').html(msg);
@@ -142,7 +142,7 @@
    var creditor_id = {{$creditor->creditor_id}};
    $.ajax({
                     type : "GET",
-                    url :  '/preceipts/getPreceiptsOfDebtor/'+creditor_id,
+                    url :  '/sreceipts/getSreceiptsOfcreditor/'+creditor_id,
                     success : function(msg){
                       // alert(msg);
                       $('#result').html(msg);
@@ -159,7 +159,7 @@
    var creditor_id = {{$creditor->creditor_id}};
    $.ajax({
                     type : "GET",
-                    url :  '/pledgers/prepareLedgerforDebtor/'+creditor_id,
+                    url :  '/sledgers/prepareLedgerforCreditor/'+creditor_id,
                     success : function(msg){
                       // alert(msg);
                       $('#result').html(msg);

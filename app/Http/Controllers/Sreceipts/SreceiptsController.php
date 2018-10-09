@@ -207,4 +207,13 @@ class SreceiptsController extends Controller
         $sreceipt->delete();
         return redirect('/sreceipts')->with('success',"Sreceipt deleted successful");
     }
+
+    public function getSreceiptsOfCreditor($creditor_id){
+        $creditor = Creditor::find($creditor_id);
+        $sreceipts = $creditor->sreceipt;
+        $data = array(
+                'sreceipts' => $sreceipts
+        );
+        return view('sreceipt.receipts')->with($data);
+    }
 }
