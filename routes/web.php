@@ -15,7 +15,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/printpbill/{id}', 'Pbills\PbillsController@printpbill');
 Route::get('/generatepdf/{id}', 'Pbills\PbillsController@generatePdf');
 
-Route::get('/dashboard','Dashboard\DashboardController@index');  /*controller to dashboard */
+Route::get('/dashboard','HomeController@index');  /*controller to dashboard */
 Route::resource('items','Items\ItemsController');  /* sab lai route gardinxa sahi ho :D */
 Route::post('/Items/loadFromExcel','Items\ItemsController@loadFromExcel');
 Route::resource('pbills','Pbills\PbillsController');
@@ -56,3 +56,5 @@ Route::DELETE('/deleteUser/{id}}','Auth\UserController@deleteUser');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::POST('/saleSummary', 'HomeController@salesSummary');
+Route::get('/genSummary', 'HomeController@salesSummary');

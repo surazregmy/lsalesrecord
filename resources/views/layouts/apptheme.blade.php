@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- need to include for POST AJAX -->
 <title class="no-print">{{config('app.name')}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -124,7 +125,7 @@
       <ul class="sidebar-menu">
         <li class="header"></li>
          <li id="dashboard">
-          <a href="{{ action('Dashboard\DashboardController@index') }}">
+          <a href="{{ action('HomeController@index') }}">
             <i class="fa fa-th"></i> <span>Home</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">Hot</small>
