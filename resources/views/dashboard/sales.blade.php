@@ -11,23 +11,27 @@
                 <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">
                     <li>
-                    <a href="#"><b>Cash Sales </b><span class=" badge bg-green">{{$sum_day['cash_bill_no']}}</span><span class="pull-right"><b>Rs. {{$sum_day['cash_total']}}</b></span>
+                    <a href="#"><b>Cash Sales </b><span class=" badge bg-green">{{$sum_day['cash_bill_no']}}</span>
+                        <span class="pull-right"><b>Rs. {{$sum_day['cash_total']}}</b></span>
                       </a>
                     </li>
                     <li>
                       <a href="#"><div><b>Credit Sales</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue">{{$sum_day['credit_clear_bill_no']}}</span><span class=" pull-right"><b> Rs.{{$sum_day['credit_clear_total']}} </b></span></div>
+                      <div>&nbsp Cleared <span class=" badge bg-blue">{{$sum_day['credit_clear_bill_no']}}</span>
+                          <span class=" pull-right"><b> Rs.{{$sum_day['credit_clear_total']}} </b></span></div>
                       <div>&nbsp Due <span class=" badge bg-red">{{$sum_day['credit_due_bill_no']}}</span>
                       <span class=" pull-right "><b> Rs.{{$sum_day['credit_due_total']}}</b></span></div></a>
                     </li>
                     <li>
                       <a href="#"><div><b>Half Paid</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>{{$sum_day['hp_clear_bill_no']}}</b></span><span class=" pull-right"><b>Rs.{{$sum_day['hp_clear_total']}}</b></span></div>
+                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>{{$sum_day['hp_clear_bill_no']}}</b></span>
+                          <span class=" pull-right"><b>Rs.{{$sum_day['hp_clear_total']}}</b></span></div>
                       <div>&nbsp Due <span class=" badge bg-red">{{$sum_day['hp_due_bill_no']}}</span>
                       <span class=" pull-right "><b> Rs. {{$sum_day['hp_due_total']}} </b></span></div></a>
                     </li>
                     <li>
-                    <a href="#"><b>Sales Return </b><span class=" badge bg-orange">{{$sum_day['sr_bill_no']}}</span><span class="pull-right"><b>Rs. {{$sum_day['sr_total']}}</b></span>
+                    <a href="#"><b>Sales Return </b><span class=" badge bg-orange">{{$sum_day['sr_bill_no']}}</span>
+                        <span class="pull-right"><b>Rs. {{$sum_day['sr_total']}}</b></span>
                       </a>
                     </li>
                     <li>
@@ -56,31 +60,35 @@
                 <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">
                     <li>
-                      <a href="#"><b>Cash Sales </b><span class=" badge bg-green">{{$sum_week['cash_bill_no']}}</span><span class="pull-right"><b>Rs.{{$sum_week['cash_total']}}</b></span>
+                      <a href="#"><b>Cash Sales </b><span class=" badge bg-green">{{$sum_week['cash_bill_no']}}</span>
+                          <span class="pull-right"><b>Rs.{{$sum_week['cash_total']}}</b></span>
                       </a>
                     </li>
                     <li>
                       <a href="#"><div><b>Credit Sales</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue">31</span><span class=" pull-right"><b> Rs. 31 </b></span></div>
-                      <div>&nbsp Due <span class=" badge bg-red">31</span>
-                      <span class=" pull-right "><b> Rs. 31 </b></span></div></a>
+                      <div>&nbsp Cleared <span class=" badge bg-blue">{{$sum_week['credit_clear_bill_no']}}</span>
+                          <span class=" pull-right"><b> Rs.{{$sum_week['credit_clear_total']}} </b></span></div>
+                      <div>&nbsp Due <span class=" badge bg-red">{{$sum_week['credit_clear_bill_no']}}</span>
+                      <span class=" pull-right "><b> Rs.{{$sum_week['credit_clear_total']}}</b></span></div></a>
                     </li>
                     <li>
                       <a href="#"><div><b>Half Paid</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>31</b></span><span class=" pull-right"><b>Rs. 31</b></span></div>
-                      <div>&nbsp Due <span class=" badge bg-red">31</span>
-                      <span class=" pull-right "><b> Rs. 31 </b></span></div></a>
+                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>{{$sum_week['hp_clear_bill_no']}}</b></span>
+                          <span class=" pull-right"><b>{$sum_week['hp_clear_total']}}</b></span></div>
+                      <div>&nbsp Due <span class=" badge bg-red">{{$sum_week['hp_due_bill_no']}}</span>
+                      <span class=" pull-right "><b> Rs.{{$sum_week['hp_due_total']}}</b></span></div></a>
                     </li>
                     <li>
-                      <a href="#"><b>Sales Return </b><span class=" badge bg-orange">31</span><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Sales Return </b><span class=" badge bg-orange">{{$sum_week['sr_bill_no']}}</span>
+                          <span class="pull-right"><b>Rs. {{$sum_week['sr_bill_total']}}</b></span>
                       </a>
                     </li>
                     <li>
-                      <a href="#"><b>Total Sales </b><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Total Sales </b><span class="pull-right"><b>Rs. {{$sum_week['total_sales']}}</b></span>
                       </a>
                     </li>
                      <li>
-                      <a href="#"><b>Total Profit </b><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Total Profit </b><span class="pull-right"><b>Rs. {{$sum_day['total_profit']}}</b></span>
                       </a>
                     </li>
 
@@ -101,31 +109,35 @@
                 <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">
                     <li>
-                      <a href="#"><b>Cash Sales </b><span class=" badge bg-green">31</span><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Cash Sales </b><span class=" badge bg-green">{{$sum_month['cash_bill_no']}}</span>
+                          <span class="pull-right"><b>Rs.{{$sum_month['cash_total']}}</b></span>
                       </a>
                     </li>
                     <li>
                       <a href="#"><div><b>Credit Sales</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue">31</span><span class=" pull-right"><b> Rs. 31 </b></span></div>
-                      <div>&nbsp Due <span class=" badge bg-red">31</span>
-                      <span class=" pull-right "><b> Rs. 31 </b></span></div></a>
+                      <div>&nbsp Cleared <span class=" badge bg-blue">{{$sum_month['credit_clear_bill_no']}}</span>
+                          <span class=" pull-right"><b> Rs.{{$sum_month['credit_clear_total']}} </b></span></div>
+                      <div>&nbsp Due <span class=" badge bg-red">{{$sum_month['credit_due_bill_no']}}</span>
+                      <span class=" pull-right "><b> Rs. {{$sum_month['credit_due_total']}} </b></span></div></a>
                     </li>
                     <li>
                       <a href="#"><div><b>Half Paid</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>31</b></span><span class=" pull-right"><b>Rs. 31</b></span></div>
-                      <div>&nbsp Due <span class=" badge bg-red">31</span>
-                      <span class=" pull-right "><b> Rs. 31 </b></span></div></a>
+                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>{{$sum_month['hp_clear_bill_no']}}</b>
+                          </span><span class=" pull-right"><b>Rs. {{$sum_month['hp_clear_total']}}</b></span></div>
+                      <div>&nbsp Due <span class=" badge bg-red">{{$sum_month['hp_due_bill_no']}}</span>
+                      <span class=" pull-right "><b> Rs. {{$sum_month['hp_due_total']}} </b></span></div></a>
                     </li>
                     <li>
-                      <a href="#"><b>Sales Return </b><span class=" badge bg-orange">31</span><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Sales Return </b><span class=" badge bg-orange">Rs. {{$sum_month['sr_bill_no']}}</span>
+                          <span class="pull-right"><b>Rs. {{$sum_month['sr_bill_total']}}</b></span>
                       </a>
                     </li>
                     <li>
-                      <a href="#"><b>Total Sales </b><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Total Sales </b><span class="pull-right"><b>Rs. {{$sum_month['total_sales']}}</b></span>
                       </a>
                     </li>
                      <li>
-                      <a href="#"><b>Total Profit </b><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Total Profit </b><span class="pull-right"><b>Rs. {{$sum_month['total_profit']}}</b></span>
                       </a>
                     </li>
 
@@ -146,31 +158,35 @@
                 <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">
                     <li>
-                      <a href="#"><b>Cash Sales </b><span class=" badge bg-green">31</span><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Cash Sales </b><span class=" badge bg-green">{{$sum_year['cash_bill_no']}}</span>
+                          <span class="pull-right"><b>Rs. {{$sum_year['cash_total']}}</b></span>
                       </a>
                     </li>
                     <li>
                       <a href="#"><div><b>Credit Sales</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue">31</span><span class=" pull-right"><b> Rs. 31 </b></span></div>
-                      <div>&nbsp Due <span class=" badge bg-red">31</span>
-                      <span class=" pull-right "><b> Rs. 31 </b></span></div></a>
+                      <div>&nbsp Cleared <span class=" badge bg-blue">{{$sum_year['credit_clear_bill_no']}}</span>
+                          <span class=" pull-right"><b> Rs. {{$sum_year['credit_clear_total']}} </b></span></div>
+                      <div>&nbsp Due <span class=" badge bg-red">{{$sum_year['credit_due_bill_no']}}</span>
+                      <span class=" pull-right "><b> Rs. {{$sum_year['credit_due_total']}} </b></span></div></a>
                     </li>
                     <li>
                       <a href="#"><div><b>Half Paid</b></div>
-                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>31</b></span><span class=" pull-right"><b>Rs. 31</b></span></div>
-                      <div>&nbsp Due <span class=" badge bg-red">31</span>
-                      <span class=" pull-right "><b> Rs. 31 </b></span></div></a>
+                      <div>&nbsp Cleared <span class=" badge bg-blue"><b>{{$sum_year['hp_clear_bill_no']}}</b></span>
+                          <span class=" pull-right"><b>Rs. {{$sum_year['hp_clear_total']}}</b></span></div>
+                      <div>&nbsp Due <span class=" badge bg-red">{{$sum_year['hp_due_bill_no']}}</span>
+                      <span class=" pull-right "><b> Rs. {{$sum_year['hp_due_total']}} </b></span></div></a>
                     </li>
                     <li>
-                      <a href="#"><b>Sales Return </b><span class=" badge bg-orange">31</span><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Sales Return </b><span class=" badge bg-orange">{{$sum_year['sr_bill_no']}}</span>
+                          <span class="pull-right"><b>Rs. {{$sum_year['sr_bill_total']}}</b></span>
                       </a>
                     </li>
                     <li>
-                      <a href="#"><b>Total Sales </b><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Total Sales </b><span class="pull-right"><b>Rs. {{$sum_year['total_sales']}}</b></span>
                       </a>
                     </li>
                      <li>
-                      <a href="#"><b>Total Profit </b><span class="pull-right"><b>Rs. 31</b></span>
+                      <a href="#"><b>Total Profit </b><span class="pull-right"><b>Rs. {{$sum_year['total_profit']}}</b></span>
                       </a>
                     </li>
 
