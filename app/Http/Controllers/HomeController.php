@@ -109,15 +109,24 @@ class HomeController extends Controller
         $sum_day =  $this->genSummary($today_date);
        
         $sum_week =  $this->genSummary($week_begin_date,$week_end_date);
-        // $sum_month =  $this->genSummary($month_begin_date,$month_end_date);
-        // $sum_year =  $this->genSummary($year_begin_date,$year_end_date);
+        $sum_month =  $this->genSummary($month_begin_date,$month_end_date);
+        $sum_year =  $this->genSummary($year_begin_date,$year_end_date);
 
 
         $data = array(
+            'nepali_date_toady' => $request->input('nepali_date_toady'),
+            'nweek_begin_md' => $request->input('nweek_begin_md'),
+            'nweek_end_md' => $request->input('nweek_end_md'),
+            'nmonth'=> $request->input('nmonth'),
+            'fiscal_year' => $request->input('fiscal_year'),
+            'week_begin_date' => $wbd,
+            'week_end_date'=>$wed,
+            'month_begin_date'=>$mbd,
+            'month_end_date' => $med,
             'sum_day' => $sum_day,
             'sum_week' => $sum_week, 
-            // 'sum_month' => $sum_month, 
-            // 'sum_year' => $sum_year
+            'sum_month' => $sum_month, 
+            'sum_year' => $sum_year
         );
         return view('dashboard.sales')->with($data);
 
