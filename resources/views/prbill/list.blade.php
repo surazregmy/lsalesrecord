@@ -18,7 +18,7 @@
             <tr>
               <th>S.N.</th>
               <th>Bill No</th>
-              <th>Debtor Name</th>
+              <th>Supplier Name</th>
               <th>Purchase Date</th>
               <th>Total Amount</th>
               <th>Entered By</th>

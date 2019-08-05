@@ -3,7 +3,7 @@
         <tr>
           <th>S.N.</th>
           <th>Receipt No</th>
-          <th>Debotrs Name</th>
+          <th>Supplier Name</th>
           <th>Date of Pay</th>
           <th>Paid Amount</th>
           <th>Entered By</th>

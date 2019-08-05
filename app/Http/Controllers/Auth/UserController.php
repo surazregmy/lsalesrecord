@@ -22,7 +22,8 @@ class UserController extends Controller
         $data = array(
             'heading' => 'Users',
             'subheading' => 'List User',
-            'users'=>$users   
+            'users'=>$users,
+            'brname'=>'addPbills'   
         );
         return view('Auth.listUser')->with($data);
     }
@@ -36,7 +37,8 @@ class UserController extends Controller
 
         $data = array(
             'heading' => 'Users',
-            'subheading' => 'Create User'   
+            'subheading' => 'Create User' ,
+            'brname'=>'addPbills'   
         );
         return view('Auth.createUser')->with($data);
     }
@@ -74,7 +76,8 @@ class UserController extends Controller
         $data = array(
             'heading' => 'Users',
             'subheading' => 'Edit User',
-            'user' =>$user   
+            'user' =>$user   ,
+            'brname'=>'addPbills' 
         );
         return view('Auth.editUser')->with($data);
     }

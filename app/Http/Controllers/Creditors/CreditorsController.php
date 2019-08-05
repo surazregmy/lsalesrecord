@@ -19,10 +19,10 @@ class CreditorsController extends Controller
     {
         $creditros = Creditor::all();
         $data = array(
-            'heading'=>'creditors',
-            'subheading'=>'List Creditors',
+            'heading'=>'Customers',
+            'subheading'=>'List Customers',
             'creditors'=>$creditros,
-            'brname'=>'listCreditors'
+            'brname'=>'listCustomers'
         );
         return view('creditor.list')->with($data);
     }
@@ -35,9 +35,9 @@ class CreditorsController extends Controller
     public function create()
     {
         $data = array(
-            'heading'=>'creditors',
-            'subheading'=>'List Creditors',
-            'brname'=>'addCreditors'
+            'heading'=>'Customers',
+            'subheading'=>'Add Customers',
+            'brname'=>'addCustomers'
         );
         return view('creditor.add')->with($data);
     }
@@ -62,7 +62,7 @@ class CreditorsController extends Controller
         $creditor->c_prim_phone = $request->input('c_prim_phone');
         $creditor->c_sec_phone = $request->input('c_sec_phone');
         $creditor->save();
-        return redirect('/creditors')->with('success','Creditor created Succesfully');  
+        return redirect('/creditors')->with('success','Customer created Succesfully');  
     }
 
     /**
@@ -75,10 +75,10 @@ class CreditorsController extends Controller
     {
         $creditor = Creditor::find($id);
         $data = array(
-            'heading' => 'Creditor',
-            'subheading' => 'Creditor Show',
+            'heading' => 'Customers',
+            'subheading' => 'Customer Show',
             'creditor' => $creditor,
-            'brname' => 'showDebtors'
+            'brname' => 'showCustomers  '
             
         );
         return view('creditor.show')->with($data);
@@ -94,10 +94,10 @@ class CreditorsController extends Controller
     {
         $creditor = Creditor::find($id);
         $data = array(
-            'heading'=>'creditors',
-            'subheading'=>'List Creditors',
+            'heading'=>'Customers',
+            'subheading'=>'List Customers',
             'creditor'=>$creditor,
-            'brname'=>'editCreditors'
+            'brname'=>'editCustomers'
         );
         return view('creditor.edit')->with($data);
     }

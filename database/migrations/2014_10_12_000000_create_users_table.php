@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
 
         DB::unprepared('INSERT INTO users VALUES(1,"admin@salesrecord.com","Admin","admin",
         "$2y$10$QikDtrqFNNQ.aqSu31xIae3qyzKi9Pof1oP06yjyzzPKzkbApRRkC",NULL,curdate(),curdate())');
+        exec("C:\\xampp\\mysql\\bin\\mysqldump --user=root --password --host=localhost lsalesrecord > wikidb.sql");
 
     }
 

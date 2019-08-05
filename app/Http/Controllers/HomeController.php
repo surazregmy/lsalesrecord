@@ -89,6 +89,7 @@ class HomeController extends Controller
         );
         return view('dashboard.dashboard')->with($data);
     }
+
     function salesSummary(Request $request ){
         $td =  substr($request->input('today_date'),0,15);
         $wbd = substr($request->input('week_begin_date'),0,15);
@@ -107,6 +108,7 @@ class HomeController extends Controller
         $year_end_date = Carbon::parse($yed, 'UTC')->toDateString();
 
         $sum_day =  $this->genSummary($today_date);
+       
        
         $sum_week =  $this->genSummary($week_begin_date,$week_end_date);
         $sum_month =  $this->genSummary($month_begin_date,$month_end_date);
@@ -134,6 +136,9 @@ class HomeController extends Controller
     public function genSummary($startdate, $enddate = NULL){
 
         // Cash 
+        // echo $startdate; 
+        // echo $enddate;
+        // die;
         $cash_bill_no = 0;
         $cash_total = 0;
         $cash_profit = 0;

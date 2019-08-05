@@ -19,7 +19,7 @@
         <td>{{$pbill->pbill_original_id}}</td>
         </tr>
         <tr>
-          <td>Debtor's Name</td>
+          <td>Supplier's Name</td>
           <td>{{$pbill->debtor->debtor_name}}</td>
         </tr>
         <tr>

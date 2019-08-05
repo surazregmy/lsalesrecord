@@ -23,10 +23,10 @@ class DebtorsController extends Controller
     {
         $debtors = Debtor :: all();
         $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors List',
+            'heading' => 'Suppliers',
+            'subheading' => 'Suplliers List',
             'debtors'=>$debtors,
-            'brname' => 'listDebtors'
+            'brname' => 'listSuppliers'
         );
         return view('debtor.list')->with($data);
         
@@ -40,9 +40,9 @@ class DebtorsController extends Controller
     public function create()
     {
         $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors Add',
-            'brname' => 'addDebtors'
+            'heading' => 'Suppliers',
+            'subheading' => 'Suppliers Add',
+            'brname' => 'addSuppliers'
         );
         return view('debtor.add')->with($data);
     }
@@ -82,10 +82,10 @@ class DebtorsController extends Controller
     {
         $debtor = Debtor::find($id);
         $data = array(
-            'heading' => 'Debtors',
-            'subheading' => 'Debtors Show',
+            'heading' => 'Suppliers',
+            'subheading' => 'Suppliers Show',
             'debtor' => $debtor,
-            'brname' => 'showDebtors'
+            'brname' => 'showSuppliers'
             
         );
         return view('debtor.show')->with($data);
@@ -101,10 +101,10 @@ class DebtorsController extends Controller
     {
         $debtor =  Debtor:: find($id);
         $data = array(
-            'heading' => 'Debtor',
-            'subheading' => 'Debtor Edit',
+            'heading' => 'Suppliers',
+            'subheading' => 'Suppliers Edit',
             'debtor'=>$debtor,
-            'brname' => 'editDebtors'
+            'brname' => 'editSuppliers'
             
         );
         return view('Debtor.edit')->with($data); 

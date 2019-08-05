@@ -25,24 +25,24 @@ Breadcrumbs::for('editItems', function ($trail) {
 });
 
 // Breadcumbs for debtors
-Breadcrumbs::for('listDebtors', function ($trail) {
+Breadcrumbs::for('listSuppliers', function ($trail) {
     $trail->parent('home');
-    $trail->push('ListDebtor', action('Debtors\DebtorsController@index'));
+    $trail->push('ListSuppliers', action('Debtors\DebtorsController@index'));
 });
 
-Breadcrumbs::for('addDebtors', function ($trail) {
-    $trail->parent('listDebtors');
-    $trail->push('AddDebtor', action('Debtors\DebtorsController@create'));
+Breadcrumbs::for('addSuppliers', function ($trail) {
+    $trail->parent('listSuppliers');
+    $trail->push('AddSuppliers', action('Debtors\DebtorsController@create'));
 });
 
-Breadcrumbs::for('showDebtors', function ($trail) {
-    $trail->parent('listDebtors');
-    $trail->push('showDebtor');
+Breadcrumbs::for('showSuppliers', function ($trail) {
+    $trail->parent('listSuppliers');
+    $trail->push('showSuppliers');
 });
 
-Breadcrumbs::for('editDebtors', function ($trail) {
-    $trail->parent('listDebtors');
-    $trail->push('EditDebtor');
+Breadcrumbs::for('editSuppliers', function ($trail) {
+    $trail->parent('listSuppliers');
+    $trail->push('EditSuppliers');
 });
 
 // Breadcumbs for purchase Bill
@@ -109,24 +109,24 @@ Breadcrumbs::for('editPreceipts', function ($trail) {
 });
 
 // Breadcumbs for creditors
-Breadcrumbs::for('listCreditors', function ($trail) {
+Breadcrumbs::for('listCustomers', function ($trail) {
     $trail->parent('home');
-    $trail->push('ListCreditors', action('Creditors\CreditorsController@index'));
+    $trail->push('ListCustomers', action('Creditors\CreditorsController@index'));
 });
 
-Breadcrumbs::for('addCreditors', function ($trail) {
-    $trail->parent('listCreditors');
-    $trail->push('AddCreditors', action('Creditors\CreditorsController@create'));
+Breadcrumbs::for('addCustomers', function ($trail) {
+    $trail->parent('listCustomers');
+    $trail->push('AddCustomers', action('Creditors\CreditorsController@create'));
 });
 
-Breadcrumbs::for('showCreditors', function ($trail) {
-    $trail->parent('listCreditors');
-    $trail->push('showCreditor');
+Breadcrumbs::for('showCustomers', function ($trail) {
+    $trail->parent('listCustomers');
+    $trail->push('showCustomers');
 });
 
-Breadcrumbs::for('editCreditors', function ($trail) {
-    $trail->parent('listCreditors');
-    $trail->push('EditDebtorCreditors');
+Breadcrumbs::for('editCustomers', function ($trail) {
+    $trail->parent('listCustomers');
+    $trail->push('EditCustomers');
 });
 
 ?>

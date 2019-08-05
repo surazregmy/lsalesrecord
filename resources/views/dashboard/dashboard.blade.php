@@ -226,7 +226,9 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var dateObj = new Date();
+  var dateObj = new Date();
+  var dt = new Date(); 
+  console.log(dt);
 	var month = dateObj.getMonth() + 1; //months from 1-12
 	var day = dateObj.getDate();
 	var year = dateObj.getFullYear();
@@ -246,14 +248,13 @@
 
 	// this is for week 
 	var week_begin_date=new Date() ;
-	var week_actual_end_date = new Date();
+	var week_actual_end_date = dateObj;
 	var week_end_date  = dateObj;
 	switch(Day){
 		case 0:
 			week_begin_date.setDate(week_begin_date.getDate()-0); 
       console.log(week_begin_date);
 			week_actual_end_date.setDate(week_actual_end_date.getDate()+6); 
-      console.log("Fuck you");
 			break;
 		case 1:
 			week_begin_date.setDate(week_begin_date.getDate()-1); 
@@ -261,7 +262,8 @@
 			break;
 		case 2:
 			week_begin_date.setDate(week_begin_date.getDate()-2); 
-			week_actual_end_date.setDate(week_actual_end_date.getDate()+4); 
+			week_actual_end_date.setDate(week_actual_end_date.getDate()+4);
+
 			break;
 		case 3:
 			week_begin_date.setDate(week_begin_date.getDate()-3); 
@@ -327,7 +329,7 @@
                     url :  '/saleSummary',
                     data: {
                       _token: CSRF_TOKEN,
-                      today_date : dateObj, 
+                      today_date : dt, 
                       nepali_date_toady : nepali_date_toady,
                       nmonth:nmonth,
                       week_begin_date: week_begin_date,

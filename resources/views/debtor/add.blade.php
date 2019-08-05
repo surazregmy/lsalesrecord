@@ -12,20 +12,20 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-sm-2 text-center">
-                  {{form:: label('d_name','Debtor Name : ','',['class'=>'form-control'])}}
+                  {{form:: label('d_name','Supplier Name : ','',['class'=>'form-control'])}}
                 </div>
                 <div class="col-sm-4">
-                  {{form:: text('d_name','',['class'=>'form-control','placeholder'=>'Debtor name'])}}
+                  {{form:: text('d_name','',['class'=>'form-control','placeholder'=>'Supplier name'])}}
                 </div>
               </div>
             </div>
             <div class="form-group">
                 <div class="row">
                   <div class="col-sm-2 text-center">
-                    {{form:: label('d_address','Debtor Address : ','',['class'=>'form-control'])}}
+                    {{form:: label('d_address','Supplier Address : ','',['class'=>'form-control'])}}
                   </div>
                   <div class="col-sm-4">
-                    {{form:: text('d_address','',['class'=>'form-control','placeholder'=>'Debtor Address'])}}
+                    {{form:: text('d_address','',['class'=>'form-control','placeholder'=>'Supplier Address'])}}
                   </div>
                 </div>
               </div>

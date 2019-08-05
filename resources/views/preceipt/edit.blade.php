@@ -22,7 +22,7 @@
             <div class="form-group">
                 <div class="row">
                   <div class="col-sm-2 text-center">
-                    {{form:: label('d_id','Debtor Name : ','',['class'=>'form-control'])}}
+                    {{form:: label('d_id','Supplier Name : ','',['class'=>'form-control'])}}
                   </div>
                   <div class="col-sm-4">
                       <select name = "d_id" class="select2 form-control" style="width: 100%";>

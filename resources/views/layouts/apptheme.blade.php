@@ -163,14 +163,14 @@
         <li class="header text-center" ><b>Purchase Section</b></li>
         <li id="debtors" class="treeview">
           <a href="#">
-            <i class="fa fa-users"></i> <span>Debtors</span>
+            <i class="fa fa-users"></i> <span>Suppliers</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="adddebtors" ><a href="{{ action('Debtors\DebtorsController@create') }}"><i class="fa fa-circle-o"></i>Add Debtors</a></li>
-            <li id="viewdebtors" ><a href="{{ action('Debtors\DebtorsController@index') }}"><i class="fa fa-circle-o"></i>View Debtors</a></li>
+            <li id="adddebtors" ><a href="{{ action('Debtors\DebtorsController@create') }}"><i class="fa fa-circle-o"></i>Add Supplier</a></li>
+            <li id="viewdebtors" ><a href="{{ action('Debtors\DebtorsController@index') }}"><i class="fa fa-circle-o"></i>View Suppliers</a></li>
           </ul>
         </li>
          <li id="pbills"  class="treeview">
@@ -212,19 +212,32 @@
         <li class="header text-center" ><b>Sales Section</b></li>
         <li id="creditors" class="treeview">
           <a href="#">
-            <i class="fa fa-users"></i> <span>Creditors</span>
+            <i class="fa fa-users"></i> <span>Customers</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="addcreditors"><a href="{{ action('Creditors\CreditorsController@create') }}"><i class="fa fa-circle-o"></i>Add Creditors</a></li>
-            <li id="viewcreditors"><a href="{{ action('Creditors\CreditorsController@index') }}"><i class="fa fa-circle-o"></i>View Creditors</a></li>
+            <li id="addcreditors"><a href="{{ action('Creditors\CreditorsController@create') }}"><i class="fa fa-circle-o"></i>Add Customer</a></li>
+            <li id="viewcreditors"><a href="{{ action('Creditors\CreditorsController@index') }}"><i class="fa fa-circle-o"></i>View Customer</a></li>
           </ul>
         </li>
+        <li id="dsbills" class="treeview">
+          <a href="#">
+            <i class="fa fa-newspaper-o"></i> <span>Daily Sales Bills</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li id="adddsbills"><a href="{{ action('Dsbills\DsbillsController@create') }}"><i class="fa fa-circle-o"></i>Add DSales Bills</a></li>
+          <li id="viewdsbills"><a href="{{action('Dsbills\DsbillsController@index')}}"><i class="fa fa-circle-o"></i>View DSales Bills</a></li>
+          </ul>
+        </li>
+
          <li id="sbills" class="treeview">
           <a href="#">
-            <i class="fa fa-newspaper-o"></i> <span>Sales Bills</span>
+            <i class="fa fa-newspaper-o"></i> <span>Customer Sales Bills</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

@@ -15,7 +15,7 @@
                 <td>{{$preceipt->p_rec_no}}</td>
               </tr>
               <tr>
-                <td>Debtor Name</td>
+                <td>Supplier Name</td>
                 <td>{{$preceipt->debtor->debtor_name}}</td>
               </tr>
               <tr>

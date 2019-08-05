@@ -200,11 +200,11 @@
                           <div class="form-group">
                               <div class="row">
                                   <div class="col-sm-4 text-center">
-                                  {{form:: label('d_id','Debtor Name: ','',['class'=>'form-control'])}}
+                                  {{form:: label('d_id','Supllier Name: ','',['class'=>'form-control'])}}
                                   </div>
                                   <div class="col-sm-8">
                                         <select name = "d_id" class="select2 form-control" style="width: 100%";>
-                                                <option value=""  selected="selected" >Select Debtor</option>
+                                                <option value=""  selected="selected" >Select Supplier</option>
                                                 <?php foreach($debtors as $debtor): ?>
                                                            <option value="<?php echo $debtor['debtor_id'] ?>"
                                                                 @if (old('d_id') == $debtor['debtor_id']) selected="selected" @endif>
