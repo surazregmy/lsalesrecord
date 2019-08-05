@@ -44,128 +44,8 @@
         </div>
         <!-- /.box-header -->
         <!-- /.box-header -->
-        <div class="box-body">
-        
-
-          <div class="row">
-          <!-- Today -->
-              <div class="col-md-3">
-                  <!-- Widget: user widget style 1 -->
-                    <div class="box box-widget">
-                      <!-- Add the bg color to the header using any of the bg-* classes -->
-                      <div class="widget-user-header text-center" style="padding-bottom: 1px;background-color:#C3C1B8">
-                        <h3 class="widget-user-username">Today</h3>
-                        <h5 class="widget-user-desc">Baisakh  11</h5>
-                      </div>
-                      <div class="box-footer no-padding">
-                        <ul class="nav nav-stacked">
-                          <li>
-                            <a href="#"><b>Purchase</b><span class=" badge bg-green">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#"><b>Purchase Return </b><span class=" badge bg-orange">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#"><b>Total Purchases </b><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-
-                        </ul>
-                      </div>
-                    </div>
-                 <!-- /.widget-user -->
-              </div>
-              <!-- This week -->
-              <div class="col-md-3">
-                <!-- Widget: user widget style 1 -->
-                  <div class="box box-widget">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header text-center" style="padding-bottom: 1px;background-color:#A6A395">
-                      <h3 class="widget-user-username">This Week</h3>
-                      <h5 class="widget-user-desc">Baisakh  11</h5>
-                    </div>
-                    <div class="box-footer no-padding">
-                      <ul class="nav nav-stacked">
-                        <li>
-                          <a href="#"><b>Purchases </b><span class=" badge bg-green">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                          </a>
-                        </li>
-                        <li>
-                            <a href="#"><b>Purchase Returns </b><span class=" badge bg-orange">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"><b>Total Purchase</b><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                        </li>
-
-                      </ul>
-                    </div>
-                  </div>
-               <!-- /.widget-user -->
-              </div>
-              <!-- This Month -->
-              <div class="col-md-3">
-                  <!-- Widget: user widget style 1 -->
-                    <div class="box box-widget">
-                      <!-- Add the bg color to the header using any of the bg-* classes -->
-                      <div class="widget-user-header text-center" style="padding-bottom: 1px;background-color:#888472">
-                        <h3 class="widget-user-username">This Month</h3>
-                        <h5 class="widget-user-desc">Baisakh  11</h5>
-                      </div>
-                      <div class="box-footer no-padding">
-                        <ul class="nav nav-stacked">
-                          <li>
-                            <a href="#"><b>Purchase </b><span class=" badge bg-green">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#"><b>Purchase Returns </b><span class=" badge bg-orange">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#"><b>Total Purchases </b><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-
-                        </ul>
-                      </div>
-                    </div>
-                 <!-- /.widget-user -->
-              </div>
-              <!-- This Year -->
-              <div class="col-md-3">
-                  <!-- Widget: user widget style 1 -->
-                    <div class="box box-widget">
-                      <!-- Add the bg color to the header using any of the bg-* classes -->
-                      <div class="widget-user-header text-center" style="padding-bottom: 1px;background-color:#6A664F">
-                        <h3 class="widget-user-username">This Year</h3>
-                        <h5 class="widget-user-desc">Baisakh  11</h5>
-                      </div>
-                      <div class="box-footer no-padding">
-                        <ul class="nav nav-stacked">
-                          <li>
-                            <a href="#"><b>Purchases </b><span class=" badge bg-green">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#"><b>Purchase Return </b><span class=" badge bg-orange">31</span><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#"><b>Total Purchase </b><span class="pull-right"><b>Rs. 31</b></span>
-                            </a>
-                          </li>
-
-                        </ul>
-                      </div>
-                    </div>
-                 <!-- /.widget-user -->
-              </div>
-          </div>
-          <!-- /.row -->
+        <div class="box-body" id = "purchaseresult">
+      
         </div>
         <!-- /.box-body -->
         <!-- /.box-body -->
@@ -347,13 +227,46 @@
                       },
                     dataType: 'JSON',
                     success : function(msg){
-                      alert("success");
+                      // alert("success");
                       // console.log(msg);
                       $('#salesresult').html(msg);
                     },
                     error: function (request, status, error) {
-                        alert(request.responseText);
+                        // alert(request.responseText);
                         $('#salesresult').html(request.responseText); //it works for now
+                    }
+          });
+
+          $.ajax({
+                    type : "POST",
+                    url :  '/purchaseSummary',
+                    data: {
+                      _token: CSRF_TOKEN,
+                      today_date : dt, 
+                      nepali_date_toady : nepali_date_toady,
+                      nmonth:nmonth,
+                      week_begin_date: week_begin_date,
+                      week_end_date:week_end_date,
+                      month_begin_date:month_begin_date,
+                      month_end_date:month_end_date,
+                      fiscal_year_begin_date:fiscal_year_begin_date,
+                      fiscal_year_end_date:fiscal_year_end_date,
+                      // for show 
+                      nweek_begin_md : nweek_b_date_m+'-'+nweek_b_date_d, 
+                      nweek_end_md : nweek_e_date_m+'-'+nweek_e_date_d,
+                      fiscal_year : fiscal_year,
+
+
+                      },
+                    dataType: 'JSON',
+                    success : function(msg){
+                      // alert("success");
+                      // console.log(msg);
+                      $('#purchaseresult').html(msg);
+                    },
+                    error: function (request, status, error) {
+                        // alert(request.responseText);
+                        $('#purchaseresult').html(request.responseText); //it works for now
                     }
           });
 

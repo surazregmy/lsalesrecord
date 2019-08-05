@@ -54,8 +54,9 @@ Route::DELETE('/deleteUser/{id}}','Auth\UserController@deleteUser');
 
 
 
-Auth::routes();
+Auth::routes();             
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::POST('/saleSummary', 'HomeController@salesSummary');
-Route::get('/genSummary', 'HomeController@salesSummary');
+// Route::get('/genSummary', 'HomeController@salesSummary');
+Route::POST('/purchaseSummary', 'HomeController@purchasesSummary');

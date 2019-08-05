@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sbill\Sbill;
 use App\Srbill\Srbill;
+use App\Pbill\Pbill;
+use App\Prbill\Prbill;
 use Carbon\carbon;
 
 class HomeController extends Controller
@@ -107,12 +109,12 @@ class HomeController extends Controller
         $year_begin_date = Carbon::parse($ybd, 'UTC')->toDateString();
         $year_end_date = Carbon::parse($yed, 'UTC')->toDateString();
 
-        $sum_day =  $this->genSummary($today_date);
+        $sum_day =  $this->genSalesSummary($today_date);
        
        
-        $sum_week =  $this->genSummary($week_begin_date,$week_end_date);
-        $sum_month =  $this->genSummary($month_begin_date,$month_end_date);
-        $sum_year =  $this->genSummary($year_begin_date,$year_end_date);
+        $sum_week =  $this->genSalesSummary($week_begin_date,$week_end_date);
+        $sum_month =  $this->genSalesSummary($month_begin_date,$month_end_date);
+        $sum_year =  $this->genSalesSummary($year_begin_date,$year_end_date);
 
 
         $data = array(
@@ -133,7 +135,51 @@ class HomeController extends Controller
         return view('dashboard.sales')->with($data);
 
     }
-    public function genSummary($startdate, $enddate = NULL){
+
+    function purchasesSummary(Request $request ){
+        $td =  substr($request->input('today_date'),0,15);
+        $wbd = substr($request->input('week_begin_date'),0,15);
+        $wed = substr($request->input('week_end_date'),0,15);
+        $mbd = substr($request->input('month_begin_date'),0,15);
+        $med = substr($request->input('month_end_date'),0,15);
+        $ybd = substr($request->input('fiscal_year_begin_date'),0,15);
+        $yed = substr($request->input('fiscal_year_end_date'),0,15);
+
+        $today_date = Carbon::parse($td, 'UTC')->toDateString();
+        $week_begin_date = Carbon::parse($wbd, 'UTC')->toDateString();
+        $week_end_date = Carbon::parse($wed, 'UTC')->toDateString();
+        $month_begin_date = Carbon::parse($mbd, 'UTC')->toDateString();
+        $month_end_date = Carbon::parse($med, 'UTC')->toDateString();
+        $year_begin_date = Carbon::parse($ybd, 'UTC')->toDateString();
+        $year_end_date = Carbon::parse($yed, 'UTC')->toDateString();
+
+        $sum_day =  $this->genPurchasesSummary($today_date);
+       
+       
+        $sum_week =  $this->genPurchasesSummary($week_begin_date,$week_end_date);
+        $sum_month =  $this->genPurchasesSummary($month_begin_date,$month_end_date);
+        $sum_year =  $this->genPurchasesSummary($year_begin_date,$year_end_date);
+
+
+        $data = array(
+            'nepali_date_toady' => $request->input('nepali_date_toady'),
+            'nweek_begin_md' => $request->input('nweek_begin_md'),
+            'nweek_end_md' => $request->input('nweek_end_md'),
+            'nmonth'=> $request->input('nmonth'),
+            'fiscal_year' => $request->input('fiscal_year'),
+            'week_begin_date' => $wbd,
+            'week_end_date'=>$wed,
+            'month_begin_date'=>$mbd,
+            'month_end_date' => $med,
+            'sum_day' => $sum_day,
+            'sum_week' => $sum_week, 
+            'sum_month' => $sum_month, 
+            'sum_year' => $sum_year
+        );
+        return view('dashboard.purchases')->with($data);
+
+    }
+    public function genSalesSummary($startdate, $enddate = NULL){
 
         // Cash 
         // echo $startdate; 
@@ -302,6 +348,53 @@ class HomeController extends Controller
                             $hp_clear_total+ $hp_due_total-$sr_total,
             'total_profit'=>$cash_profit + $credit_clear_profit + $credit_due_profit + 
                             $hp_clear_profit + $hp_due_profit
+        );
+        
+       return $sum_array;
+    }
+
+    public function genPurchasesSummary($startdate, $enddate = NULL){
+
+        $purchase_bill_no = 0;
+        $purchase_total = 0;
+        $purchase_return_bill_no = 0;
+        $purchase_return_total = 0;
+        $purchase_total_sub = 0;
+
+        if(is_null($enddate)){
+            $pbills = Pbill::all()
+                        ->where('p_date_of_purchase','=',$startdate);
+        }
+        else{
+            $pbills = Pbill::all()
+                        ->where('p_date_of_purchase','>=',$startdate)
+                        ->where('p_date_of_purchase','<=',$enddate);
+        }
+        foreach($pbills as $pbill){
+            $purchase_bill_no = $purchase_bill_no + 1;
+            $purchase_total = $pbill->p_total_amount +  $purchase_total;
+        }
+
+        if(is_null($enddate)){
+            $prbills = Prbill::all()
+                        ->where('pr_date_of_purchase','=',$startdate);
+        }
+        else{
+            $pbills = Prbill::all()
+                        ->where('pr_date_of_purchase','>=',$startdate)
+                        ->where('pr_date_of_purchase','<=',$enddate);
+        }
+        foreach($pbills as $pbill){
+            $purchase_return_bill_no = $purchase_return_bill_no + 1;
+            $purchase_return_total = $pbill->pr_total_amount +  $purchase_return_total;
+        }   
+
+        $sum_array = array(
+            'purchase_bill_no' => $purchase_bill_no,
+            'purchase_total'=>$purchase_total,
+            'purchase_return_bill_no' =>$purchase_return_bill_no,
+            'purchase_return_total'=>$purchase_return_total,
+            'purchase_total_sub'=> $purchase_total - $purchase_return_total
         );
         
        return $sum_array;
