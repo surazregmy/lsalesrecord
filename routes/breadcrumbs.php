@@ -114,14 +114,14 @@ Breadcrumbs::for('listCustomers', function ($trail) {
     $trail->push('ListCustomers', action('Creditors\CreditorsController@index'));
 });
 
-Breadcrumbs::for('addCustomers', function ($trail) {
-    $trail->parent('listCustomers');
-    $trail->push('AddCustomers', action('Creditors\CreditorsController@create'));
-});
-
 Breadcrumbs::for('showCustomers', function ($trail) {
     $trail->parent('listCustomers');
     $trail->push('showCustomers');
+});
+
+Breadcrumbs::for('addCustomers', function ($trail) {
+    $trail->parent('listCustomers');
+    $trail->push('AddCustomers', action('Creditors\CreditorsController@create'));
 });
 
 Breadcrumbs::for('editCustomers', function ($trail) {

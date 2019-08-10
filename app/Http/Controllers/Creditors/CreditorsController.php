@@ -78,7 +78,7 @@ class CreditorsController extends Controller
             'heading' => 'Customers',
             'subheading' => 'Customer Show',
             'creditor' => $creditor,
-            'brname' => 'showCustomers  '
+            'brname' => 'showCustomers'
             
         );
         return view('creditor.show')->with($data);
