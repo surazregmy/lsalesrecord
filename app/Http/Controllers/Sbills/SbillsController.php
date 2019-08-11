@@ -291,4 +291,16 @@ class SbillsController extends Controller
         );
         return view('sbill.invoices')->with($data);
     }
+
+    public function showSalesReport(){
+        $sbills = Sbill :: orderBy('sbill_id','desc')->get();
+        $data = array(
+            'heading' => 'Sales',
+            'subheading' => 'Sales Report',
+            'sbills'=>$sbills ,
+            'brname'=>'salesRecord' 
+        );
+        return view('sbill.salesreport')->with($data);
+        
+    }
 }

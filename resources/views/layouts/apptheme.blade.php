@@ -140,11 +140,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id ="incomereports"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Income Reports</a></li>
-              <li id ="expensereports"><a href="{{ action('Items\ItemsController@index') }}"><i class="fa fa-circle-o"></i>Expense Reports</a></li>
-              <li id ="incomevsexpense"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Income Vs Expense</a></li>
-              <li id ="stockgen"><a href="{{ action('Items\ItemsController@index') }}"><i class="fa fa-circle-o"></i>Stock Generator</a></li>
-              <li id ="duegen"><a href="{{ action('Items\ItemsController@create') }}"><i class="fa fa-circle-o"></i>Due Amount Generator</a></li>
+              <li id ="purchasereport"><a href="{{ action('Sbills\SbillsController@showSalesReport') }}"><i class="fa fa-circle-o"></i>Purchase Report</a></li>
+              <li id ="salesreport"><a href="{{ action('Sbills\SbillsController@showSalesReport') }}"><i class="fa fa-circle-o"></i>Sale Report</a></li>
             </ul>
           </li>
         <li class="header text-center" ><b>Stock</b></li>

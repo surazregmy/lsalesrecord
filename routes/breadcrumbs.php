@@ -129,4 +129,9 @@ Breadcrumbs::for('editCustomers', function ($trail) {
     $trail->push('EditCustomers');
 });
 
+Breadcrumbs::for('salesRecord', function ($trail) {
+    $trail->parent('home');
+    $trail->push('salesReport', action('Sbills\SbillsController@showSalesReport'));
+});
+
 ?>

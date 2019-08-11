@@ -48,10 +48,7 @@ Route::POST('/updateUser','Auth\UserController@updateUser');
 Route::GET('/listUser','Auth\UserController@listUser');
 Route::DELETE('/deleteUser/{id}}','Auth\UserController@deleteUser');
 
-
-
-
-
+Route::GET("/salesreport","Sbills\SbillsController@showSalesReport");
 
 
 Auth::routes();             
@@ -60,3 +57,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::POST('/saleSummary', 'HomeController@salesSummary');
 // Route::get('/genSummary', 'HomeController@salesSummary');
 Route::POST('/purchaseSummary', 'HomeController@purchasesSummary');
+Route::POST('/generateCustomDateRangesSalesSummary', 'HomeController@generateCustomDateRangesSalesSummary');
+
