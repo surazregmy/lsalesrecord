@@ -14,6 +14,7 @@ class CreateLogTableProcedure extends Migration
     public function up()
     {
         DB::unprepared('
+        DROP PROCEDURE IF EXISTS `insert_into_log`;
                     CREATE  PROCEDURE `insert_into_log`(
                                                 IN eventDescription varchar(255),
                                                 IN table1 varchar(50),

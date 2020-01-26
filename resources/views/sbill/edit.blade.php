@@ -143,6 +143,21 @@
                               </div>
                           </div>
                           <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4 text-center">
+                                    <input type="hidden" name="add_pan">
+                                    {{form:: label('add_pan','Add PAN?: ','',['class'=>'form-control'])}}
+                                    </div>
+                                    <div class="col-sm-8">
+                                    @if($sbill->pan_enable == "on")    
+                                     <input type="checkbox"  checked name="addPan" class="custom-control-input" id="statuscheck">
+                                    @else
+                                    <input type="checkbox" name="addPan" class="custom-control-input" id="statuscheck">
+                                    @endif
+                                    </div>
+                                </div>
+                            </div>
+                          <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-4 text-center">
                                 {{form:: label('comment','Comment : ','',['class'=>'form-control'])}}

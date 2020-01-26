@@ -18,7 +18,7 @@ class CreateCreditorsTable extends Migration
             $table->string('creditor_name')->unique();
             $table->string('c_address');
             $table->string('c_prim_phone');
-            $table->string('c_sec_phone');
+            $table->string('c_sec_phone')->nullable();
             $table->longtext('c_note')->nullable();
             $table->timestamps();
         });

@@ -31,6 +31,7 @@ class CreateSbillsTable extends Migration
             $table->float('s_rem_amount')->nullable();
             $table->float('profit_amount');
             $table->longText('comment')->nullable();
+            $table->string('pan_enable')->nullable();
             $table->timestamps();
             $table->unique('sbill_generated_id');
         });

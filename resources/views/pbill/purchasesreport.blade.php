@@ -80,7 +80,7 @@
     // alert("Hi");
    $.ajax({
                     type : "POST",
-                    url :  "/generateCustomDateRangesSalesSummary",
+                    url :  "/generateCustomDateRangesPurchagesSummary",
                     data: {
                       _token: CSRF_TOKEN,
                       efromDate : efromDate,

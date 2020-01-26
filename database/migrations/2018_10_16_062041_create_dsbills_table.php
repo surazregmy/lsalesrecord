@@ -30,7 +30,8 @@ class CreateDsbillsTable extends Migration
             $table->float('s_paid_amount')->nullable();
             $table->float('s_rem_amount')->nullable();
             $table->float('profit_amount');
-            $table->longText('comment')->nullable();
+            $table->string('comment')->nullable();
+            $table->string('pan_enable')->nullable();
             $table->timestamps();
             $table->unique('sbill_generated_id');
         });

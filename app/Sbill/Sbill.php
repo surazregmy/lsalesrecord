@@ -47,12 +47,13 @@ class Sbill extends Model
         $sbill->s_rem_amount = $request->input('rem_amount');
         $sbill->profit_amount = $request->input('sub_total');
         $sbill->comment = $request->input('comment');
+        $sbill->pan_enable = $request->input('addPan');
         $sbill->sbill_generated_id = $request->input('sbill_generated_id');
        
         if($request->input('sbill_type') == 'halfpaid'){
-            $no_of_params = 12;
+            $no_of_params = 13;
         }else{
-            $no_of_params = 10;
+            $no_of_params = 13;
         }
         // echo $no_of_params;
         // die;
@@ -91,7 +92,7 @@ class Sbill extends Model
             $sbill_add_status = 1;
             
 
-        }catch(\Exception $e){
+        }catch(Exception $e){
             $sbill_add_status = 0;
             DB:: rollback();
 
@@ -125,12 +126,13 @@ class Sbill extends Model
         $sbill->s_rem_amount = $request->input('rem_amount');
         $sbill->profit_amount = $request->input('sub_total');
         $sbill->comment = $request->input('comment');
+        $sbill->pan_enable = $request->input('addPan');
         $sbill->sbill_generated_id = $request->input('sbill_generated_id');
        
         if($request->input('sbill_type') == 'halfpaid'){
             $no_of_params = 12;
         }else{
-            $no_of_params = 10;
+            $no_of_params = 12;
         }
         // echo $no_of_params;
         // die;

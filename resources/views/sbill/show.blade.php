@@ -14,6 +14,12 @@
     <div class="col-xs-7 table-responsive">
       <table class="table table-condensed" style="border: none;">
         <tbody>
+         @if($sbill->pan_enable == "on")  
+         <tr>
+            <td>PAN No: </td>
+          <td>999999999</td>
+          </tr>
+         @endif
         <tr>
           <td>Sbill No: </td>
         <td>{{$sbill->sbill_original_id}}</td>

@@ -290,4 +290,15 @@ class PbillsController extends Controller
         );
         return view('pbill.invoices')->with($data);
     }
+
+    public function showPurchasesReport(){
+        $data = array(
+            'heading' => 'Purchases',
+            'subheading' => 'Purchases Report',
+            // 'sbills'=>$sbills ,
+            'brname'=>'purchasesReport' 
+        );
+        return view('pbill.purchasesreport')->with($data);
+    }
+
 }

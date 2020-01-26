@@ -69,6 +69,10 @@ class SbillsController extends Controller
      */
     public function store(Request $request)
     {
+        // echo "<pre>";
+        // print_r($request->all());
+        // die;
+
         $this->validate($request,[
             'item1'=>'required|numeric',
             'quantity1'=>'required|numeric',

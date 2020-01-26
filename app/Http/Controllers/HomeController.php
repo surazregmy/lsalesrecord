@@ -252,7 +252,6 @@ class HomeController extends Controller
         }
 
         // SR bill 
-        //halfpaid due
         $sr_bill_no = 0;
         $sr_total = 0;
         if(is_null($enddate)){
@@ -345,21 +344,197 @@ class HomeController extends Controller
     }
 
     public function generateCustomDateRangesSalesSummary(Request $request){
-        $sd = substr($request->input('start_date'),0,15);
-        $ed = substr($request->input('end_date'),0,15);
+
+        $this->validate($request,[
+            'efromDate'=>'required',
+        ],[
+            'efromDate.required'=>'From Date is Required',
+        ]);
+        
+        $sd = substr($request->input('efromDate'),0,15);
+        $ed = substr($request->input('etoDate'),0,15);
+        $nepali_date_range = $request->input('nepali_date_range');
+        $efromDate  = $request -> input('efromDate');
+        $etoDate  = $request -> input('etoDate');
 
         $start_date = Carbon::parse($sd, 'UTC')->toDateString();
         $end_date = Carbon::parse($ed, 'UTC')->toDateString();
 
-
-
-        $sum_custom_dates =  $this->genSalesSummary($year_begin_date,$year_end_date);
+        $sum_custom_dates =  $this->genSalesSummary($start_date,$end_date);
         $data = array(
             'heading' => 'Salesrecord',
             'subheading' => 'Dashboard',
             'brname' => 'home',
+            'sum_day' => $sum_custom_dates,
+            'nepali_date_range'=>$nepali_date_range,
+            'efromDate' => $efromDate,
+            'etoDate' => $etoDate,
         );
         return view('sbill.salesreportresult')->with($data);
         
     }
+
+    public function generateCustomDateRangesSalesSummaryDetail($salestype, $star, $end = NULL){
+        $sd = substr($star,0,15);
+        $startdate = Carbon::parse($sd, 'UTC')->toDateString();
+        $enddate;
+
+        if($end != null){
+            $ed = substr($end,0,15);
+            $enddate = Carbon::parse($ed, 'UTC')->toDateString();
+        }
+       
+        switch($salestype){
+            case "CashSales":
+                if(is_null($enddate)){
+                    $sbills = Sbill::all()
+                                ->where('sbill_type','cash')
+                                ->where('s_date_of_sale','=',$startdate);
+                }
+                else{
+                    $sbills = Sbill::all()
+                                ->where('sbill_type','cash')
+                                ->where('s_date_of_sale','>=',$startdate)
+                                ->where('s_date_of_sale','<=',$enddate);
+                }
+                $data = array(
+                    'heading' => 'Salesrecord',
+                    'subheading' => 'Dashboard',
+                    'brname' => 'home',
+                    'type'=>"Cash Sales",
+                   'sbills'=>$sbills,
+                );
+                return view('sbill.detailsalesreport')->with($data);
+                break;
+            case "CreditSales":
+                //Sales clear
+                if(is_null($enddate)){
+                    $sbills = Sbill::all()
+                                ->where('sbill_type','credit')
+                                ->where('status','clear')
+                                ->where('s_date_of_sale','=',$startdate);
+                }
+                else{
+                    $sbills = Sbill::all()
+                                ->where('sbill_type','credit')
+                                ->where('status','clear')
+                                ->where('s_date_of_sale','>=',$startdate)
+                                ->where('s_date_of_sale','<=',$enddate);
+                }
+                // Sdbills
+                if(is_null($enddate)){
+                    $sdbills = Sbill::all()
+                                ->where('sbill_type','credit')
+                                ->where('status','due')
+                                ->where('s_date_of_sale','=',$startdate);
+                }
+                else{
+                    $sdbills = Sbill::all()
+                                ->where('sbill_type','credit')
+                                ->where('status','due')
+                                ->where('s_date_of_sale','>=',$startdate)
+                                ->where('s_date_of_sale','<=',$enddate);
+                }
+                $data = array(
+                    'heading' => 'Salesrecord',
+                    'subheading' => 'Dashboard',
+                    'brname' => 'home',
+                    'type1'=>"Credit Clear Sales",
+                    'type2'=>"Credit Due Sales",
+                    'sbills'=>$sbills,
+                    'sdbills'=>$sdbills,
+                );
+                return view('sbill.detailcreditsalesreport')->with($data);
+                break;
+            case "HalfPaid":
+                if(is_null($enddate)){
+                    $sbills = Sbill::all()
+                                ->where('sbill_type','halfpaid')
+                                ->where('status','clear')
+                                ->where('s_date_of_sale','=',$startdate);
+                }
+                else{
+                    $sbills = Sbill::all()
+                                ->where('sbill_type','halfpaid')
+                                ->where('status','clear')
+                                ->where('s_date_of_sale','>=',$startdate)
+                                ->where('s_date_of_sale','<=',$enddate);
+                }
+
+                if(is_null($enddate)){
+                    $sdbills = Sbill::all()
+                                ->where('sbill_type','halfpaid')
+                                ->where('status','due')
+                                ->where('s_date_of_sale','=',$startdate);
+                }
+                else{
+                    $sdbills = Sbill::all()
+                                ->where('sbill_type','halfpaid')
+                                ->where('status','due')
+                                ->where('s_date_of_sale','>=',$startdate)
+                                ->where('s_date_of_sale','<=',$enddate);
+                }
+                $data = array(
+                    'heading' => 'Salesrecord',
+                    'subheading' => 'Dashboard',
+                    'brname' => 'home',
+                    'type1'=>"Half Paid Clear Sales",
+                    'type2'=>"Half Paid Due Sales",
+                    'sbills'=>$sbills,
+                    'sdbills'=>$sdbills,
+                );
+                return view('sbill.detailcreditsalesreport')->with($data);
+                break;
+            case "SalesReturn":
+                if(is_null($enddate)){
+                    $srbills = SRbill::all()
+                                ->where('sr_date_of_ret','=',$startdate);
+                }
+                else{
+                    $srbills = Srbill::all()
+                                ->where('sr_date_of_ret','>=',$startdate)
+                                ->where('sr_date_of_ret','<=',$enddate);
+                }
+                $data = array(
+                    'heading' => 'Salesrecord',
+                    'subheading' => 'Dashboard',
+                    'brname' => 'home',
+                    'type'=>"Sales Return",
+                    'srbills'=>$srbills,
+                );
+                return view('srbill.detailsalesretrunreport')->with($data);
+                break;
+        }
+        
+    }
+
+    public function getSalesBill($salestype, $star, $end = NULL){
+        $sd = substr($star,0,15);
+        $startdate = Carbon::parse($sd, 'UTC')->toDateString();
+        $enddate;
+
+        if($end != null){
+            $ed = substr($end,0,15);
+            $enddate = Carbon::parse($ed, 'UTC')->toDateString();
+        }
+        if(is_null($enddate)){
+            $sbills = Sbill::all()
+                        ->where('sbill_type','cash')
+                        ->where('s_date_of_sale','=',$startdate);
+        }
+        else{
+            $sbills = Sbill::all()
+                        ->where('sbill_type','cash')
+                        ->where('s_date_of_sale','>=',$startdate)
+                        ->where('s_date_of_sale','<=',$enddate);
+        }
+
+        return $sbills;
+    }
+
+    public function generateCustomDateRangesPurchagesSummary(Request $request){
+        
+    }
+
+    
 }

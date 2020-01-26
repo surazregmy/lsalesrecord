@@ -27,7 +27,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@salesrecord.com','Admin','admin','$2y$10$QikDtrqFNNQ.aqSu31xIae3qyzKi9Pof1oP06yjyzzPKzkbApRRkC',NULL,'2018-11-03 18:15:00','2018-11-03 18:15:00');
+INSERT INTO `users` VALUES (1,'admin@salesrecord.com','Admin','admin','$2y$10$QikDtrqFNNQ.aqSu31xIae3qyzKi9Pof1oP06yjyzzPKzkbApRRkC',NULL,'2019-08-14 18:15:00','2019-08-14 18:15:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -80,4 +80,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-04 16:23:46
+-- Dump completed on 2019-08-15 22:22:55

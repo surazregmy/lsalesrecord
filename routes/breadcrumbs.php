@@ -134,4 +134,9 @@ Breadcrumbs::for('salesRecord', function ($trail) {
     $trail->push('salesReport', action('Sbills\SbillsController@showSalesReport'));
 });
 
+Breadcrumbs::for('purchasesReport', function ($trail) {
+    $trail->parent('home');
+    $trail->push('purchasesReport', action('Pbills\PbillsController@showPurchasesReport'));
+});
+
 ?>

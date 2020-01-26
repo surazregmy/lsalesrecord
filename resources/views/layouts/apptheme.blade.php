@@ -118,7 +118,7 @@
           <img src="{{ url('images/shiva.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Welcome Suraj!</p>
+          <p>Welcome {{ Auth::user()->name }} !</p>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -140,8 +140,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id ="purchasereport"><a href="{{ action('Sbills\SbillsController@showSalesReport') }}"><i class="fa fa-circle-o"></i>Purchase Report</a></li>
+              <li id ="purchasereport"><a href="{{ action('Pbills\PbillsController@showPurchasesReport') }}"><i class="fa fa-circle-o"></i>Purchase Report</a></li>
               <li id ="salesreport"><a href="{{ action('Sbills\SbillsController@showSalesReport') }}"><i class="fa fa-circle-o"></i>Sale Report</a></li>
+              <li id ="genDueAmount"><a href="{{ action('Sbills\SbillsController@showSalesReport') }}"><i class="fa fa-circle-o"></i>Generate Due Amount</a></li>
             </ul>
           </li>
         <li class="header text-center" ><b>Stock</b></li>
@@ -374,6 +375,7 @@
     $(function () {
       document.getElementById("contWrap").style.minHeight = "992px"; // Somewhere theme autocalculates minheight, need to set it at first though  :-/  I am overriding it. 
       $("#example1").DataTable();
+      $("#example3").DataTable();
       $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
