@@ -1,11 +1,11 @@
-@extends('layouts.apptheme')
-@section('content')
+<link rel="stylesheet" type="text/css" href="{{asset('css/apptheme/bootstrap.min.css')}}">
+1
 <section class="invoice">
   <!-- title row -->
   <div class="row">
     <div class="col-xs-12">
       <h3 class="page-header text-center">
-        ईश्वर प्लम्बिङ पसल
+       Ishwor Plumbing Pasal
       </h3>
     </div>
     <!-- /.col -->
@@ -32,7 +32,7 @@
         </tr>
         <tr>
           <td>Date of purchase</td>
-          <td>{{$pbill->p_date_of_purchase_n}}</td>
+          <td>{{$pbill->p_date_of_purchase}}</td>
         </tr>
         <tr>
           <td>Entered By</td>
@@ -87,8 +87,4 @@
 </section>
 <!-- /.content -->
 <div class="clearfix"></div>
-@endsection
 
-@section('pagespecificscripts')
-<body onload="window.print();">
-@endsection

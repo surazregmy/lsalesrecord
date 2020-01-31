@@ -276,8 +276,8 @@ class PbillsController extends Controller
         );
         // return view('pbill.generate', $data);
 
-        $pdf = PDF::loadView('pbill.generate', $data);
-        set_time_limit(300);
+        $pdf = PDF::loadView('pbill.generate', $data)->setPaper('a4','portrait');
+        set_time_limit(30);
         return $pdf->download('invoice.pdf');
 
     }

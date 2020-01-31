@@ -206,7 +206,7 @@
 
   $.ajax({
                     type : "POST",
-                    url :  '/saleSummary',
+                    url :  'saleSummary',
                     data: {
                       _token: CSRF_TOKEN,
                       today_date : dt, 
@@ -239,7 +239,7 @@
 
           $.ajax({
                     type : "POST",
-                    url :  '/purchaseSummary',
+                    url :  'purchaseSummary',
                     data: {
                       _token: CSRF_TOKEN,
                       today_date : dt, 

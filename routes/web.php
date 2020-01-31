@@ -58,7 +58,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::POST('/saleSummary', 'HomeController@salesSummary');
 // Route::get('/genSummary', 'HomeController@salesSummary');
 Route::POST('/purchaseSummary', 'HomeController@purchasesSummary');
-    Route::POST('/generateCustomDateRangesSalesSummary', 'HomeController@generateCustomDateRangesSalesSummary');
+Route::POST('/generateCustomDateRangesSalesSummary', 'HomeController@generateCustomDateRangesSalesSummary');
 Route::GET('/generateCustomDateRangesSalesSummaryDetail/{salesType}/{startDate}/{endDate}', 'HomeController@generateCustomDateRangesSalesSummaryDetail');
 
 Route::POST('/generateCustomDateRangesPurchagesSummary', 'HomeController@generateCustomDateRangesPurchagesSummary');
